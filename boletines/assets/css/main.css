@@ -1,0 +1,146 @@
+/* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */ 
+/* 
+#c6ffdd
+color: #d500f9;
+→ 
+#fbd786
+→ 
+background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
+#f7797d */ 
+html{
+    font-family: 'Jost', sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: #d500f9;
+}
+
+image{
+    max-width: 100%;
+}
+a:hover{
+    opacity: 0.8;
+}
+
+.title{
+    text-transform: uppercase;
+    text-align: center;
+}
+.paragraph{
+    line-height: 1.8cm ;
+    font-weight: 200;
+}
+.container {
+    background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.table{
+    width: 100%;
+    border-spacing: 0;
+}
+.table td, .table th{
+    padding:  1em;
+    text-align: left;
+}
+.table tr:nth-child(even){ 
+    background-color: #fad9ff;
+}
+.fa-star{
+    color:#ffc400
+}
+.title-item{
+    border-bottom: #C6426e solid 2px;
+    padding-bottom: 1em;
+    padding-top: 2em;
+    font-size: 2em;
+}
+.address{
+    font-weight: bold;
+    color: #642b73;
+    font-size: 1.2em;
+    margin-top: 2em ;
+    display: inline-block;
+}
+
+.position{
+    background-color: #C6426e;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-right: 0.5em;
+}
+.content{
+    max-width: 960px;
+    width: 100%;
+    height: 80%;
+    background-color: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0px 6px rgba(0,0,0,0.23);
+    border-radius: 4px;
+    position: relative;
+    overflow: scroll ;
+}
+
+.content{
+    padding: 1em;
+}
+
+td{
+    display: block;
+    width: 100%;
+}
+
+th {
+    display: none;
+}
+.actions{
+    position: absolute;
+    top: 1px;
+    right: 1px;
+}
+
+.close{
+    height: 40px;
+    width: 40px;
+    color: white;
+    border-radius: 50%;
+    background-color: #4ca4ec;
+    display: inline-block;
+    box-shadow: 0 epx 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
+    font-weight: 300;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main-image{
+    float: left;
+    margin-right: 1em;
+    height: 250px ;
+
+}
+@media(min-width:900px){
+    th{
+        display: table-cell;
+    }    
+    td{
+        width: auto;
+        display: table-cell;
+    }
+    td:ntd-of-type(1){
+        font-size: 1em ;
+    }
+    .content{
+        padding: 1.8em;
+    }
+}
+
+@media(min-height: 550px){
+    .content{
+        height: 500px;
+    }
+}
+
