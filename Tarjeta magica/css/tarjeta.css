@@ -98,3 +98,29 @@ a {
     font-weight: bold;
     margin-top: 2rem;
 }
+
+@media screen and (max-width: 768px) {
+    :root{
+        --card-height: 50vh;
+        --card-width: calc(var(--card-height)/1.5)
+    }
+
+    .card {
+        font-size: 1em;
+    }
+
+    a {
+        margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    :root{
+        --card-height: 40vh;
+        --card-width: calc(var(--card-height)/1.5)
+    }
+
+    .card {
+        font-size: 0.8em;
+    }
+}
