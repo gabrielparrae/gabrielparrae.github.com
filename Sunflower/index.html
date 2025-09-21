@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flores Amarillas para Ti ✨</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Cielo nocturno -->
+        <div class="night-sky" id="nightSky"></div>
+        <!-- Luna con halo (modo noche) -->
+        <div class="moon" id="moon"></div>
+        <!-- Neblina dorada en el horizonte (modo noche) -->
+        <div class="haze" id="haze"></div>
+        <!-- Partículas de fondo -->
+        <div class="particles"></div>
+        
+        <!-- Switch Día / Noche -->
+        <div class="theme-toggle" id="themeToggle" title="Cambiar tema">
+            <div class="toggle-track">
+                <span class="track-icon moon">🌙</span>
+                <div class="toggle-thumb"></div>
+                <span class="track-icon sun">☀️</span>
+            </div>
+        </div>
+        
+        <!-- Header con fecha especial -->
+        <header class="header">
+            <div class="date-special">
+                <span class="day">21</span>
+                <span class="month">Septiembre</span>
+                <span class="year">2025</span>
+            </div>
+        </header>
+
+        <!-- Sección principal -->
+        <main class="main-content">
+            <div class="flower-container">
+                <!-- Girasoles PNG reales (colocar en carpeta assets/) -->
+                <img class="sunflower sunflower-1" alt="Girasol" src="assets/pngwing.com.png" />
+                <img class="sunflower sunflower-2" alt="Girasol" src="assets/pngwing.com.png" />
+                <img class="sunflower sunflower-3" alt="Girasol" src="assets/pngwing.com.png" />
+            </div>
+
+            <!-- Mensaje principal -->
+            <div class="message-container">
+                <h1 class="main-title">Para Ti</h1>
+                <div class="heart">💛</div>
+                <p class="romantic-message">
+                    En este día tan especial, quiero regalarte estas flores amarillas
+                    que brillan tanto como tu sonrisa y llenan mi mundo de luz.
+                </p>
+                <p class="date-message">
+                    21 de Septiembre - Un día para recordar siempre
+                </p>
+            </div>
+
+            <!-- Botón interactivo -->
+            <div class="interaction-area">
+                <button class="magic-button" id="magicBtn">
+                    ✨ Haz clic para una sorpresa ✨
+                </button>
+                <button class="magic-button secondary" id="bouquetBtn">
+                    💐 Entregar ramo
+                </button>
+            </div>
+        </main>
+
+        <!-- Sección de mensaje personalizado -->
+        <section class="personal-section" id="personalSection">
+            <div class="personal-card">
+                <button class="close-btn" id="closePersonal" aria-label="Cerrar mensaje">✕</button>
+                <h2>Un mensaje especial para ti</h2>
+                <div class="message-box">
+                    <p>Cada pétalo de estas flores amarillas representa un momento especial que hemos compartido.</p>
+                    <p>Tu risa es como el sol que hace florecer mi corazón cada día.</p>
+                    <p>Gracias por ser la luz que ilumina mi camino. ¡Feliz 21 de Septiembre!</p>
+                </div>
+                <div class="signature">Con todo mi amor 💛</div>
+            </div>
+        </section>
+
+        <!-- Flores flotantes adicionales -->
+        <div class="floating-flowers">
+            <div class="floating-flower" style="--delay: 0s; --duration: 8s;">🌻</div>
+            <div class="floating-flower" style="--delay: 2s; --duration: 10s;">🌼</div>
+            <div class="floating-flower" style="--delay: 4s; --duration: 12s;">🌻</div>
+            <div class="floating-flower" style="--delay: 6s; --duration: 9s;">🌼</div>
+            <div class="floating-flower" style="--delay: 1s; --duration: 11s;">🌻</div>
+        </div>
+        
+        <!-- Corazones flotantes adicionales -->
+        <div class="floating-hearts" id="floatingHearts"></div>
+        
+        <!-- Lienzo de efectos (fuegos artificiales y confeti) -->
+        <canvas id="fxCanvas"></canvas>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
