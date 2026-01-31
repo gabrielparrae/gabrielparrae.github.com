@@ -548,6 +548,162 @@ const quizData = [
         q: "La notación ______ se usa para números muy grandes en potencias de 10.",
         a: "Científica",
         validAnswers: ["cientifica", "científica"]
+      },
+      {
+        id: 11,
+        type: "choice",
+        q: "Problema: Si la luz recorre 300,000 km en 1 segundo, ¿cuánto recorre en 5 segundos?",
+        options: ["1 millón km", "1.5 millones km", "3 millones km", "500,000 km"],
+        correct: 1,
+        a: "1.5 millones km (300,000 x 5)."
+      },
+      {
+        id: 12,
+        type: "boolean",
+        q: "Problema: Una estrella a 10 parsecs está más lejos que una a 10 años luz.",
+        options: ["Verdadero", "Falso"],
+        correct: 0,
+        a: "Verdadero. 1 parsec ≈ 3.26 años luz, por lo tanto 10 pc ≈ 32.6 años luz."
+      },
+      {
+        id: 13,
+        type: "choice",
+        q: "Problema: Si convertimos 2.5 UA a kilómetros, el resultado es...",
+        options: ["250 millones km", "375 millones km", "150 millones km", "500 millones km"],
+        correct: 1,
+        a: "375 millones km (2.5 x 150,000,000)."
+      },
+      {
+        id: 14,
+        type: "boolean",
+        q: "Teoría: El calendario Gregoriano añade un día bisiesto cada 10 años.",
+        options: ["Verdadero", "Falso"],
+        correct: 1,
+        a: "Falso. Es cada 4 años (con excepciones seculares)."
+      },
+      {
+        id: 15,
+        type: "input",
+        q: "La estrella más brillante del cielo nocturno es ______.",
+        a: "Sirio",
+        validAnswers: ["sirio"]
+      },
+      {
+        id: 16,
+        type: "choice",
+        q: "Teoría: ¿De dónde proviene la palabra 'Parsec'?",
+        options: ["Paralaje de Segundo", "Parte del Sector", "Par de Secuencias", "Paraíso Secundario"],
+        correct: 0,
+        a: "Viene de 'Paralaje de un Segundo de arco'."
+      },
+      {
+        id: 17,
+        type: "choice",
+        q: "Problema: ¿Cuántas veces más brillante es una estrella de mag 1 que una de mag 6?",
+        options: ["10 veces", "50 veces", "100 veces", "5 veces"],
+        correct: 2,
+        a: "100 veces. Una diferencia de 5 magnitudes equivale a un factor de 100."
+      },
+      {
+        id: 18,
+        type: "boolean",
+        q: "Teoría: El Gnomon debe apuntar hacia el Ecuador Celeste.",
+        options: ["Verdadero", "Falso"],
+        correct: 1,
+        a: "Falso. Debe apuntar hacia el Polo Celeste (alineado con el eje de la Tierra)."
+      },
+      {
+        id: 19,
+        type: "input",
+        q: "El instrumento que divide la luz de las estrellas en colores se llama ______.",
+        a: "Espectroscopio",
+        validAnswers: ["espectroscopio"]
+      },
+      {
+        id: 20,
+        type: "choice",
+        q: "Problema: Si 1 hora tiene 60 minutos, ¿cuántos minutos hay en 0.5 horas?",
+        options: ["30 min", "50 min", "15 min", "20 min"],
+        correct: 0,
+        a: "30 minutos (0.5 x 60)."
+      },
+      {
+        id: 21,
+        type: "boolean",
+        q: "Problema: Un año luz equivale aproximadamente a 9.46 billones de kilómetros.",
+        options: ["Verdadero", "Falso"],
+        correct: 0,
+        a: "Verdadero."
+      },
+      {
+        id: 22,
+        type: "choice",
+        q: "Teoría: ¿Qué define al Año Tropical?",
+        options: ["Tiempo entre dos lunas llenas", "Tiempo entre dos equinoccios de primavera", "Tiempo de rotación de la Tierra", "Tiempo de vida del Sol"],
+        correct: 1,
+        a: "Es el tiempo entre dos pasos sucesivos del Sol por el equinoccio de primavera."
+      },
+      {
+        id: 23,
+        type: "boolean",
+        q: "Problema: Magnitud -5 es MENOS brillante que Magnitud +5.",
+        options: ["Verdadero", "Falso"],
+        correct: 1,
+        a: "Falso. En magnitudes, el número negativo es MÁS brillante."
+      },
+      {
+        id: 24,
+        type: "input",
+        q: "La velocidad de la ______ es de 300,000 km/s.",
+        a: "Luz",
+        validAnswers: ["luz"]
+      },
+      {
+        id: 25,
+        type: "choice",
+        q: "Problema: Convertir 0.003 a notación científica.",
+        options: ["3 x 10^-3", "3 x 10^3", "0.3 x 10^-2", "30 x 10^-4"],
+        correct: 0,
+        a: "3 x 10<sup>-3</sup>"
+      },
+      {
+        id: 26,
+        type: "boolean",
+        q: "Teoría: La contaminación lumínica nos permite ver MÁS estrellas.",
+        options: ["Verdadero", "Falso"],
+        correct: 1,
+        a: "Falso. La contaminación lumínica borra las estrellas débiles, vemos MENOS."
+      },
+      {
+        id: 27,
+        type: "choice",
+        q: "Problema: Diferencia de brillo entre Mag 0 y Mag 1.",
+        options: ["2.512 veces", "10 veces", "100 veces", "2 veces"],
+        correct: 0,
+        a: "2.512 veces (Raíz quinta de 100)."
+      },
+      {
+        id: 28,
+        type: "boolean",
+        q: "Teoría: Una Unidad Astronómica es mayor que un Año Luz.",
+        options: ["Verdadero", "Falso"],
+        correct: 1,
+        a: "Falso. 1 Año luz = 63,241 UA. El año luz es mucho mayor."
+      },
+      {
+        id: 29,
+        type: "input",
+        q: "Nuestro planeta ocupa la ______ posición desde el Sol.",
+        a: "Tercera",
+        validAnswers: ["tercera", "3ra", "3"]
+      },
+      {
+        id: 30,
+        type: "choice",
+        q: "Problema: ¿Cuántos segundos tiene un minuto?",
+        options: ["100 s", "60 s", "30 s", "3600 s"],
+        correct: 1,
+        a: "60 segundos."
       }
     ]
   }
