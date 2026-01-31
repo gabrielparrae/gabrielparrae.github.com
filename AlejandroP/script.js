@@ -63,7 +63,14 @@ function startQuiz(topicId) {
     
     const topic = quizData.find(t => t.id === topicId);
     // Create a copy and shuffle
-    currentQuestions = [...topic.questions].sort(() => Math.random() - 0.5);
+    let allquestions = [...topic.questions].sort(() => Math.random() - 0.5);
+    
+    // For Exam, limit to 20 questions
+    if (topicId === 't6-examen') {
+        currentQuestions = allquestions.slice(0, 20);
+    } else {
+        currentQuestions = allquestions;
+    }
     
     // Update UI
     topicLabel.textContent = topic.title.split(":")[0]; 
