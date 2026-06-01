@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DDoS Event Analysis Dashboard</title>
+  <meta name="description" content="Interactive dashboard for DDoS event analysis with volume distribution, application protection, and infrastructure protection views." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <!-- SheetJS CDN -->
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surface: {
+              900: '#0b0f19',
+              800: '#111827',
+              700: '#1a2235',
+              600: '#212d45',
+              500: '#2a3a5c',
+            },
+            accent: {
+              cyan: '#06d6a0',
+              blue: '#118ab2',
+              violet: '#7b2ff7',
+              pink: '#ef476f',
+              amber: '#ffd166',
+              orange: '#f77f00',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      background: #0b0f19;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #111827; }
+    ::-webkit-scrollbar-thumb { background: #2a3a5c; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3b4f7a; }
+
+    /* File drop zone animation */
+    .drop-zone {
+      border: 2px dashed #2a3a5c;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .drop-zone.drag-over {
+      border-color: #06d6a0;
+      background: rgba(6, 214, 160, 0.05);
+      transform: scale(1.01);
+    }
+
+    /* Tab active indicator */
+    .tab-btn {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #06d6a0, #118ab2);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+      border-radius: 1px;
+    }
+    .tab-btn.active::after {
+      width: 80%;
+    }
+    .tab-btn.active {
+      color: #06d6a0;
+    }
+
+    /* Pulse animation for upload icon */
+    @keyframes pulse-glow {
+      0%, 100% { filter: drop-shadow(0 0 4px rgba(6, 214, 160, 0.3)); }
+      50% { filter: drop-shadow(0 0 12px rgba(6, 214, 160, 0.6)); }
+    }
+    .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+    /* Fade in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeIn 0.5s ease forwards; }
+
+    /* Table styles */
+    .data-table th {
+      background: #1a2235;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .data-table tr:hover td {
+      background: rgba(6, 214, 160, 0.04);
+    }
+
+    /* Severity badges */
+    .severity-critical { background: rgba(239, 71, 111, 0.15); color: #ef476f; border: 1px solid rgba(239, 71, 111, 0.3); }
+    .severity-high { background: rgba(247, 127, 0, 0.15); color: #f77f00; border: 1px solid rgba(247, 127, 0, 0.3); }
+    .severity-medium { background: rgba(255, 209, 102, 0.15); color: #ffd166; border: 1px solid rgba(255, 209, 102, 0.3); }
+    .severity-low { background: rgba(6, 214, 160, 0.15); color: #06d6a0; border: 1px solid rgba(6, 214, 160, 0.3); }
+    .severity-info { background: rgba(17, 138, 178, 0.15); color: #118ab2; border: 1px solid rgba(17, 138, 178, 0.3); }
+
+    /* Glass card */
+    .glass-card {
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(42, 58, 92, 0.5);
+    }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #06d6a0, #118ab2, #7b2ff7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Count badge animation */
+    @keyframes countUp {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .count-badge { animation: countUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+    /* Select styling */
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2306d6a0' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.7rem center;
+      padding-right: 2.5rem;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen text-gray-200">
+
+  <!-- ========== HEADER ========== -->
+  <header class="sticky top-0 z-50 glass-card border-b border-surface-500/50">
+    <div class="max-w-[1600px] mx-auto px-4 py-3 flex items-center justify-between flex-wrap gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-accent-cyan to-accent-blue flex items-center justify-center">
+          <svg class="w-5 h-5 text-surface-900" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight gradient-text">DDoS Analysis Dashboard</h1>
+          <p class="text-[11px] text-gray-500 font-medium tracking-wide uppercase">Security Event Intelligence</p>
+        </div>
+      </div>
+
+      <!-- File loader - always visible -->
+      <div id="file-loader" class="flex items-center gap-3">
+        <div class="drop-zone rounded-xl px-4 py-2.5 flex items-center gap-3 cursor-pointer hover:border-accent-cyan/50 transition-all"
+             id="dropZone"
+             onclick="document.getElementById('fileInput').click()">
+          <svg class="w-5 h-5 text-accent-cyan pulse-glow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
+          </svg>
+          <div>
+            <p class="text-sm font-medium text-gray-300">Cargar archivo Excel</p>
+            <p class="text-[10px] text-gray-500">.xlsx · .xls · .csv</p>
+          </div>
+        </div>
+        <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" class="hidden" />
+        <div id="file-status" class="hidden items-center gap-2 text-xs">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20 font-medium">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            <span id="file-name-display">archivo.xlsx</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="max-w-[1600px] mx-auto px-4 py-6">
+
+    <!-- Empty state -->
+    <div id="empty-state" class="flex flex-col items-center justify-center min-h-[60vh] text-center">
+      <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-surface-700 to-surface-600 flex items-center justify-center mb-6 border border-surface-500/50">
+        <svg class="w-12 h-12 text-gray-500 pulse-glow" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12H9.75m3 0v3.375m0-3.375h3.375M6.75 21h10.5a2.25 2.25 0 002.25-2.25V6.108c0-.597-.237-1.17-.659-1.591l-2.858-2.858A2.25 2.25 0 0014.392 1H6.75A2.25 2.25 0 004.5 3.25v15.5A2.25 2.25 0 006.75 21z"/>
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-300 mb-2">Sin datos cargados</h2>
+      <p class="text-gray-500 max-w-md mb-6 text-sm leading-relaxed">
+        Carga un archivo Excel con las hojas <span class="text-accent-cyan font-medium">DDoS_Volume</span>,
+        <span class="text-accent-blue font-medium">App_Protection</span> e
+        <span class="text-accent-violet font-medium">Infra_Protection</span> para generar el dashboard.
+      </p>
+      <button onclick="document.getElementById('fileInput').click()"
+              class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-accent-cyan to-accent-blue text-surface-900 font-semibold text-sm hover:shadow-lg hover:shadow-accent-cyan/20 transition-all hover:scale-105 active:scale-95">
+        Seleccionar Archivo
+      </button>
+    </div>
+
+    <!-- Dashboard (hidden until data loads) -->
+    <div id="dashboard" class="hidden fade-in">
+
+      <!-- Summary cards -->
+      <div id="summary-cards" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6"></div>
+
+      <!-- Tab Navigation -->
+      <nav class="flex items-center gap-1 mb-6 p-1 glass-card rounded-xl w-fit" role="tablist">
+        <button class="tab-btn active px-5 py-2.5 rounded-lg text-sm font-semibold transition-all" data-tab="volume" role="tab" aria-selected="true">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"/><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"/></svg>
+            Volumen DDoS
+          </span>
+        </button>
+        <button class="tab-btn px-5 py-2.5 rounded-lg text-sm font-semibold text-gray-400 transition-all" data-tab="app" role="tab" aria-selected="false">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-.597-.237-1.17-.659-1.591l-2.858-2.858A2.25 2.25 0 0014.392 1H6.75A2.25 2.25 0 004.5 3.25v15.5A2.25 2.25 0 006.75 21z"/></svg>
+            App Protection
+          </span>
+        </button>
+        <button class="tab-btn px-5 py-2.5 rounded-lg text-sm font-semibold text-gray-400 transition-all" data-tab="infra" role="tab" aria-selected="false">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z"/></svg>
+            Infra Protection
+          </span>
+        </button>
+      </nav>
+
+      <!-- ===== TAB 1: DDoS Volume ===== -->
+      <section id="tab-volume" class="tab-content fade-in">
+        <div id="volume-missing" class="hidden glass-card rounded-2xl p-8 text-center">
+          <p class="text-amber-400 font-medium">⚠ Hoja "DDoS_Volume" no encontrada en el archivo.</p>
+        </div>
+        <div id="volume-content" class="grid lg:grid-cols-2 gap-6">
+          <div class="glass-card rounded-2xl p-6">
+            <h3 class="text-lg font-bold text-gray-200 mb-1">Distribución de Volumen por Ataque</h3>
+            <p class="text-xs text-gray-500 mb-4">Basado en bytes totales por tipo de ataque</p>
+            <div class="relative" style="max-height: 420px;">
+              <canvas id="volumeDonutChart"></canvas>
+            </div>
+          </div>
+          <div class="glass-card rounded-2xl p-6">
+            <h3 class="text-lg font-bold text-gray-200 mb-4">Detalle de Volumen</h3>
+            <div class="overflow-auto max-h-[400px] rounded-xl border border-surface-500/30">
+              <table class="data-table w-full text-sm">
+                <thead>
+                  <tr>
+                    <th class="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Ataque</th>
+                    <th class="text-right px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Volumen</th>
+                    <th class="text-right px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">% Total</th>
+                  </tr>
+                </thead>
+                <tbody id="volume-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAB 2: App Protection ===== -->
+      <section id="tab-app" class="tab-content hidden">
+        <div id="app-missing" class="hidden glass-card rounded-2xl p-8 text-center">
+          <p class="text-amber-400 font-medium">⚠ Hoja "App_Protection" no encontrada en el archivo.</p>
+        </div>
+        <div id="app-content">
+          <!-- Filters -->
+          <div class="glass-card rounded-2xl p-4 mb-6 flex flex-wrap items-end gap-4">
+            <div class="flex-1 min-w-[180px]">
+              <label class="block text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Severity</label>
+              <select id="app-filter-severity" class="w-full bg-surface-700 border border-surface-500/50 text-gray-200 text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-accent-cyan/50">
+                <option value="">Todas</option>
+              </select>
+            </div>
+            <div class="flex-1 min-w-[180px]">
+              <label class="block text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Attack Name</label>
+              <select id="app-filter-attack" class="w-full bg-surface-700 border border-surface-500/50 text-gray-200 text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-accent-cyan/50">
+                <option value="">Todos</option>
+              </select>
+            </div>
+            <div class="flex-[2] min-w-[220px]">
+              <label class="block text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Búsqueda</label>
+              <div class="relative">
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input id="app-filter-search" type="text" placeholder="Buscar en cualquier columna…"
+                       class="w-full bg-surface-700 border border-surface-500/50 text-gray-200 text-sm rounded-lg pl-10 pr-3 py-2 focus:outline-none focus:border-accent-cyan/50">
+              </div>
+            </div>
+            <button onclick="resetAppFilters()" class="px-4 py-2 rounded-lg text-xs font-semibold text-gray-400 border border-surface-500/50 hover:border-accent-pink/50 hover:text-accent-pink transition-all">
+              Limpiar
+            </button>
+          </div>
+
+          <div class="grid lg:grid-cols-3 gap-6 mb-6">
+            <div class="lg:col-span-2 glass-card rounded-2xl p-5">
+              <h3 class="text-base font-bold text-gray-200 mb-1">Eventos por Aplicación</h3>
+              <p class="text-xs text-gray-500 mb-3">Cantidad de eventos agrupados por APPLICATION NAME</p>
+              <div style="max-height: 350px;" class="relative">
+                <canvas id="appBarChart"></canvas>
+              </div>
+            </div>
+            <div class="glass-card rounded-2xl p-5 flex flex-col justify-center">
+              <div class="space-y-4" id="app-stats-cards"></div>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="glass-card rounded-2xl overflow-hidden">
+            <div class="p-4 border-b border-surface-500/30 flex items-center justify-between">
+              <h3 class="text-base font-bold text-gray-200">Registros de Application Protection</h3>
+              <span id="app-row-count" class="text-xs text-gray-500"></span>
+            </div>
+            <div class="overflow-x-auto max-h-[500px] overflow-y-auto">
+              <table class="data-table w-full text-xs">
+                <thead>
+                  <tr>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Action</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Time (UTC-4)</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Application</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Source</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Attack Name</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Severity</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Attack ID</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Account</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Destination</th>
+                  </tr>
+                </thead>
+                <tbody id="app-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAB 3: Infrastructure Protection ===== -->
+      <section id="tab-infra" class="tab-content hidden">
+        <div id="infra-missing" class="hidden glass-card rounded-2xl p-8 text-center">
+          <p class="text-amber-400 font-medium">⚠ Hoja "Infra_Protection" no encontrada en el archivo.</p>
+        </div>
+        <div id="infra-content">
+          <!-- Filters -->
+          <div class="glass-card rounded-2xl p-4 mb-6">
+            <div class="flex flex-wrap items-end gap-4">
+              <div class="min-w-[160px]">
+                <label class="block text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Fecha Inicio</label>
+                <input id="infra-date-start" type="date" class="w-full bg-surface-700 border border-surface-500/50 text-gray-200 text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-accent-cyan/50">
+              </div>
+              <div class="min-w-[160px]">
+                <label class="block text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Fecha Fin</label>
+                <input id="infra-date-end" type="date" class="w-full bg-surface-700 border border-surface-500/50 text-gray-200 text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-accent-cyan/50">
+              </div>
+              <div class="flex-1 min-w-[150px]">
+                <label class="block text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Severity</label>
+                <select id="infra-filter-severity" class="w-full bg-surface-700 border border-surface-500/50 text-gray-200 text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-accent-cyan/50">
+                  <option value="">Todas</option>
+                </select>
+              </div>
+              <div class="flex-1 min-w-[150px]">
+                <label class="block text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Category</label>
+                <select id="infra-filter-category" class="w-full bg-surface-700 border border-surface-500/50 text-gray-200 text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-accent-cyan/50">
+                  <option value="">Todas</option>
+                </select>
+              </div>
+              <div class="flex-1 min-w-[150px]">
+                <label class="block text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Attack Name</label>
+                <select id="infra-filter-attack" class="w-full bg-surface-700 border border-surface-500/50 text-gray-200 text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-accent-cyan/50">
+                  <option value="">Todos</option>
+                </select>
+              </div>
+              <div class="flex-[2] min-w-[200px]">
+                <label class="block text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Búsqueda</label>
+                <div class="relative">
+                  <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  <input id="infra-filter-search" type="text" placeholder="Buscar…"
+                         class="w-full bg-surface-700 border border-surface-500/50 text-gray-200 text-sm rounded-lg pl-10 pr-3 py-2 focus:outline-none focus:border-accent-cyan/50">
+                </div>
+              </div>
+              <button onclick="resetInfraFilters()" class="px-4 py-2 rounded-lg text-xs font-semibold text-gray-400 border border-surface-500/50 hover:border-accent-pink/50 hover:text-accent-pink transition-all">
+                Limpiar
+              </button>
+            </div>
+          </div>
+
+          <!-- Charts row -->
+          <div class="grid lg:grid-cols-3 gap-6 mb-6">
+            <div class="lg:col-span-2 glass-card rounded-2xl p-5">
+              <h3 class="text-base font-bold text-gray-200 mb-1">Eventos por Día y Severidad</h3>
+              <p class="text-xs text-gray-500 mb-3">Barras apiladas por START DATE (UTC-4)</p>
+              <div style="max-height: 350px;" class="relative">
+                <canvas id="infraStackedBarChart"></canvas>
+              </div>
+            </div>
+            <div class="glass-card rounded-2xl p-5">
+              <h3 class="text-base font-bold text-gray-200 mb-1">Distribución por Tipo</h3>
+              <p class="text-xs text-gray-500 mb-3">Eventos agrupados por TYPE</p>
+              <div class="relative" style="max-height: 300px;">
+                <canvas id="infraTypeDonutChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="glass-card rounded-2xl overflow-hidden">
+            <div class="p-4 border-b border-surface-500/30 flex items-center justify-between">
+              <h3 class="text-base font-bold text-gray-200">Informe ERT – Infrastructure Protection</h3>
+              <span id="infra-row-count" class="text-xs text-gray-500"></span>
+            </div>
+            <div class="overflow-x-auto max-h-[500px] overflow-y-auto">
+              <table class="data-table w-full text-xs">
+                <thead>
+                  <tr>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Start Date (UTC-4)</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">End Date (UTC-4)</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Type</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Severity</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Attack Name</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Category</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Source</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Account</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Site</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Asset Name</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Source IP</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Source Port</th>
+                    <th class="px-3 py-3 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">Destination IP</th>
+                  </tr>
+                </thead>
+                <tbody id="infra-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /dashboard -->
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-[10px] text-gray-600 tracking-wide uppercase">
+    DDoS Analysis Dashboard · Datos en UTC-4 · Generado localmente
+  </footer>
+
+
+  <!-- ========================================== -->
+  <!-- ============= JAVASCRIPT ================ -->
+  <!-- ========================================== -->
+  <script>
+  (function () {
+    'use strict';
+
+    // ─── Global data stores ───
+    let DATA = { volume: null, app: null, infra: null };
+    let CHARTS = {};
+
+    // ─── Color palette ───
+    const COLORS = [
+      '#06d6a0', '#118ab2', '#7b2ff7', '#ef476f', '#ffd166',
+      '#f77f00', '#00b4d8', '#e056a0', '#80ed99', '#c77dff',
+      '#48bfe3', '#f4845f', '#72efdd', '#ff6b6b', '#4ecdc4',
+      '#ffe66d', '#a78bfa', '#34d399', '#f472b6', '#60a5fa',
+    ];
+
+    const SEVERITY_COLORS = {
+      'critical': '#ef476f',
+      'high': '#f77f00',
+      'medium': '#ffd166',
+      'low': '#06d6a0',
+      'info': '#118ab2',
+    };
+
+    // ─── Utility: Parse any date value to a UTC milliseconds timestamp ───
+    // Handles: Excel serial numbers, JS Date objects (with local TZ), date strings
+    function parseToUTCMs(raw) {
+      if (raw === null || raw === undefined || raw === '') return null;
+
+      // 1) Excel serial date number (e.g., 45731.604)
+      if (typeof raw === 'number' && raw > 1000) {
+        // Serial date: days since 1900-01-01 (with the Excel leap year bug)
+        // Convert directly to UTC ms without involving local timezone
+        return Math.round((raw - 25569) * 86400000);
+      }
+
+      // 2) JS Date object (from cellDates:true — interpreted in LOCAL timezone by SheetJS)
+      if (raw instanceof Date) {
+        if (isNaN(raw.getTime())) return null;
+        // The Date was created by SheetJS using local timezone, so .getTime() is already UTC ms
+        return raw.getTime();
+      }
+
+      // 3) String — try multiple formats
+      if (typeof raw === 'string') {
+        let s = raw.trim();
+        if (!s) return null;
+
+        // Try "YYYY-MM-DD HH:mm:ss" → treat as UTC
+        const match = s.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})(?:[T\s](\d{1,2}):(\d{2})(?::(\d{2}))?)?/);
+        if (match) {
+          const [, yr, mo, dy, hh, mm, ss] = match;
+          const utcMs = Date.UTC(
+            parseInt(yr), parseInt(mo) - 1, parseInt(dy),
+            parseInt(hh || 0), parseInt(mm || 0), parseInt(ss || 0)
+          );
+          if (!isNaN(utcMs)) return utcMs;
+        }
+
+        // Try ISO string (already has timezone info)
+        if (s.includes('T') || s.includes('Z')) {
+          const d = new Date(s);
+          if (!isNaN(d.getTime())) return d.getTime();
+        }
+
+        // Last resort: try native parsing (adds 'Z' for UTC interpretation)
+        const d2 = new Date(s.replace(' ', 'T') + 'Z');
+        if (!isNaN(d2.getTime())) return d2.getTime();
+
+        // Really last resort
+        const d3 = new Date(s);
+        if (!isNaN(d3.getTime())) return d3.getTime();
+      }
+
+      return null;
+    }
+
+    // ─── Convert any date value to UTC-4 display string ───
+    function toUTC4(raw) {
+      if (!raw && raw !== 0) return '—';
+      const utcMs = parseToUTCMs(raw);
+      if (utcMs === null) return String(raw);
+      // Subtract 4 hours for UTC-4
+      const utc4Ms = utcMs - 4 * 3600000;
+      const d = new Date(utc4Ms);
+      const pad = (n) => String(n).padStart(2, '0');
+      return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())} UTC-4`;
+    }
+
+    // ─── Convert to UTC-4 Date object ───
+    function toUTC4Date(raw) {
+      const utcMs = parseToUTCMs(raw);
+      if (utcMs === null) return null;
+      return new Date(utcMs - 4 * 3600000);
+    }
+
+    // ─── Convert to UTC-4 date-only string (YYYY-MM-DD) ───
+    function toUTC4DateOnly(raw) {
+      const d = toUTC4Date(raw);
+      if (!d) return null;
+      const pad = (n) => String(n).padStart(2, '0');
+      return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`;
+    }
+
+    // ─── Utility: format bytes ───
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    // ─── Utility: severity badge ───
+    function severityBadge(sev) {
+      const s = String(sev || '').toLowerCase();
+      let cls = 'severity-info';
+      if (s.includes('critical')) cls = 'severity-critical';
+      else if (s.includes('high')) cls = 'severity-high';
+      else if (s.includes('medium')) cls = 'severity-medium';
+      else if (s.includes('low')) cls = 'severity-low';
+      return `<span class="${cls} px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase">${sev || '—'}</span>`;
+    }
+
+    // ─── Utility: safe text ───
+    function esc(v) {
+      if (v === null || v === undefined) return '—';
+      const s = String(v);
+      const div = document.createElement('div');
+      div.textContent = s;
+      return div.innerHTML;
+    }
+
+    function normalizeSheetName(name) {
+      return String(name || '').trim().toLowerCase().replace(/[\s_-]+/g, '_').replace(/[^a-z0-9_]/g, '');
+    }
+
+    function normalizeCellKey(key) {
+      return String(key || '').trim().toLowerCase().replace(/[\s_-]+/g, ' ');
+    }
+
+    const CELL_KEY_MAP = {
+      'attack name': 'ATTACK NAME',
+      'attack total volume (byte)': 'ATTACK TOTAL VOLUME (BYTE)',
+      'time': 'TIME',
+      'action': 'ACTION',
+      'application name': 'APPLICATION NAME',
+      'source': 'SOURCE',
+      'source ip': 'SOURCE IP ADDRESS',
+      'source ip address': 'SOURCE IP ADDRESS',
+      'destination ip': 'DESTINATION IP ADDRESS',
+      'destination ip address': 'DESTINATION IP ADDRESS',
+      'severity': 'SEVERITY',
+      'attack id': 'ATTACK ID',
+      'account name': 'ACCOUNT NAME',
+      'account': 'ACCOUNT',
+      'destination': 'DESTINATION',
+      'start date': 'START DATE',
+      'end date': 'END DATE',
+      'type': 'TYPE',
+      'category': 'CATEGORY',
+      'site': 'SITE',
+      'asset name': 'ASSET NAME'
+    };
+
+    function canonicalizeRow(row) {
+      const normalized = {};
+      Object.entries(row).forEach(([key, value]) => {
+        const mapKey = CELL_KEY_MAP[normalizeCellKey(key)];
+        normalized[mapKey || key] = value;
+      });
+      return normalized;
+    }
+
+    function normalizeRows(rows) {
+      return rows.map(canonicalizeRow);
+    }
+
+    // ─── Tab switching ───
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.classList.remove('active');
+          b.classList.add('text-gray-400');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.classList.remove('text-gray-400');
+        btn.setAttribute('aria-selected', 'true');
+        const tab = btn.dataset.tab;
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        const target = document.getElementById('tab-' + tab);
+        target.classList.remove('hidden');
+        target.classList.add('fade-in');
+      });
+    });
+
+    // ─── Drag & drop ───
+    const dropZone = document.getElementById('dropZone');
+    ['dragenter', 'dragover'].forEach(ev => {
+      dropZone.addEventListener(ev, e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+    });
+    ['dragleave', 'drop'].forEach(ev => {
+      dropZone.addEventListener(ev, e => { e.preventDefault(); dropZone.classList.remove('drag-over'); });
+    });
+    dropZone.addEventListener('drop', e => {
+      const file = e.dataTransfer.files[0];
+      if (file) processFile(file);
+    });
+
+    // ─── File input ───
+    document.getElementById('fileInput').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) processFile(file);
+      e.target.value = '';
+    });
+
+    // ─── Process file ───
+    function processFile(file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          const data = new Uint8Array(e.target.result);
+          // Do NOT use cellDates:true — it converts serial dates using local timezone,
+          // causing incorrect UTC interpretation in browsers with non-zero TZ offset.
+          const wb = XLSX.read(data, { type: 'array', cellDates: false });
+
+          // Extract sheets
+          const sheetNames = wb.SheetNames;
+          console.log('[DDoS Dashboard] Sheet names found:', sheetNames);
+
+          DATA.volume = null;
+          DATA.app = null;
+          DATA.infra = null;
+
+          sheetNames.forEach(name => {
+            const ws = wb.Sheets[name];
+            // defval:'' ensures empty cells are empty strings, not undefined
+            // raw:true (default) preserves native types: numbers for dates+volumes, strings for text
+            const json = normalizeRows(XLSX.utils.sheet_to_json(ws, { defval: '' }));
+            const normalized = normalizeSheetName(name);
+            console.log(`[DDoS Dashboard] Sheet "${name}": ${json.length} rows`, json.length > 0 ? 'Columns: ' + Object.keys(json[0]).join(', ') : '(empty)');
+            if (json.length > 0) {
+              console.log('[DDoS Dashboard] First row sample:', JSON.stringify(json[0]));
+            }
+            if (normalized === 'ddos_volume') DATA.volume = json;
+            else if (normalized === 'app_protection' || normalized === 'appprotection') DATA.app = json;
+            else if (normalized === 'infra_protection') DATA.infra = json;
+          });
+
+          // If no sheet matched by exact normalized name, try broader matching
+          if (!DATA.volume || !DATA.app || !DATA.infra) {
+            sheetNames.forEach(name => {
+              const ws = wb.Sheets[name];
+              const json = normalizeRows(XLSX.utils.sheet_to_json(ws, { defval: '' }));
+              const lower = normalizeSheetName(name);
+              if (!DATA.volume && (lower === 'ddos_volume' || lower === 'ddosvolume' || (lower.includes('ddos') && lower.includes('vol')))) DATA.volume = json;
+              else if (!DATA.app && (lower === 'app_protection' || lower === 'appprotection' || (lower.includes('app') && lower.includes('protect')))) DATA.app = json;
+              else if (!DATA.infra && (lower === 'infra_protection' || lower === 'infraprotection' || (lower.includes('infra') && lower.includes('protect')))) DATA.infra = json;
+            });
+          }
+
+          // Show debug notification
+          showNotification(
+            `Archivo cargado: ${file.name}\n` +
+            `Hojas: [${sheetNames.join(', ')}]\n` +
+            `DDoS_Volume: ${DATA.volume ? DATA.volume.length + ' filas' : '❌ No encontrada'}\n` +
+            `App_Protection: ${DATA.app ? DATA.app.length + ' filas' : '❌ No encontrada'}\n` +
+            `Infra_Protection: ${DATA.infra ? DATA.infra.length + ' filas' : '❌ No encontrada'}`
+          );
+
+          // Show dashboard if at least one sheet was found
+          if (DATA.volume || DATA.app || DATA.infra) {
+            document.getElementById('empty-state').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            document.getElementById('dashboard').classList.add('fade-in');
+          } else {
+            showNotification('⚠️ No se encontraron hojas válidas (DDoS_Volume, App_Protection, Infra_Protection) en el archivo.', true);
+            return;
+          }
+
+          // Show file name
+          document.getElementById('file-name-display').textContent = file.name;
+          document.getElementById('file-status').classList.remove('hidden');
+          document.getElementById('file-status').classList.add('inline-flex');
+
+          // Render all sections
+          renderSummaryCards();
+          renderVolume();
+          renderApp();
+          renderInfra();
+        } catch (err) {
+          console.error('[DDoS Dashboard] Error processing file:', err);
+          showNotification('❌ Error procesando el archivo: ' + err.message, true);
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    // ─── Notification toast ───
+    function showNotification(msg, isError) {
+      const existing = document.getElementById('toast-notification');
+      if (existing) existing.remove();
+      const div = document.createElement('div');
+      div.id = 'toast-notification';
+      div.style.cssText = `
+        position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+        max-width: 420px; padding: 16px 20px; border-radius: 12px;
+        background: ${isError ? 'rgba(239,71,111,0.15)' : 'rgba(6,214,160,0.1)'};
+        border: 1px solid ${isError ? 'rgba(239,71,111,0.3)' : 'rgba(6,214,160,0.25)'};
+        color: ${isError ? '#ef476f' : '#d1d5db'};
+        font-size: 12px; font-family: 'Inter', sans-serif;
+        white-space: pre-line; line-height: 1.5;
+        backdrop-filter: blur(12px);
+        animation: fadeIn 0.3s ease;
+        cursor: pointer;
+      `;
+      div.textContent = msg;
+      div.onclick = () => div.remove();
+      document.body.appendChild(div);
+      setTimeout(() => { if (div.parentNode) div.remove(); }, 8000);
+    }
+
+    // ─── Summary cards ───
+    function renderSummaryCards() {
+      const container = document.getElementById('summary-cards');
+      const cards = [];
+
+      if (DATA.volume) {
+        const total = DATA.volume.reduce((s, r) => s + (parseFloat(r['ATTACK TOTAL VOLUME (BYTE)']) || 0), 0);
+        cards.push({ label: 'Volumen Total', value: formatBytes(total), icon: '📊', gradient: 'from-accent-cyan/20 to-accent-blue/10' });
+        cards.push({ label: 'Tipos de Ataque (Vol)', value: DATA.volume.length, icon: '🎯', gradient: 'from-accent-violet/20 to-accent-pink/10' });
+      }
+      if (DATA.app) {
+        cards.push({ label: 'Eventos App', value: DATA.app.length.toLocaleString(), icon: '🛡️', gradient: 'from-accent-blue/20 to-accent-cyan/10' });
+      }
+      if (DATA.infra) {
+        cards.push({ label: 'Eventos Infra', value: DATA.infra.length.toLocaleString(), icon: '🏗️', gradient: 'from-accent-orange/20 to-accent-amber/10' });
+      }
+
+      container.innerHTML = cards.map(c => `
+        <div class="glass-card rounded-2xl p-4 bg-gradient-to-br ${c.gradient} border border-surface-500/30 hover:border-accent-cyan/20 transition-all">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">${c.icon}</span>
+            <div>
+              <p class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">${c.label}</p>
+              <p class="text-xl font-bold text-gray-100 count-badge">${c.value}</p>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ═══════════════════════════════════════════
+    //  TAB 1: DDoS Volume
+    // ═══════════════════════════════════════════
+    function renderVolume() {
+      if (!DATA.volume) {
+        document.getElementById('volume-missing').classList.remove('hidden');
+        document.getElementById('volume-content').classList.add('hidden');
+        return;
+      }
+      document.getElementById('volume-missing').classList.add('hidden');
+      document.getElementById('volume-content').classList.remove('hidden');
+
+      const labels = DATA.volume.map(r => r['ATTACK NAME'] || 'Desconocido');
+      const values = DATA.volume.map(r => parseFloat(r['ATTACK TOTAL VOLUME (BYTE)']) || 0);
+      const total = values.reduce((a, b) => a + b, 0);
+
+      // Donut chart
+      if (CHARTS.volumeDonut) CHARTS.volumeDonut.destroy();
+      const ctx = document.getElementById('volumeDonutChart').getContext('2d');
+      CHARTS.volumeDonut = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: values,
+            backgroundColor: COLORS.slice(0, labels.length),
+            borderColor: '#0b0f19',
+            borderWidth: 3,
+            hoverBorderColor: '#fff',
+            hoverBorderWidth: 2,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          cutout: '62%',
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: '#9ca3af',
+                padding: 16,
+                usePointStyle: true,
+                pointStyleWidth: 10,
+                font: { size: 11, family: 'Inter' }
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(17, 24, 39, 0.95)',
+              titleColor: '#06d6a0',
+              bodyColor: '#e5e7eb',
+              borderColor: '#2a3a5c',
+              borderWidth: 1,
+              padding: 12,
+              titleFont: { weight: 'bold' },
+              callbacks: {
+                label: function (ctx) {
+                  const v = ctx.parsed;
+                  const pct = total > 0 ? ((v / total) * 100).toFixed(1) : 0;
+                  return ` ${ctx.label}: ${formatBytes(v)} (${pct}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // Table
+      const tbody = document.getElementById('volume-table-body');
+      tbody.innerHTML = DATA.volume.map((r, i) => {
+        const v = parseFloat(r['ATTACK TOTAL VOLUME (BYTE)']) || 0;
+        const pct = total > 0 ? ((v / total) * 100).toFixed(1) : 0;
+        return `
+          <tr class="border-t border-surface-500/20">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full" style="background:${COLORS[i % COLORS.length]}"></span>
+                <span class="text-gray-300">${esc(r['ATTACK NAME'])}</span>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-right font-mono text-accent-cyan text-xs">${formatBytes(v)}</td>
+            <td class="px-4 py-3 text-right">
+              <div class="flex items-center justify-end gap-2">
+                <div class="w-16 h-1.5 bg-surface-600 rounded-full overflow-hidden">
+                  <div class="h-full rounded-full" style="width:${pct}%;background:${COLORS[i % COLORS.length]}"></div>
+                </div>
+                <span class="text-gray-400 text-xs w-12 text-right">${pct}%</span>
+              </div>
+            </td>
+          </tr>`;
+      }).join('');
+    }
+
+    // ═══════════════════════════════════════════
+    //  TAB 2: App Protection
+    // ═══════════════════════════════════════════
+    function renderApp() {
+      if (!DATA.app) {
+        document.getElementById('app-missing').classList.remove('hidden');
+        document.getElementById('app-content').classList.add('hidden');
+        return;
+      }
+      document.getElementById('app-missing').classList.add('hidden');
+      document.getElementById('app-content').classList.remove('hidden');
+
+      // Populate filters
+      populateSelect('app-filter-severity', getUnique(DATA.app, 'SEVERITY'), 'Todas');
+      populateSelect('app-filter-attack', getUnique(DATA.app, 'ATTACK NAME'), 'Todos');
+
+      // Attach filter events
+      ['app-filter-severity', 'app-filter-attack', 'app-filter-search'].forEach(id => {
+        const el = document.getElementById(id);
+        el.removeEventListener('input', renderAppFiltered);
+        el.removeEventListener('change', renderAppFiltered);
+        el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', renderAppFiltered);
+      });
+
+      renderAppFiltered();
+    }
+
+    function renderAppFiltered() {
+      const severity = document.getElementById('app-filter-severity').value;
+      const attack = document.getElementById('app-filter-attack').value;
+      const search = document.getElementById('app-filter-search').value.toLowerCase();
+
+      let filtered = DATA.app.filter(r => {
+        if (severity && r['SEVERITY'] !== severity) return false;
+        if (attack && r['ATTACK NAME'] !== attack) return false;
+        if (search) {
+          const row = Object.values(r).join(' ').toLowerCase();
+          if (!row.includes(search)) return false;
+        }
+        return true;
+      });
+
+      // Stats
+      const statsContainer = document.getElementById('app-stats-cards');
+      const severityCounts = {};
+      filtered.forEach(r => {
+        const s = r['SEVERITY'] || 'Unknown';
+        severityCounts[s] = (severityCounts[s] || 0) + 1;
+      });
+      statsContainer.innerHTML = Object.entries(severityCounts).sort((a, b) => b[1] - a[1]).map(([sev, count]) => `
+        <div class="flex items-center justify-between p-3 rounded-xl bg-surface-700/50 border border-surface-500/20">
+          ${severityBadge(sev)}
+          <span class="text-lg font-bold text-gray-200">${count}</span>
+        </div>
+      `).join('');
+
+      // Bar chart: events per application
+      const appCounts = {};
+      filtered.forEach(r => {
+        const app = r['APPLICATION NAME'] || 'Desconocido';
+        appCounts[app] = (appCounts[app] || 0) + 1;
+      });
+      const sorted = Object.entries(appCounts).sort((a, b) => b[1] - a[1]);
+      const appLabels = sorted.map(e => e[0]);
+      const appValues = sorted.map(e => e[1]);
+
+      if (CHARTS.appBar) CHARTS.appBar.destroy();
+      const ctx = document.getElementById('appBarChart').getContext('2d');
+      CHARTS.appBar = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: appLabels,
+          datasets: [{
+            label: 'Eventos',
+            data: appValues,
+            backgroundColor: appLabels.map((_, i) => COLORS[i % COLORS.length] + 'cc'),
+            borderColor: appLabels.map((_, i) => COLORS[i % COLORS.length]),
+            borderWidth: 1,
+            borderRadius: 6,
+            borderSkipped: false,
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: 'rgba(17, 24, 39, 0.95)',
+              titleColor: '#06d6a0',
+              bodyColor: '#e5e7eb',
+              borderColor: '#2a3a5c',
+              borderWidth: 1,
+              padding: 12,
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: '#6b7280', font: { size: 10 } },
+              grid: { color: 'rgba(42, 58, 92, 0.3)' }
+            },
+            y: {
+              ticks: { color: '#d1d5db', font: { size: 10 } },
+              grid: { display: false }
+            }
+          }
+        }
+      });
+
+      // Table
+      document.getElementById('app-row-count').textContent = `${filtered.length} registro${filtered.length !== 1 ? 's' : ''}`;
+      const tbody = document.getElementById('app-table-body');
+      tbody.innerHTML = filtered.map(r => `
+        <tr class="border-t border-surface-500/10 hover:bg-surface-700/30 transition-colors">
+          <td class="px-3 py-2.5 whitespace-nowrap"><span class="px-2 py-0.5 rounded bg-accent-blue/10 text-accent-blue text-[10px] font-semibold uppercase">${esc(r['ACTION'])}</span></td>
+          <td class="px-3 py-2.5 whitespace-nowrap font-mono text-gray-400">${toUTC4(r['TIME'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap text-gray-300 font-medium">${esc(r['APPLICATION NAME'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap text-gray-400">${esc(r['SOURCE'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap text-gray-300">${esc(r['ATTACK NAME'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap">${severityBadge(r['SEVERITY'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap font-mono text-gray-500 text-[10px]">${esc(r['ATTACK ID'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap text-gray-400">${esc(r['ACCOUNT NAME'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap text-gray-400">${esc(r['DESTINATION'])}</td>
+        </tr>
+      `).join('');
+    }
+
+    window.resetAppFilters = function () {
+      document.getElementById('app-filter-severity').value = '';
+      document.getElementById('app-filter-attack').value = '';
+      document.getElementById('app-filter-search').value = '';
+      renderAppFiltered();
+    };
+
+    // ═══════════════════════════════════════════
+    //  TAB 3: Infra Protection
+    // ═══════════════════════════════════════════
+    function renderInfra() {
+      if (!DATA.infra) {
+        document.getElementById('infra-missing').classList.remove('hidden');
+        document.getElementById('infra-content').classList.add('hidden');
+        return;
+      }
+      document.getElementById('infra-missing').classList.add('hidden');
+      document.getElementById('infra-content').classList.remove('hidden');
+
+      // Populate filters
+      populateSelect('infra-filter-severity', getUnique(DATA.infra, 'SEVERITY'), 'Todas');
+      populateSelect('infra-filter-category', getUnique(DATA.infra, 'CATEGORY'), 'Todas');
+      populateSelect('infra-filter-attack', getUnique(DATA.infra, 'ATTACK NAME'), 'Todos');
+
+      // Attach filter events
+      ['infra-filter-severity', 'infra-filter-category', 'infra-filter-attack', 'infra-filter-search', 'infra-date-start', 'infra-date-end'].forEach(id => {
+        const el = document.getElementById(id);
+        el.removeEventListener('input', renderInfraFiltered);
+        el.removeEventListener('change', renderInfraFiltered);
+        el.addEventListener(el.tagName === 'INPUT' && el.type === 'text' ? 'input' : 'change', renderInfraFiltered);
+      });
+
+      renderInfraFiltered();
+    }
+
+    function renderInfraFiltered() {
+      const severity = document.getElementById('infra-filter-severity').value;
+      const category = document.getElementById('infra-filter-category').value;
+      const attack = document.getElementById('infra-filter-attack').value;
+      const search = document.getElementById('infra-filter-search').value.toLowerCase();
+      const dateStart = document.getElementById('infra-date-start').value;
+      const dateEnd = document.getElementById('infra-date-end').value;
+
+      let filtered = DATA.infra.filter(r => {
+        if (severity && r['SEVERITY'] !== severity) return false;
+        if (category && r['CATEGORY'] !== category) return false;
+        if (attack && r['ATTACK NAME'] !== attack) return false;
+        if (search) {
+          const row = Object.values(r).join(' ').toLowerCase();
+          if (!row.includes(search)) return false;
+        }
+        // Date range filter on START DATE (UTC-4)
+        if (dateStart || dateEnd) {
+          const d = toUTC4DateOnly(r['START DATE']);
+          if (!d) return false;
+          if (dateStart && d < dateStart) return false;
+          if (dateEnd && d > dateEnd) return false;
+        }
+        return true;
+      });
+
+      // ─── Stacked bar chart: events per day by severity ───
+      const daySevMap = {};
+      const allSeverities = new Set();
+      filtered.forEach(r => {
+        const day = toUTC4DateOnly(r['START DATE']);
+        if (!day) return;
+        const sev = r['SEVERITY'] || 'Unknown';
+        allSeverities.add(sev);
+        if (!daySevMap[day]) daySevMap[day] = {};
+        daySevMap[day][sev] = (daySevMap[day][sev] || 0) + 1;
+      });
+
+      const days = Object.keys(daySevMap).sort();
+      const sevArray = Array.from(allSeverities);
+      const stackedDatasets = sevArray.map((sev, i) => ({
+        label: sev,
+        data: days.map(d => daySevMap[d][sev] || 0),
+        backgroundColor: SEVERITY_COLORS[sev.toLowerCase()] || COLORS[i % COLORS.length],
+        borderColor: '#0b0f19',
+        borderWidth: 1,
+        borderRadius: 4,
+        borderSkipped: false,
+      }));
+
+      if (CHARTS.infraStacked) CHARTS.infraStacked.destroy();
+      const ctx1 = document.getElementById('infraStackedBarChart').getContext('2d');
+      CHARTS.infraStacked = new Chart(ctx1, {
+        type: 'bar',
+        data: { labels: days, datasets: stackedDatasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: {
+                color: '#9ca3af',
+                usePointStyle: true,
+                pointStyleWidth: 10,
+                padding: 14,
+                font: { size: 10, family: 'Inter' }
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(17, 24, 39, 0.95)',
+              titleColor: '#06d6a0',
+              bodyColor: '#e5e7eb',
+              borderColor: '#2a3a5c',
+              borderWidth: 1,
+              padding: 12,
+              mode: 'index',
+              intersect: false,
+            }
+          },
+          scales: {
+            x: {
+              stacked: true,
+              ticks: { color: '#6b7280', font: { size: 9 }, maxRotation: 45 },
+              grid: { display: false }
+            },
+            y: {
+              stacked: true,
+              ticks: { color: '#6b7280', font: { size: 10 }, stepSize: 1 },
+              grid: { color: 'rgba(42, 58, 92, 0.3)' }
+            }
+          }
+        }
+      });
+
+      // ─── Donut chart: distribution by TYPE ───
+      const typeCounts = {};
+      filtered.forEach(r => {
+        const t = r['TYPE'] || 'Desconocido';
+        typeCounts[t] = (typeCounts[t] || 0) + 1;
+      });
+      const typeLabels = Object.keys(typeCounts);
+      const typeValues = Object.values(typeCounts);
+
+      if (CHARTS.infraType) CHARTS.infraType.destroy();
+      const ctx2 = document.getElementById('infraTypeDonutChart').getContext('2d');
+      CHARTS.infraType = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+          labels: typeLabels,
+          datasets: [{
+            data: typeValues,
+            backgroundColor: COLORS.slice(0, typeLabels.length),
+            borderColor: '#0b0f19',
+            borderWidth: 3,
+            hoverBorderColor: '#fff',
+            hoverBorderWidth: 2,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          cutout: '58%',
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: '#9ca3af',
+                padding: 12,
+                usePointStyle: true,
+                pointStyleWidth: 10,
+                font: { size: 10, family: 'Inter' }
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(17, 24, 39, 0.95)',
+              titleColor: '#06d6a0',
+              bodyColor: '#e5e7eb',
+              borderColor: '#2a3a5c',
+              borderWidth: 1,
+              padding: 12,
+              callbacks: {
+                label: function (ctx) {
+                  const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                  const pct = total > 0 ? ((ctx.parsed / total) * 100).toFixed(1) : 0;
+                  return ` ${ctx.label}: ${ctx.parsed} (${pct}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // ─── Table ───
+      document.getElementById('infra-row-count').textContent = `${filtered.length} registro${filtered.length !== 1 ? 's' : ''}`;
+      const tbody = document.getElementById('infra-table-body');
+      tbody.innerHTML = filtered.map(r => `
+        <tr class="border-t border-surface-500/10 hover:bg-surface-700/30 transition-colors">
+          <td class="px-3 py-2.5 whitespace-nowrap font-mono text-gray-400">${toUTC4(r['START DATE'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap font-mono text-gray-400">${toUTC4(r['END DATE'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap"><span class="px-2 py-0.5 rounded bg-accent-violet/10 text-accent-violet text-[10px] font-semibold">${esc(r['TYPE'])}</span></td>
+          <td class="px-3 py-2.5 whitespace-nowrap">${severityBadge(r['SEVERITY'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap text-gray-300">${esc(r['ATTACK NAME'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap text-gray-400">${esc(r['CATEGORY'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap text-gray-400">${esc(r['SOURCE'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap text-gray-400">${esc(r['ACCOUNT'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap text-gray-400">${esc(r['SITE'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap text-gray-300">${esc(r['ASSET NAME'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap font-mono text-gray-500">${esc(r['SOURCE IP ADDRESS'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap font-mono text-gray-500">${esc(r['SOURCE PORT'])}</td>
+          <td class="px-3 py-2.5 whitespace-nowrap font-mono text-gray-500">${esc(r['DESTINATION IP ADDRESS'])}</td>
+        </tr>
+      `).join('');
+    }
+
+    window.resetInfraFilters = function () {
+      document.getElementById('infra-filter-severity').value = '';
+      document.getElementById('infra-filter-category').value = '';
+      document.getElementById('infra-filter-attack').value = '';
+      document.getElementById('infra-filter-search').value = '';
+      document.getElementById('infra-date-start').value = '';
+      document.getElementById('infra-date-end').value = '';
+      renderInfraFiltered();
+    };
+
+    // ─── Helpers ───
+    function getUnique(data, key) {
+      return [...new Set(data.map(r => r[key]).filter(Boolean))].sort();
+    }
+
+    function populateSelect(id, options, defaultLabel) {
+      const sel = document.getElementById(id);
+      const current = sel.value;
+      sel.innerHTML = `<option value="">${defaultLabel}</option>` +
+        options.map(o => `<option value="${esc(o)}"${o === current ? ' selected' : ''}>${esc(o)}</option>`).join('');
+    }
+
+  })();
+  </script>
+
+</body>
+</html>
