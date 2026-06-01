@@ -1,90 +1,3407 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AstroQuiz 2026 | Fundacite Yaracuy</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen Didáctico: Efecto Invernadero, Calentamiento Global y Cambio Climático</title>
+  
+  <!-- Google Fonts para Tipografía Moderna -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome para Iconos Premium -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* VARIABLES DE DISEÑO Y TEMAS */
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+      --border-color: #e2e8f0;
+      
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-inverse: #ffffff;
+      
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --primary-light: #e0f2fe;
+      
+      --success: #10b981;
+      --success-hover: #059669;
+      --success-light: #ecfdf5;
+      
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+      --danger-light: #fef2f2;
+      
+      --warning: #f59e0b;
+      --warning-light: #fffbeb;
+      
+      --review-color: #8b5cf6;
+      --review-light: #f5f3ff;
+      
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --border-color: #334155;
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      --primary: #38bdf8;
+      --primary-hover: #0ea5e9;
+      --primary-light: #0c4a6e;
+      
+      --success: #34d399;
+      --success-hover: #059669;
+      --success-light: #064e3b;
+      
+      --danger: #f87171;
+      --danger-hover: #dc2626;
+      --danger-light: #7f1d1d;
+      
+      --warning: #fbbf24;
+      --warning-light: #78350f;
+      
+      --review-color: #a78bfa;
+      --review-light: #4c1d95;
+    }
+
+    /* ESTILOS GLOBALES */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      transition: var(--transition);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    /* CONTENEDOR PRINCIPAL Y HEADER */
+    .app-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      width: 100%;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0284c7 0%, #0d9488 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+      transform: rotate(-15deg);
+      pointer-events: none;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .header-title-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .header-icon {
+      font-size: 2.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.8rem;
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header-title-area h1 {
+      font-size: 1.8rem;
+      color: white;
+      line-height: 1.2;
+    }
+
+    .header-title-area p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* CONTROLES DE CONFIGURACIÓN */
+    .btn-toggle {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+    }
+
+    .btn-toggle:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-toggle i {
+      font-size: 1.1rem;
+    }
+
+    /* BARRA DE PROGRESO Y MODO */
+    .progress-section {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 1.2rem;
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #34d399 0%, #10b981 100%);
+      border-radius: 5px;
+      transition: width 0.4s ease-out;
+    }
+
+    /* GRID PRINCIPAL DE LA APP */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 1.5rem;
+      flex-grow: 1;
+    }
+
+    @media (max-width: 1024px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* COLUMNA DE PREGUNTA */
+    .question-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* CONTROLES DE CATEGORÍAS */
+    .filter-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.2rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .filter-title {
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .category-select-wrapper {
+      position: relative;
+    }
+
+    .category-select {
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      background-color: var(--bg-primary);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      appearance: none;
+      transition: var(--transition);
+    }
+
+    .category-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .category-select-wrapper::after {
+      content: '\f078';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* TARJETA DE PREGUNTA */
+    .question-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .question-card.marked {
+      border-left: 6px solid var(--review-color);
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+    }
+
+    .question-badge {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      padding: 0.4rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    [data-theme="dark"] .question-badge {
+      color: #38bdf8;
+      background-color: rgba(56, 189, 248, 0.15);
+    }
+
+    .question-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .question-text {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    /* OPCIONES DE RESPUESTA */
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .option-btn {
+      background-color: var(--bg-primary);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.2rem;
+      text-align: left;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-main);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      width: 100%;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+      transform: translateX(4px);
+    }
+
+    [data-theme="dark"] .option-btn:hover:not(:disabled) {
+      background-color: rgba(56, 189, 248, 0.1);
+    }
+
+    .option-btn.selected {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+
+    [data-theme="dark"] .option-btn.selected {
+      background-color: rgba(56, 189, 248, 0.2);
+    }
+
+    .option-letter {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .option-btn.selected .option-letter {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* RESPUESTA VERDADERO/FALSO */
+    .tf-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .tf-btn {
+      padding: 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-align: center;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      border: 1.5px solid var(--border-color);
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tf-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+    }
+
+    .tf-btn.selected-true {
+      border-color: var(--success);
+      background-color: var(--success-light);
+      color: var(--success-hover);
+    }
+
+    .tf-btn.selected-false {
+      border-color: var(--danger);
+      background-color: var(--danger-light);
+      color: var(--danger-hover);
+    }
+
+    /* COMPLETAR LA FRASE */
+    .text-input-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .text-answer-input {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .text-answer-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    /* RETROALIMENTACIÓN */
+    .feedback-box {
+      margin-top: 1rem;
+      padding: 1.2rem;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      display: none;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feedback-box.correct {
+      background-color: var(--success-light);
+      border: 1px solid var(--success);
+      color: #065f46;
+    }
+
+    [data-theme="dark"] .feedback-box.correct {
+      color: #a7f3d0;
+      background-color: rgba(52, 211, 153, 0.1);
+    }
+
+    .feedback-box.incorrect {
+      background-color: var(--danger-light);
+      border: 1px solid var(--danger);
+      color: #991b1b;
+    }
+
+    [data-theme="dark"] .feedback-box.incorrect {
+      color: #fca5a5;
+      background-color: rgba(239, 68, 68, 0.1);
+    }
+
+    .feedback-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feedback-explanation {
+      font-weight: 500;
+    }
+
+    /* CONTROLES DE NAVEGACIÓN Y ACCIÓN */
+    .actions-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: none;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:disabled {
+      background-color: var(--border-color);
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-tertiary);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background-color: var(--border-color);
+      transform: translateY(-2px);
+    }
+
+    .btn-review {
+      background-color: var(--review-light);
+      color: var(--review-color);
+      border: 1px solid var(--review-color);
+    }
+
+    .btn-review:hover {
+      background-color: var(--review-color);
+      color: white;
+    }
+
+    .btn-review.active {
+      background-color: var(--review-color);
+      color: white;
+    }
+
+    /* BARRA LATERAL (GRID DE PREGUNTAS Y CONTADOR) */
+    .sidebar-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .stats-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem;
+      background-color: var(--bg-primary);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+    }
+
+    .stat-val {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.2rem;
+    }
+
+    /* GRID DE MAPA DE PREGUNTAS */
+    .map-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-height: 480px;
+    }
+
+    .map-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .dot-unvisited { background-color: var(--bg-tertiary); border: 1px solid var(--border-color); }
+    .dot-correct { background-color: var(--success); }
+    .dot-incorrect { background-color: var(--danger); }
+    .dot-review { background-color: var(--review-color); }
+    .dot-unanswered { border: 1.5px solid var(--primary); background-color: var(--bg-secondary); }
+
+    .question-grid-container {
+      overflow-y: auto;
+      flex-grow: 1;
+      padding-right: 0.3rem;
+    }
+
+    .question-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.5rem;
+    }
+
+    .grid-cell {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .grid-cell:hover {
+      transform: scale(1.1);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .grid-cell.active {
+      box-shadow: 0 0 0 2px var(--primary);
+      font-weight: 800;
+    }
+
+    .grid-cell.unanswered {
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+      background-color: var(--bg-secondary);
+    }
+
+    .grid-cell.correct {
+      background-color: var(--success);
+      color: white;
+      border-color: var(--success);
+    }
+
+    .grid-cell.incorrect {
+      background-color: var(--danger);
+      color: white;
+      border-color: var(--danger);
+    }
+
+    .grid-cell.review {
+      background-color: var(--review-color);
+      color: white;
+      border-color: var(--review-color);
+    }
+
+    /* SECCIÓN DE RESULTADOS DE EXAMEN */
+    .results-container {
+      display: none;
+      flex-direction: column;
+      gap: 2rem;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .results-summary-card {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+    }
+
+    .circular-score {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .circular-score svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .circular-score circle {
+      fill: none;
+      stroke-width: 12;
+      stroke-linecap: round;
+    }
+
+    .circular-score .circle-bg {
+      stroke: var(--border-color);
+    }
+
+    .circular-score .circle-progress {
+      stroke: var(--primary);
+      stroke-dasharray: 502; /* 2 * PI * r (r=80) */
+      stroke-dashoffset: 502;
+      transition: stroke-dashoffset 1s ease-in-out;
+    }
+
+    .score-text {
+      font-size: 2.2rem;
+      font-weight: 800;
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .score-percent {
+      font-size: 2.5rem;
+      color: var(--primary);
+    }
+
+    .score-sub {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .results-feedback {
+      max-width: 600px;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+    }
+
+    .category-results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .category-score-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .category-score-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .category-progress-track {
+      height: 8px;
+      background-color: var(--bg-tertiary);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .category-progress-fill {
+      height: 100%;
+      background-color: var(--primary);
+      width: 0%;
+      transition: width 0.6s ease-out;
+    }
+
+    .review-section-title {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      border-left: 4px solid var(--danger);
+      padding-left: 0.8rem;
+    }
+
+    .review-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .review-item {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .review-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--danger);
+    }
+
+    .review-item-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .review-item-answers {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.8rem;
+      background-color: var(--bg-primary);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+    }
+
+    .review-explanation {
+      padding: 0.8rem 0 0 0;
+      border-top: 1px dashed var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: auto;
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    /* INFORMACIÓN FLOTANTE / ANALOGÍA */
+    .fact-box {
+      background-color: var(--warning-light);
+      border: 1px solid var(--warning);
+      border-radius: var(--radius-md);
+      padding: 1.2rem;
+      color: #92400e;
+      display: flex;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    [data-theme="dark"] .fact-box {
+      color: #fef3c7;
+      background-color: rgba(245, 158, 11, 0.1);
+    }
+
+    .fact-icon {
+      font-size: 1.5rem;
+      color: var(--warning);
+      flex-shrink: 0;
+    }
+
+    .fact-content h4 {
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+      color: inherit;
+    }
+
+    /* RESPONSIVE DESIGN ADJUSTMENTS */
+    @media (max-width: 640px) {
+      .header-title-area h1 {
+        font-size: 1.4rem;
+      }
+      .question-card {
+        padding: 1.2rem;
+      }
+      .tf-container {
+        grid-template-columns: 1fr;
+      }
+      .stats-card {
+        grid-template-columns: 1fr 1fr;
+      }
+      .question-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="stars"></div>
-    <div class="twinkling"></div>
 
-    <main class="app-container">
-        <!-- Header Section -->
-        <header class="main-header">
-            <div class="logo-area">
-                <span class="logo-icon">🪐</span>
-                <h1>AstroQuiz</h1>
+  <div class="app-container">
+    
+    <!-- ENCABEZADO -->
+    <header>
+      <div class="header-content">
+        <div class="header-top">
+          <div class="header-title-area">
+            <div class="header-icon">
+              <i class="fa-solid fa-earth-americas"></i>
             </div>
-            <p class="subtitle">Olimpiadas Venezolanas de Astronomía</p>
-        </header>
-
-        <!-- Dashboard / Topic Selection -->
-        <section id="dashboard" class="dashboard-section">
-            <h2 class="section-title">Elige un Tema de Estudio</h2>
-            <div id="topic-grid" class="topic-grid">
-                <!-- Topics will be injected here by JS -->
+            <div>
+              <h1>Examen Didáctico del Cambio Climático</h1>
+              <p>Efecto Invernadero, Calentamiento Global y Ciencias de la Tierra</p>
             </div>
-        </section>
+          </div>
+          <div class="header-actions">
+            <button class="btn-toggle" id="theme-toggle" title="Cambiar tema">
+              <i class="fa-solid fa-moon"></i>
+              <span id="theme-text">Modo Oscuro</span>
+            </button>
+            <button class="btn-toggle" id="mode-toggle" title="Cambiar modo de examen">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span id="mode-text">Modo Práctica</span>
+            </button>
+          </div>
+        </div>
+        
+        <div class="progress-section">
+          <div class="progress-info">
+            <span>Progreso del Examen</span>
+            <span id="progress-text">0% (0 de 0 respondidas)</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+          </div>
+        </div>
+      </div>
+    </header>
 
-        <!-- Quiz Interface (Initially Hidden) -->
-        <section id="quiz-interface" class="quiz-interface hidden">
-            <div class="quiz-header">
-                <button id="back-btn" class="icon-btn" aria-label="Volver">←</button>
-                <div class="progress-container">
-                    <span id="topic-label">Tema 1</span>
-                    <div class="progress-bar-bg">
-                        <div id="progress-fill" class="progress-bar-fill" style="width: 0%"></div>
-                    </div>
-                    <span id="question-counter">1/10</span>
-                </div>
+    <!-- CUERPO PRINCIPAL DEL EXAMEN -->
+    <div class="main-grid" id="exam-view">
+      
+      <!-- COLUMNA IZQUIERDA: PREGUNTA Y RESPUESTA -->
+      <div class="question-column">
+        
+        <!-- Tarjeta de Filtro -->
+        <div class="filter-card">
+          <div class="filter-title">
+            <i class="fa-solid fa-filter text-primary"></i>
+            Filtrar preguntas por Categoría
+          </div>
+          <div class="category-select-wrapper">
+            <select class="category-select" id="category-filter">
+              <option value="all">Todas las categorías (101 preguntas)</option>
+              <option value="atmosfera">1. Conceptos básicos de la atmósfera</option>
+              <option value="mecanismo">2. Mecanismo del efecto invernadero natural</option>
+              <option value="gases">3. Gases de efecto invernadero (GEI)</option>
+              <option value="antropogenico">4. Causas antropogénicas</option>
+              <option value="evidencias">5. Evidencias del calentamiento global</option>
+              <option value="naturales">6. Ciclos de Milankovitch y causas naturales</option>
+              <option value="clima_tiempo">7. Diferencias entre clima y tiempo meteorológico</option>
+              <option value="internacional">8. Protocolos, informes IPCC y conferencias</option>
+              <option value="consecuencias">9. Consecuencias previstas</option>
+              <option value="mitigacion">10. Medidas de mitigación y adaptación</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Tarjeta de la Pregunta -->
+        <div class="question-card" id="question-card">
+          <div class="question-header">
+            <span class="question-badge" id="question-category">Categoría</span>
+            <div class="question-meta">
+              <span id="question-index-display">Pregunta 1 de 100</span>
+              <span id="points-display"><i class="fa-solid fa-star"></i> 1 pt</span>
             </div>
+          </div>
 
-            <div class="card-stack">
-                <div class="flashcard">
-                    <div class="card-content">
-                        <span class="card-label">Pregunta</span>
-                        <h3 id="question-text">¿Cargando pregunta?</h3>
-                    </div>
-                </div>
+          <div class="question-text" id="question-text">
+            Cargando pregunta...
+          </div>
 
-                <div id="answer-card" class="flashcard solution hidden-card">
-                    <div class="card-content">
-                        <span class="card-label">Respuesta</span>
-                        <div id="answer-text">
-                            <!-- Answer content goes here -->
-                        </div>
-                    </div>
-                </div>
+          <!-- Contenedor dinámico de opciones de respuesta -->
+          <div id="answers-container">
+            <!-- Se llena dinámicamente con JS -->
+          </div>
+
+          <!-- Caja de Retroalimentación en Modo Práctica -->
+          <div class="feedback-box" id="feedback-box">
+            <div class="feedback-title" id="feedback-title">
+              <i class="fa-solid fa-circle-info"></i> Retroalimentación
             </div>
-
-            <!-- Input Area for Completion Mode -->
-            <div id="input-container" class="input-container hidden">
-                <input type="text" id="user-input" placeholder="Escribe tu respuesta aquí..." autocomplete="off">
-                <button id="check-btn" class="action-btn">Comprobar</button>
+            <div class="feedback-explanation" id="feedback-explanation">
+              Explicación detallada...
             </div>
+          </div>
 
-            <!-- Options Area for Selection Mode -->
-            <div id="options-container" class="options-grid hidden">
-                <!-- Buttons will be injected here -->
+          <!-- Caja de Datos Curiosos / Analogías -->
+          <div class="fact-box" id="fact-box" style="display: none;">
+            <i class="fa-solid fa-lightbulb fact-icon"></i>
+            <div class="fact-content">
+              <h4>¿Sabías que...?</h4>
+              <p id="fact-text">Dato educativo relacionado...</p>
             </div>
+          </div>
 
-            <div class="controls-area">
-                <button id="reveal-btn" class="primary-btn">Mostrar Respuesta</button>
-                
-                <div id="feedback-btns" class="feedback-buttons hidden-btns">
-                    <button id="retry-btn" class="secondary-btn">Repasar</button>
-                    <button id="next-btn" class="success-btn">Entendido</button>
-                </div>
+          <!-- Barra de Acciones y Navegación -->
+          <div class="actions-bar">
+            <button class="btn btn-secondary" id="btn-prev">
+              <i class="fa-solid fa-chevron-left"></i> Anterior
+            </button>
+            
+            <button class="btn btn-review" id="btn-mark-review">
+              <i class="fa-solid fa-bookmark"></i> <span id="mark-text">Marcar para revisión</span>
+            </button>
+
+            <button class="btn btn-primary" id="btn-next">
+              Siguiente <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: ESTADÍSTICAS Y MAPA DE PREGUNTAS -->
+      <div class="sidebar-column">
+        
+        <!-- Tarjeta de Estadísticas Rápidas -->
+        <div class="stats-card">
+          <div class="stat-item">
+            <div class="stat-val" id="stat-answered">0</div>
+            <div class="stat-label">Respondidas</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val" id="stat-pending">101</div>
+            <div class="stat-label">Pendientes</div>
+          </div>
+          <div class="stat-item" id="stat-score-container" style="display: none;">
+            <div class="stat-val" id="stat-correct">0</div>
+            <div class="stat-label">Correctas</div>
+          </div>
+          <div class="stat-item" id="stat-incorrect-container" style="display: none;">
+            <div class="stat-val" id="stat-incorrect">0</div>
+            <div class="stat-label">Incorrectas</div>
+          </div>
+        </div>
+
+        <!-- Mapa / Rejilla de Preguntas -->
+        <div class="map-card">
+          <div class="map-header">
+            <h3>Mapa de Preguntas</h3>
+            <button class="btn btn-secondary" id="btn-submit-exam" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; background-color: var(--danger-light); color: var(--danger-hover); border-color: var(--danger);">
+              <i class="fa-solid fa-flag-checkered"></i> Terminar examen
+            </button>
+          </div>
+          
+          <div class="map-legend">
+            <div class="legend-item"><span class="legend-dot dot-unvisited"></span> No visitada</div>
+            <div class="legend-item"><span class="legend-dot dot-unanswered"></span> Sin responder</div>
+            <div class="legend-item" id="legend-correct-item"><span class="legend-dot dot-correct"></span> Correcta</div>
+            <div class="legend-item" id="legend-incorrect-item"><span class="legend-dot dot-incorrect"></span> Incorrecta</div>
+            <div class="legend-item"><span class="legend-dot dot-review"></span> Revisión</div>
+          </div>
+
+          <div class="question-grid-container">
+            <div class="question-grid" id="question-grid">
+              <!-- Celdas dinámicas con JS -->
             </div>
-        </section>
-    </main>
+          </div>
+        </div>
 
-    <script src="data.js"></script>
-    <script src="script.js"></script>
+        <button class="btn btn-secondary" id="btn-reset-exam" style="width: 100%; justify-content: center; gap: 0.8rem; border-color: var(--danger); color: var(--danger-hover); background: transparent;">
+          <i class="fa-solid fa-rotate-right"></i> Reiniciar progreso del examen
+        </button>
+      </div>
+
+    </div>
+
+    <!-- SECCIÓN DE RESULTADOS FINALES -->
+    <div class="results-container" id="results-view">
+      <div class="results-summary-card">
+        <h2><i class="fa-solid fa-square-poll-vertical text-primary"></i> Resultado de tu Examen</h2>
+        <div class="circular-score">
+          <svg>
+            <circle class="circle-bg" cx="90" cy="90" r="80"></circle>
+            <circle class="circle-progress" id="score-circle-progress" cx="90" cy="90" r="80"></circle>
+          </svg>
+          <div class="score-text">
+            <span class="score-percent" id="final-percent">0%</span>
+            <span class="score-sub" id="final-ratio">0/0</span>
+          </div>
+        </div>
+        <p class="results-feedback" id="final-feedback">
+          ¡Felicidades por completar este riguroso examen didáctico! A continuación, puedes revisar el desempeño por categoría y el desglose de preguntas incorrectas.
+        </p>
+
+        <div class="category-results-grid" id="category-results-grid">
+          <!-- Desglose dinámico por categorías -->
+        </div>
+
+        <button class="btn btn-primary" id="btn-restart-from-results" style="font-size: 1.1rem; padding: 1rem 2rem;">
+          <i class="fa-solid fa-arrow-rotate-left"></i> Realizar el Examen de Nuevo
+        </button>
+      </div>
+
+      <div>
+        <h3 class="review-section-title" id="review-title">Preguntas para Revisar (Respuestas Incorrectas)</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">Aquí puedes ver todas las preguntas que respondiste incorrectamente para reforzar tu aprendizaje científico.</p>
+        <div class="review-list" id="review-list">
+          <!-- Lista dinámica de preguntas falladas -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <p><strong>Examen Didáctico de Ciencias del Clima (Actualizado a 2026)</strong></p>
+    <p>Basado en los trabajos de: Miguel Ángel Alario y Franco (Real Academia de Ciencias) | Gerarda Díaz Cordero (Instituto Tecnológico de Santo Domingo) | Margarita Caballero, Socorro Lozano, Beatriz Ortega (UNAM).</p>
+    <p>&copy; 2026 Divulgación Científica & Aprendizaje Activo.</p>
+  </footer>
+
+  <!-- BASE DE DATOS DE PREGUNTAS Y LÓGICA DE APLICACIÓN -->
+  <script>
+    // 101 PREGUNTAS DIDÁCTICAS COMPLEMENTADAS Y ACTUALIZADAS HASTA 2026
+    const questions = [
+      // CATEGORÍA 1: CONCEPTOS BÁSICOS DE LA ATMÓSFERA (1-10)
+      {
+        id: 1,
+        category: "atmosfera",
+        categoryName: "Conceptos básicos de la atmósfera",
+        type: "multiple",
+        text: "¿Cuál es el gas más abundante en la atmósfera terrestre seca por volumen?",
+        options: [
+          "Oxígeno (O₂)",
+          "Dióxido de Carbono (CO₂)",
+          "Nitrógeno (N₂)",
+          "Argón (Ar)"
+        ],
+        correct: 2,
+        feedback: "El Nitrógeno (N₂) constituye aproximadamente el 78.03% (o 79% según aproximaciones) del volumen de la atmósfera terrestre seca. Le sigue el oxígeno con un 20.99%.",
+        fact: "Aunque el nitrógeno es inerte para la mayoría de los seres vivos directamente, es esencial para la formación de proteínas y aminoácidos a través de la fijación biológica."
+      },
+      {
+        id: 2,
+        category: "atmosfera",
+        categoryName: "Conceptos básicos de la atmósfera",
+        type: "true-false",
+        text: "La temperatura desciende de forma constante a medida que subimos en todas las capas de la atmósfera.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. La temperatura disminuye con la altitud en la troposfera y mesosfera, pero aumenta en la estratosfera (gracias a la absorción de radiación ultravioleta por la capa de ozono) y en la termosfera.",
+        fact: "El límite donde la troposfera termina y la temperatura deja de descender se llama Tropopausa, situada entre los 9 y 18 km de altura."
+      },
+      {
+        id: 3,
+        category: "atmosfera",
+        categoryName: "Conceptos básicos de la atmósfera",
+        type: "multiple",
+        text: "¿En qué capa de la atmósfera se concentra la mayor parte de la masa atmosférica y ocurren la mayoría de los fenómenos meteorológicos?",
+        options: [
+          "Estratosfera",
+          "Termosfera",
+          "Troposfera",
+          "Mesosfera"
+        ],
+        correct: 2,
+        feedback: "La troposfera contiene aproximadamente el 75-80% de la masa total de la atmósfera y casi todo el vapor de agua. Es donde vivimos y donde ocurren las tormentas, nubes y vientos.",
+        fact: "El grosor de la troposfera varía: es más delgada en los polos (unos 9 km) y más gruesa en el ecuador (hasta 18 km)."
+      },
+      {
+        id: 4,
+        category: "atmosfera",
+        categoryName: "Conceptos básicos de la atmósfera",
+        type: "multiple",
+        text: "¿Cuál es el porcentaje aproximado de oxígeno en volumen en la atmósfera seca según los documentos de referencia?",
+        options: [
+          "0.93%",
+          "20.99%",
+          "78.03%",
+          "0.033%"
+        ],
+        correct: 1,
+        feedback: "El oxígeno molecular (O₂) representa aproximadamente el 20.99% del aire seco. Este nivel es óptimo para mantener la vida aeróbica sin provocar combustiones espontáneas incontroladas.",
+        fact: "El oxígeno libre apareció en grandes cantidades gracias a la 'Gran Oxidación' causada por cianobacterias fotosintéticas hace unos 2400 millones de años."
+      },
+      {
+        id: 5,
+        category: "atmosfera",
+        categoryName: "Conceptos básicos de la atmósfera",
+        type: "text",
+        text: "¿Qué gas noble representa el tercer componente más abundante en volumen de la atmósfera terrestre seca (cerca del 0.93%)?",
+        correct: "Argon",
+        feedback: "El Argón (Ar) representa el 0.93% de la atmósfera. Es un gas noble inerte que se produce principalmente por la desintegración radiactiva del potasio-40 en la corteza terrestre.",
+        fact: "Al ser un gas noble y químicamente inerte, el argón no interactúa con la radiación infrarroja y no contribuye al efecto invernadero."
+      },
+      {
+        id: 6,
+        category: "atmosfera",
+        categoryName: "Conceptos básicos de la atmósfera",
+        type: "true-false",
+        text: "La atmósfera es extremadamente gruesa en comparación con el tamaño de la Tierra, asemejándose a una pesada colcha de varios miles de kilómetros de espesor denso.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. Las autoras Caballero, Lozano y Ortega emplean la analogía de que la atmósfera equivale a una delgada envoltura, similar a una hoja de papel de aluminio sobre un balón de fútbol.",
+        fact: "Más del 99% de la masa de la atmósfera se encuentra concentrada en los primeros 30 km sobre la superficie de la Tierra."
+      },
+      {
+        id: 7,
+        category: "atmosfera",
+        categoryName: "Conceptos básicos de la atmósfera",
+        type: "multiple",
+        text: "¿A qué se debe el aumento de temperatura observado en la estratosfera con respecto a la altura?",
+        options: [
+          "A la cercanía directa con el Sol.",
+          "A procesos fotoquímicos y absorción de radiación ultravioleta por el ozono (O₃).",
+          "A la fricción provocada por meteoritos que entran en la atmósfera.",
+          "A la liberación de calor geotérmico desde los volcanes."
+        ],
+        correct: 1,
+        feedback: "El aumento de temperatura en la estratosfera (entre 10 y 50 km de altura) se debe a que las moléculas de ozono (O₃) absorben la radiación ultravioleta dañina del sol, liberando calor en el proceso.",
+        fact: "Sin esta capa de ozono estratosférico que absorbe los rayos UV-B y UV-C, la vida terrestre fuera de las profundidades marinas no habría sido posible."
+      },
+      {
+        id: 8,
+        category: "atmosfera",
+        categoryName: "Conceptos básicos de la atmósfera",
+        type: "true-false",
+        text: "El vapor de agua es un componente atmosférico muy variable, pudiendo oscilar entre el 1% y el 4% en volumen según las condiciones de humedad y temperatura regional.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. A diferencia de los gases secos constantes (N₂, O₂, Ar), la concentración de vapor de agua varía drásticamente desde casi 0% en desiertos y zonas polares extremas hasta un 4% en los trópicos húmedos.",
+        fact: "El vapor de agua es el gas de efecto invernadero natural más potente y abundante de la atmósfera, regulado por la temperatura del aire."
+      },
+      {
+        id: 9,
+        category: "atmosfera",
+        categoryName: "Conceptos básicos de la atmósfera",
+        type: "multiple",
+        text: "¿Cuál es el orden correcto de las capas de la atmósfera desde la superficie terrestre hacia el espacio exterior?",
+        options: [
+          "Troposfera, Estratosfera, Mesosfera, Termosfera",
+          "Estratosfera, Troposfera, Termosfera, Mesosfera",
+          "Troposfera, Mesosfera, Estratosfera, Termosfera",
+          "Termosfera, Mesosfera, Estratosfera, Troposfera"
+        ],
+        correct: 0,
+        feedback: "El orden correcto de las capas principales es: Troposfera (donde vivimos), Estratosfera (capa de ozono), Mesosfera (donde se desintegran los meteoritos) y Termosfera (donde orbitan satélites y se producen las auroras).",
+        fact: "La transición entre la troposfera y la estratosfera se llama tropopausa; la transición entre estratosfera y mesosfera se llama estratopausa."
+      },
+      {
+        id: 10,
+        category: "atmosfera",
+        categoryName: "Conceptos básicos de la atmósfera",
+        type: "multiple",
+        text: "¿Qué procesos liberan calor en la estratosfera superior permitiendo calentar dicha capa?",
+        options: [
+          "Combustión de gases fósiles.",
+          "Procesos de ionización y disociación fotoquímica de gases como O₂ y O₃.",
+          "Emisión de rayos infrarrojos terrestres.",
+          "Evaporación rápida de nubes."
+        ],
+        correct: 1,
+        feedback: "La disociación del oxígeno molecular (O₂ + luz UV -> O + O) y la posterior formación y destrucción continua de ozono (ciclo de Chapman) absorben radiación ultravioleta de alta energía y la convierten en energía cinética, es decir, calor.",
+        fact: "Este calor es lo que genera la anomalía térmica estratosférica, donde la parte superior de la estratosfera alcanza temperaturas cercanas a los 0 °C."
+      },
+
+      // CATEGORÍA 2: MECANISMO DEL EFECTO INVERNADERO NATURAL (11-20)
+      {
+        id: 11,
+        category: "mecanismo",
+        categoryName: "Mecanismo del efecto invernadero natural",
+        type: "multiple",
+        text: "Si la atmósfera terrestre no contara con gases de efecto invernadero (como vapor de agua y CO₂), ¿cuál sería la temperatura media aproximada de la superficie de la Tierra?",
+        options: [
+          "Aproximadamente 0°C",
+          "Aproximadamente -18°C a -20°C",
+          "Aproximadamente 15°C",
+          "Aproximadamente -50°C"
+        ],
+        correct: 1,
+        feedback: "Sin el efecto invernadero natural, la temperatura promedio de la superficie terrestre sería de unos -18°C a -20°C. La Tierra sería un desierto de hielo inhabitable.",
+        fact: "Gracias al efecto invernadero natural, la temperatura media global se eleva en unos 33°C a 35°C, situándose históricamente en torno a los +15°C, idóneos para el agua líquida."
+      },
+      {
+        id: 12,
+        category: "mecanismo",
+        categoryName: "Mecanismo del efecto invernadero natural",
+        type: "multiple",
+        text: "¿Qué tipo de radiación solar atraviesa con mayor facilidad la atmósfera sin ser absorbida significativamente por la mayoría de los gases?",
+        options: [
+          "Radiación Infrarroja (onda larga)",
+          "Radiación de Onda Corta (luz visible y ultravioleta)",
+          "Ondas de radio",
+          "Rayos Gamma y Rayos X"
+        ],
+        correct: 1,
+        feedback: "La mayor parte de la energía solar que llega a la atmósfera está en forma de onda corta (luz visible y UV). La atmósfera seca y limpia es casi transparente a esta radiación, permitiendo que llegue al suelo.",
+        fact: "El albedo terrestre refleja aproximadamente un 30% de esta luz de onda corta directamente de vuelta al espacio antes de que pueda calentar la superficie."
+      },
+      {
+        id: 13,
+        category: "mecanismo",
+        categoryName: "Mecanismo del efecto invernadero natural",
+        type: "true-false",
+        text: "Los gases de efecto invernadero (GEI) calientan la superficie terrestre porque reflejan la luz visible del sol hacia abajo como si fueran pequeños espejos.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. Los GEI no interactúan mucho con la luz solar visible entrante. En cambio, absorben fuertemente la radiación infrarroja térmica (onda larga) emitida por la superficie caliente de la Tierra y la reemiten en todas direcciones, calentando el aire inferior.",
+        fact: "Este flujo de radiación infrarroja descendente de la atmósfera hacia la superficie se conoce científicamente como 'contrarradiación'."
+      },
+      {
+        id: 14,
+        category: "mecanismo",
+        categoryName: "Mecanismo del efecto invernadero natural",
+        type: "multiple",
+        text: "¿Cuál es el valor medio de la irradiación de energía solar recibida en el límite superior de la atmósfera terrestre?",
+        options: [
+          "1361 W/m² (constante solar) y cerca de 340 W/m² promediados sobre toda la superficie esférica",
+          "340 W/m² constantes y directos en el cénit",
+          "100 W/m² en promedio anual",
+          "1000 W/m² fijos en todo momento y lugar"
+        ],
+        correct: 0,
+        feedback: "El flujo solar medio que llega perpendicularmente a la parte superior de la atmósfera es de ~1361 W/m². Debido a la geometría esférica del planeta y la alternancia día-noche, el promedio global es de aproximadamente 340 W/m².",
+        fact: "Aproximadamente 240 W/m² de estos 340 son absorbidos por el sistema climático terrestre, mientras que 100 W/m² son reflejados por el albedo."
+      },
+      {
+        id: 15,
+        category: "mecanismo",
+        categoryName: "Mecanismo del efecto invernadero natural",
+        type: "multiple",
+        text: "¿Quién fue el científico que a principios del siglo XIX intuyó por primera vez que la atmósfera actúa como una 'caja de vidrio' (efecto invernadero) y que la actividad humana podría influir en el clima?",
+        options: [
+          "Sadi Carnot",
+          "Joseph Fourier",
+          "John Tyndall",
+          "Svante Arrhenius"
+        ],
+        correct: 1,
+        feedback: "Joseph Fourier es acreditado con la formulación analítica del efecto invernadero a partir de sus estudios sobre la transferencia de calor en 1824 y 1827. Intuyó que la composición química del aire afectaba la retención térmica.",
+        fact: "Fourier trabajó junto a Sadi Carnot comparando la Tierra con una máquina térmica que intercambiaba calor mediante la radiación solar y la reemisión infrarroja."
+      },
+      {
+        id: 16,
+        category: "mecanismo",
+        categoryName: "Mecanismo del efecto invernadero natural",
+        type: "true-false",
+        text: "John Tyndall fue el primer científico en identificar experimentalmente en el laboratorio qué gases específicos absorbían el calor infrarrojo (especialmente el vapor de agua y el dióxido de carbono).",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. En 1859, John Tyndall demostró mediante experimentos con un espectrofotómetro casero que el vapor de agua y el dióxido de carbono (ácido carbónico) eran potentes absorbedores de calor radiante.",
+        fact: "Tyndall escribió que pequeñas variaciones en estos componentes podrían explicar todas las mutaciones climáticas que la geología revelaba."
+      },
+      {
+        id: 17,
+        category: "mecanismo",
+        categoryName: "Mecanismo del efecto invernadero natural",
+        type: "multiple",
+        text: "¿Cuál es la relación física básica que describe la energía de la radiación solar según la ecuación que menciona el Documento 1?",
+        options: [
+          "E = hν (donde h es la constante de Planck y ν es la frecuencia)",
+          "E = mc² (teoría de la relatividad)",
+          "F = m * a (segunda ley de Newton)",
+          "PV = nRT (ecuación de los gases ideales)"
+        ],
+        correct: 0,
+        feedback: "La energía de los fotones de la radiación solar se define por la ecuación E = hν. Los fotones de alta frecuencia (como UV) tienen mucha energía y disocian moléculas, mientras que los de baja frecuencia (infrarrojo) causan vibraciones y rotaciones.",
+        fact: "Esta energía se transforma al interactuar con la materia de la atmósfera y el suelo, pasando de energía electromagnética a energía térmica (vibración molecular)."
+      },
+      {
+        id: 18,
+        category: "mecanismo",
+        categoryName: "Mecanismo del efecto invernadero natural",
+        type: "multiple",
+        text: "¿Qué niveles de energía molecular se excitan cuando una molécula absorbe radiación de onda larga (infrarroja)?",
+        options: [
+          "Nivel electrónico (cambio de órbita de electrones)",
+          "Niveles vibracionales y rotacionales",
+          "Nivel de ionización completa",
+          "Nivel de fusión del núcleo atómico"
+        ],
+        correct: 1,
+        feedback: "La radiación infrarroja tiene la frecuencia exacta para hacer oscilar los enlaces químicos de las moléculas polares (CO₂, H₂O, CH₄), provocando tránsitos entre sus estados de energía vibracional y rotacional.",
+        fact: "Los gases diatómicos simétricos como N₂ y O₂ no absorben radiación infrarroja porque sus vibraciones no cambian su momento dipolar eléctrico."
+      },
+      {
+        id: 19,
+        category: "mecanismo",
+        categoryName: "Mecanismo del efecto invernadero natural",
+        type: "true-false",
+        text: "H.B. de Saussure usó un experimento basado en cajas concéntricas de madera con cristales para demostrar cómo el calor del sol se acumula debajo del vidrio, sirviendo de inspiración conceptual del efecto invernadero.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. H.B. de Saussure construyó un heliotermómetro con cajas concéntricas de vidrio y madera aislada, logrando temperaturas superiores a los 100°C. Este experimento sirvió a Fourier para entender el comportamiento de la atmósfera.",
+        fact: "Aunque un invernadero físico real calienta principalmente al limitar la convección (el aire caliente no puede escapar), la atmósfera retiene el calor radiativamente."
+      },
+      {
+        id: 20,
+        category: "mecanismo",
+        categoryName: "Mecanismo del efecto invernadero natural",
+        type: "multiple",
+        text: "¿Cómo influye el albedo terrestre en el balance radiativo de la Tierra?",
+        options: [
+          "Absorbiendo la radiación infrarroja y calentando la troposfera.",
+          "Reflejando directamente una parte de la radiación solar incidente de vuelta al espacio exterior sin cambiar su frecuencia.",
+          "Provocando las tormentas y huracanes.",
+          "Emitiendo calor geotérmico desde el fondo de los océanos."
+        ],
+        correct: 1,
+        feedback: "El albedo es el porcentaje de radiación que una superficie refleja. En la Tierra es en promedio del 30%, siendo la nieve fresca (hasta 90%) y las nubes brillantes los reflectores más potentes.",
+        fact: "El derretimiento del hielo reduce el albedo terrestre, provocando que se absorba más calor y acelerando el calentamiento global (retroalimentación positiva de albedo-hielo)."
+      },
+
+      // CATEGORÍA 3: GASES DE EFECTO INVERNADERO (21-35)
+      {
+        id: 21,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "multiple",
+        text: "¿Cuál es el gas de efecto invernadero antropogénico que más contribuye al forzamiento radiativo total desde la época preindustrial?",
+        options: [
+          "Metano (CH₄)",
+          "Dióxido de Carbono (CO₂)",
+          "Óxido Nitroso (N₂O)",
+          "CFC-11"
+        ],
+        correct: 1,
+        feedback: "El dióxido de carbono (CO₂) es el principal contribuyente al forzamiento radiativo debido a las enormes cantidades emitidas por las actividades humanas, a pesar de que otros gases son molecularmente más potentes.",
+        fact: "El CO₂ tiene un tiempo de residencia atmosférica muy prolongado: una parte importante de las emisiones actuales seguirá en el aire durante miles de años."
+      },
+      {
+        id: 22,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "true-false",
+        text: "El dióxido de carbono (CO₂) tiene un tiempo medio de permanencia en la atmósfera uniforme y corto, disipándose por completo en menos de 5 años.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. La Tabla II (IPCC) estima el tiempo medio de permanencia del CO₂ en la atmósfera en un rango complejo de 50 a 200 años. Estudios modernos muestran que parte del CO₂ permanece por milenios debido a la lentitud de los sumideros profundos.",
+        fact: "A diferencia del metano, que se oxida a CO₂ en aproximadamente una década, el CO₂ no tiene una ruta de destrucción química rápida y se cicla entre el océano, la biosfera y la atmósfera."
+      },
+      {
+        id: 23,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "multiple",
+        text: "¿Cuál era la concentración aproximada de CO₂ en la atmósfera antes de la revolución industrial (época preindustrial)?",
+        options: [
+          "180 ppm",
+          "280 ppm",
+          "358 ppm",
+          "420 ppm"
+        ],
+        correct: 1,
+        feedback: "Durante los últimos 10,000 años previos a la revolución industrial, la concentración de CO₂ se mantuvo notablemente estable alrededor de las 280 ppm (partes por millón).",
+        fact: "Hoy en día hemos aumentado este valor en más de un 50% con respecto al límite preindustrial."
+      },
+      {
+        id: 24,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "multiple",
+        text: "Considerando las mediciones actualizadas a 2024-2026, ¿cuál es la concentración aproximada del dióxido de carbono (CO₂) en la atmósfera global?",
+        options: [
+          "Cerca de 315 ppm",
+          "Cerca de 358 ppm",
+          "Cerca de 420-425 ppm",
+          "Cerca de 550 ppm"
+        ],
+        correct: 2,
+        feedback: "La concentración de CO₂ ha superado las 420-425 ppm (partes por millón). Esto representa un incremento sin precedentes en al menos los últimos 800,000 años de historia geológica.",
+        fact: "El observatorio de Mauna Loa en Hawái registra este aumento continuo que dibuja la famosa 'Curva de Keeling'."
+      },
+      {
+        id: 25,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "multiple",
+        text: "¿Qué gas de efecto invernadero tiene un potencial de calentamiento global muy superior al CO₂ a corto plazo y proviene de la descomposición orgánica anaerobia, ganadería y vertederos?",
+        options: [
+          "Monóxido de Carbono (CO)",
+          "Vapor de agua (H₂O)",
+          "Metano (CH₄)",
+          "Dióxido de Azufre (SO₂)"
+        ],
+        correct: 2,
+        feedback: "El metano (CH₄) es un potente gas de efecto invernadero. Aunque tiene una vida útil atmosférica de solo 10-12 años, su potencial de calentamiento global es unas 28-36 veces superior al del CO₂ en un horizonte de 100 años.",
+        fact: "Las principales fuentes humanas de metano son la ganadería bovina (fermentación entérica), el cultivo de arroz, las fugas de gas natural y la basura orgánica."
+      },
+      {
+        id: 26,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "true-false",
+        text: "Los gases de clorofluorocarbonos (CFCs), además de destruir la capa de ozono, son gases con un potencial de calentamiento de efecto invernadero miles de veces superior al dióxido de carbono.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. Aunque sus concentraciones se expresan en partes por billón (ppb) y han disminuido gracias al Protocolo de Montreal, los CFC y sus sustitutos (HFC) tienen una capacidad molecular de absorción de calor colosal.",
+        fact: "Una sola molécula de ciertos gases CFC puede atrapar tanto calor infrarrojo como 10,000 moléculas de CO₂."
+      },
+      {
+        id: 27,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "multiple",
+        text: "¿Qué gas de efecto invernadero se produce en gran medida por el uso extensivo de fertilizantes nitrogenados en la agricultura moderna y tiene una vida atmosférica de más de 100 años?",
+        options: [
+          "Óxido Nitroso (N₂O)",
+          "Metano (CH₄)",
+          "Ozono troposférico (O₃)",
+          "Monóxido de dinitrógeno"
+        ],
+        correct: 0,
+        feedback: "El óxido nitroso (N₂O) es liberado por las bacterias del suelo al procesar fertilizantes nitrogenados. Tiene un potencial de calentamiento global unas 298 veces superior al CO₂ y daña la capa de ozono.",
+        fact: "El N₂O representa aproximadamente el 6% de las emisiones globales de gases de efecto invernadero antropogénicos."
+      },
+      {
+        id: 28,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "true-false",
+        text: "El ozono troposférico (el que se encuentra a nivel del suelo) es un contaminante secundario perjudicial para la salud y la agricultura que también actúa como gas de efecto invernadero.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. El ozono troposférico es un gas de invernadero de vida corta producido por reacciones fotoquímicas de contaminantes precursores (NOx y COVs). No debe confundirse con el ozono estratosférico beneficioso.",
+        fact: "El ozono troposférico reduce la capacidad de fotosíntesis de las plantas, limitando la absorción forestal de CO₂."
+      },
+      {
+        id: 29,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "multiple",
+        text: "¿Cuál es el principal gas responsable del efecto invernadero natural de la Tierra y que se autoajusta en base a la temperatura en un bucle de retroalimentación activa?",
+        options: [
+          "Dióxido de Carbono (CO₂)",
+          "Vapor de Agua (H₂O)",
+          "Ozono (O₃)",
+          "Oxígeno (O₂)"
+        ],
+        correct: 1,
+        feedback: "El vapor de agua es el gas que más contribuye al efecto invernadero natural. Si la atmósfera se calienta (por ejemplo, debido al aumento de CO₂), puede contener más humedad, lo que a su vez duplica el calentamiento inicial.",
+        fact: "A este proceso se le llama la 'retroalimentación del vapor de agua', un potente amplificador del cambio climático."
+      },
+      {
+        id: 30,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "multiple",
+        text: "¿Qué compuestos sintéticos de origen puramente industrial, regulados por el Protocolo de Montreal, causaron un calentamiento global y la destrucción de la capa de ozono?",
+        options: [
+          "Hidrocarburos aromáticos policíclicos",
+          "Clorofluorocarbonos (CFCs)",
+          "Óxidos de nitrógeno",
+          "Compuestos de azufre"
+        ],
+        correct: 1,
+        feedback: "Los Clorofluorocarbonos (CFCs) son compuestos sintéticos que dañan el ozono en la estratosfera e incrementan el efecto invernadero en la troposfera. Su prohibición ha evitado un calentamiento planetario catastrófico.",
+        fact: "Actualmente se ha verificado una paulatina recuperación del agujero de la capa de ozono gracias al cumplimiento de este acuerdo internacional."
+      },
+      {
+        id: 31,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "true-false",
+        text: "El dióxido de carbono es un compuesto químico altamente tóxico y perjudicial en cualquier concentración para el desarrollo de la vida vegetal.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. El CO₂ es un componente natural no tóxico en concentraciones atmosféricas normales. Es fundamental para la fotosíntesis y el crecimiento de las plantas. Sin embargo, su exceso perturba gravemente el equilibrio climático global.",
+        fact: "Aunque el CO₂ estimula el crecimiento vegetal ('efecto fertilización'), las sequías y olas de calor asociadas al calentamiento global contrarrestan este beneficio."
+      },
+      {
+        id: 32,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "text",
+        text: "¿Cuál es la unidad estándar de medida para referirse a la concentración de gases traza en la atmósfera como el CO₂ (que significa partes por millón)?",
+        correct: "ppm",
+        feedback: "La unidad es ppm (partes por millón). Indica la cantidad de moléculas del gas específico presentes por cada millón de moléculas de aire seco.",
+        fact: "El metano y el óxido nitroso se miden en unidades aún más pequeñas: ppb (partes por billón)."
+      },
+      {
+        id: 33,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "multiple",
+        text: "¿Cuál de las siguientes afirmaciones describe el 'potencial de calentamiento global' (GWP) de un gas?",
+        options: [
+          "La velocidad a la que el gas se evapora de los océanos.",
+          "Una medida relativa de cuánta energía de calor absorbe un gas en la atmósfera en comparación con el dióxido de carbono.",
+          "El grado de toxicidad del gas para la respiración de los seres humanos.",
+          "La cantidad de radiación ultravioleta que filtra el gas."
+        ],
+        correct: 1,
+        feedback: "El GWP compara el impacto térmico de una masa de gas con el de una masa equivalente de CO₂ durante un periodo (usualmente 100 años). El CO₂ tiene por definición un GWP = 1.",
+        fact: "El SF₆ (hexafluoruro de azufre), usado como aislante eléctrico, tiene uno de los mayores potenciales conocidos, superando las 23,000 veces el GWP del CO₂."
+      },
+      {
+        id: 34,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "true-false",
+        text: "Las concentraciones atmosféricas de dióxido de carbono y metano actuales superan con creces el rango de variabilidad natural documentado de los últimos 650,000 años.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. Los datos extraídos de las burbujas de aire en núcleos de hielo profundos (como en Vostok, Antártida) demuestran que durante los ciclos naturales glaciales-interglaciales de los últimos 650,000 años el CO₂ nunca superó las 300 ppm ni el metano las 800 ppb.",
+        fact: "En 2026, el metano se encuentra cerca de las 1900 ppb, más del doble del valor máximo natural del Pleistoceno."
+      },
+      {
+        id: 35,
+        category: "gases",
+        categoryName: "Gases de efecto invernadero (GEI)",
+        type: "multiple",
+        text: "¿Por qué el agua líquida de los océanos es relevante para la concentración de CO₂ atmosférico?",
+        options: [
+          "Porque el agua salada destruye químicamente el CO₂.",
+          "Porque los océanos actúan como un sumidero físico, absorbiendo y disolviendo CO₂ en sus aguas frías.",
+          "Porque los peces consumen el dióxido de carbono al respirar.",
+          "Porque la evaporación del agua crea ozono en el aire."
+        ],
+        correct: 1,
+        feedback: "El océano absorbe aproximadamente el 25-30% de nuestras emisiones anuales de CO₂. Al disolverse en el agua fría, reacciona y forma ácido carbónico, disminuyendo la acumulación en el aire.",
+        fact: "La disolución del CO₂ genera la acidificación del océano, lo que debilita las conchas de carbonato de calcio de corales y moluscos."
+      },
+
+      // CATEGORÍA 4: CAUSAS ANTROPOGÉNICAS (36-45)
+      {
+        id: 36,
+        category: "antropogenico",
+        categoryName: "Causas antropogénicas",
+        type: "multiple",
+        text: "¿Cuáles son las dos principales actividades humanas que rompen el balance natural de CO₂ emitiendo miles de millones de toneladas a la atmósfera?",
+        options: [
+          "La ganadería y la aviación recreativa.",
+          "La quema de combustibles fósiles (carbón, petróleo y gas) y la deforestación.",
+          "La agricultura de secano y la pesca intensiva.",
+          "El uso de bombillas fluorescentes y la energía nuclear."
+        ],
+        correct: 1,
+        feedback: "La quema de combustibles fósiles (carbón, petróleo y gas natural) para energía e industria, combinada con la tala y quema de bosques (deforestación), son las principales causas del aumento acelerado de CO₂.",
+        fact: "La deforestación contribuye doblemente: elimina un sumidero que absorbía CO₂ y, si la biomasa se quema o descompone, libera el carbono almacenado."
+      },
+      {
+        id: 37,
+        category: "antropogenico",
+        categoryName: "Causas antropogénicas",
+        type: "true-false",
+        text: "La cantidad de carbono que la humanidad emite al año representa cerca del 8% del flujo total de intercambio biológico natural de la Tierra.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. Según el Documento 1, mientras el ciclo natural de la biosfera intercambia anualmente unos 100,000 millones de toneladas métricas de carbono, las emisiones humanas representaban unos 8,000 millones de toneladas (cerca del 8%). Aunque parece un porcentaje menor, al no tener una contrapartida de absorción natural equivalente, este 8% se acumula año tras año.",
+        fact: "Hoy en día, las emisiones antropogénicas globales superan los 37,000 millones de toneladas de CO₂ al año."
+      },
+      {
+        id: 38,
+        category: "antropogenico",
+        categoryName: "Causas antropogénicas",
+        type: "multiple",
+        text: "¿Cuáles fueron los dos periodos históricos de mayor incremento acelerado de CO₂ atmosférico identificados en el Documento 1?",
+        options: [
+          "La época romana y la Edad Media.",
+          "Alrededor de 1880 (Revolución Industrial) y tras la Segunda Guerra Mundial (década de 1950 en adelante).",
+          "La caída del Imperio Romano y la Revolución Francesa.",
+          "El descubrimiento de América y la era espacial."
+        ],
+        correct: 1,
+        feedback: "La curva de concentración de CO₂ del Documento 1 muestra un despegue en 1880 debido a la máquina de vapor y la industrialización basada en el carbón. Un segundo incremento más empinado se inicia en 1950 por la gran expansión económica mundial.",
+        fact: "Esta aceleración post-1950 es conocida por los científicos del Antropoceno como 'La Gran Aceleración'."
+      },
+      {
+        id: 39,
+        category: "antropogenico",
+        categoryName: "Causas antropogénicas",
+        type: "multiple",
+        text: "En comparación con la contribución antropogénica de carbono, ¿cuánto aportan las fuentes naturales geológicas estables como el vulcanismo en promedio al año según el Documento 3?",
+        options: [
+          "Aproximadamente 7,500 millones de toneladas.",
+          "Aproximadamente 100 millones de toneladas (unas 75 veces menos que el ser humano).",
+          "El doble que la quema de carbón humana.",
+          "Prácticamente cero."
+        ],
+        correct: 1,
+        feedback: "Las fuentes naturales estables como el vulcanismo liberan solo unos 100 millones de toneladas de carbono al año. Por contra, la quema de combustibles fósiles humana liberaba en la época del estudio ~7,500 millones (actualmente más), demostrando que la perturbación moderna no es volcánica.",
+        fact: "Las grandes erupciones volcánicas modernas (como el Pinatubo en 1991) liberan gases que enmascaran el calentamiento temporalmente al reflejar la luz solar con aerosoles de azufre."
+      },
+      {
+        id: 40,
+        category: "antropogenico",
+        categoryName: "Causas antropogénicas",
+        type: "true-false",
+        text: "La quema de combustibles fósiles devuelve en unas pocas décadas a la atmósfera el carbono orgánico que tardó millones de años en acumularse y quedar enterrado en el subsuelo terrestre.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. El carbón, el petróleo y el gas natural son remanentes fotosintéticos acumulados durante el Carbonífero y otras eras geológicas. La humanidad los está consumiendo a una velocidad un millón de veces superior a su ritmo de formación.",
+        fact: "Gran parte del petróleo que quemamos hoy procede de fitoplancton marino depositado hace más de 100 millones de años."
+      },
+      {
+        id: 41,
+        category: "antropogenico",
+        categoryName: "Causas antropogénicas",
+        type: "multiple",
+        text: "¿Qué país industrializado tenía un consumo per cápita de carbono muy superior a la media mundial (más de tres veces la media) según los datos de finales del siglo XX del Documento 1?",
+        options: [
+          "Francia",
+          "España",
+          "Estados Unidos",
+          "Países Bajos"
+        ],
+        correct: 2,
+        feedback: "El Documento 1 destaca que Estados Unidos emitía más del triple de la media mundial de CO₂ por habitante. Francia presentaba menores emisiones (unas 4 toneladas/año) debido a su gran apuesta por la generación de electricidad nuclear.",
+        fact: "En la actualidad, aunque las emisiones per cápita de EE. UU. siguen siendo muy altas, China se ha convertido en el mayor emisor de CO₂ en términos absolutos del planeta."
+      },
+      {
+        id: 42,
+        category: "antropogenico",
+        categoryName: "Causas antropogénicas",
+        type: "multiple",
+        text: "En España (a finales del siglo XX y principios del XXI), ¿qué comunidades autónomas se encontraban entre las que más CO₂ emitían a la atmósfera por su producción eléctrica con carbón?",
+        options: [
+          "Madrid y Cataluña (por alto PIB)",
+          "Asturias, Aragón, Castilla y León, y Galicia",
+          "Andalucía y Canarias",
+          "Baleares y la Comunidad Valenciana"
+        ],
+        correct: 1,
+        feedback: "Las emisiones en España se concentraban en Asturias, Aragón, Castilla y León, Castilla-La Mancha y Galicia. Esto se debía a la presencia de grandes centrales térmicas de carbón en esos territorios.",
+        fact: "Desde entonces, la práctica totalidad de las centrales térmicas de carbón en España han sido cerradas o reconvertidas, reduciendo drásticamente las emisiones del sector eléctrico."
+      },
+      {
+        id: 43,
+        category: "antropogenico",
+        categoryName: "Causas antropogénicas",
+        type: "true-false",
+        text: "La producción de cemento y la actividad industrial pesada no liberan dióxido de carbono de forma directa, limitándose únicamente a consumir electricidad.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. La industria del cemento es una de las fuentes industriales más importantes de CO₂. Se produce CO₂ directamente durante la calcinación de la caliza (carbonato de calcio) para obtener clinker, además del combustible quemado en los hornos.",
+        fact: "La fabricación de cemento representa por sí sola aproximadamente el 8% de las emisiones mundiales de dióxido de carbono."
+      },
+      {
+        id: 44,
+        category: "antropogenico",
+        categoryName: "Causas antropogénicas",
+        type: "multiple",
+        text: "¿Por qué el cultivo de arroz inundado es una fuente antropogénica de cambio climático?",
+        options: [
+          "Porque el arroz absorbe mucho oxígeno del aire y calienta el entorno.",
+          "Porque los campos inundados crean condiciones anaerobias donde bacterias descomponen materia orgánica produciendo metano (CH₄).",
+          "Porque las hojas de la planta del arroz reflejan la radiación solar.",
+          "Porque requiere un uso masivo de carbón para su recolección."
+        ],
+        correct: 1,
+        feedback: "El agua estancada en los arrozales impide que el oxígeno del aire penetre en el suelo. Esto favorece la proliferación de bacterias metanógenas que producen grandes volúmenes de metano al descomponer materia orgánica.",
+        fact: "El cultivo de arroz es responsable de aproximadamente el 10% de las emisiones globales de metano de origen antropogénico."
+      },
+      {
+        id: 45,
+        category: "antropogenico",
+        categoryName: "Causas antropogénicas",
+        type: "multiple",
+        text: "En los países en desarrollo, ¿cuál es el factor antropogénico histórico que más ha contribuido a sus emisiones acumuladas de CO₂ en comparación con la quema de combustibles industriales?",
+        options: [
+          "El transporte aéreo nacional.",
+          "El cambio de uso de suelo y la deforestación masiva para agricultura y ganadería.",
+          "El uso masivo de aire acondicionado doméstico.",
+          "La construcción de centrales nucleares."
+        ],
+        correct: 1,
+        feedback: "Mientras que los países industrializados basan la mayoría de sus emisiones en el uso de combustibles fósiles, muchos países en desarrollo y tropicales han emitido históricamente grandes volúmenes debido a la deforestación de selvas vírgenes.",
+        fact: "La pérdida de selvas tropicales como el Amazonas o las junglas de Indonesia elimina capacidades críticas de absorción del ciclo global del carbono."
+      },
+
+      // CATEGORÍA 5: EVIDENCIAS DEL CALENTAMIENTO GLOBAL (46-55)
+      {
+        id: 46,
+        category: "evidencias",
+        categoryName: "Evidencias del calentamiento global",
+        type: "multiple",
+        text: "¿Cuál ha sido el incremento lineal aproximado de la temperatura media global registrado entre 1906 y 2005 según el Cuarto Informe del IPCC?",
+        options: [
+          "Aproximadamente 0.2°C",
+          "Aproximadamente 0.74°C (más acentuado que estimaciones anteriores)",
+          "Aproximadamente 3.5°C",
+          "No ha variado significativamente"
+        ],
+        correct: 1,
+        feedback: "El IPCC estimó en su Cuarto Informe que el calentamiento lineal del periodo de 100 años (1906-2005) fue de 0.74°C, indicando que el ritmo de calentamiento se había acelerado en la segunda mitad del siglo.",
+        fact: "Informes más recientes del IPCC (AR6) confirman que el calentamiento global ya ha alcanzado aproximadamente 1.1°C a 1.2°C respecto a los niveles preindustriales."
+      },
+      {
+        id: 47,
+        category: "evidencias",
+        categoryName: "Evidencias del calentamiento global",
+        type: "true-false",
+        text: "El glaciar del Ródano en Suiza ha servido como evidencia visual histórica del retroceso glaciar global, mostrando una gran disminución de su superficie desde 1906.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. La comparación fotográfica del glaciar del Ródano (Rhône) entre 1906 y el final del siglo XX se cita en los documentos como una demostración clara del impacto directo del calentamiento sobre la criosfera terrestre.",
+        fact: "Casi el 90% de los glaciares alpinos y de montaña de todo el planeta están perdiendo masa a un ritmo acelerado desde hace décadas."
+      },
+      {
+        id: 48,
+        category: "evidencias",
+        categoryName: "Evidencias del calentamiento global",
+        type: "multiple",
+        text: "¿Cuánto subió aproximadamente el nivel medio del mar a escala global durante el siglo XX?",
+        options: [
+          "Entre 1 y 2 milímetros al año (unos 10 a 25 cm en total)",
+          "Más de un metro en total",
+          "No subió, se mantuvo estático",
+          "Bajó debido a la alta evaporación en los océanos"
+        ],
+        correct: 0,
+        feedback: "Durante el siglo XX, el aumento medio global del nivel del mar fue de 1 a 2 mm anuales, acumulando entre 10 y 25 cm. La tasa de elevación se ha acelerado notablemente en las últimas décadas.",
+        fact: "Hoy en día, la tasa de aumento del nivel del mar supera los 4 mm al año debido a la expansión térmica y al derretimiento de Groenlandia y la Antártida."
+      },
+      {
+        id: 49,
+        category: "evidencias",
+        categoryName: "Evidencias del calentamiento global",
+        type: "multiple",
+        text: "¿Cuáles son las dos causas físicas del aumento del nivel del mar inducido por el cambio climático?",
+        options: [
+          "La evaporación acelerada y el aumento de la salinidad.",
+          "La expansión térmica del agua marina (el agua caliente ocupa más volumen) y la pérdida de masa de glaciares y casquetes polares.",
+          "El movimiento tectónico de placas y la rotación del eje terrestre.",
+          "El aumento de precipitaciones de lluvia directamente sobre el mar."
+        ],
+        correct: 1,
+        feedback: "El aumento del volumen del océano se debe principalmente a la expansión térmica (las moléculas de agua se separan ligeramente al calentarse) y a la adición de agua dulce líquida proveniente del deshielo continental.",
+        fact: "El derretimiento del hielo marino flotante (como el del Polo Norte) no altera significativamente el nivel del mar, al igual que un hielo derretido en un vaso de agua."
+      },
+      {
+        id: 50,
+        category: "evidencias",
+        categoryName: "Evidencias del calentamiento global",
+        type: "true-false",
+        text: "La extensión del hielo marino del Ártico en verano ha disminuido a un ritmo constante de más del 7% por decenio desde 1979.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. Los datos satelitales confirman una dramática reducción de la cobertura de hielo marino en el hemisferio norte durante el verano, estimándose en el Documento 2 en torno al 7.4% por decenio.",
+        fact: "Los científicos prevén que el Océano Ártico podría quedar prácticamente libre de hielo en verano antes de mediados del siglo XXI."
+      },
+      {
+        id: 51,
+        category: "evidencias",
+        categoryName: "Evidencias del calentamiento global",
+        type: "multiple",
+        text: "¿Qué anomalía meteorológica extrema se ha vuelto más frecuente e intensa a nivel global desde la década de 1970 según el IPCC?",
+        options: [
+          "Las nevadas extremas de primavera.",
+          "La actividad ciclónica tropical intensa (huracanes de gran categoría), olas de calor y lluvias torrenciales concentradas.",
+          "La caída constante de la humedad en la atmósfera.",
+          "El cese total de los vientos alisios."
+        ],
+        correct: 1,
+        feedback: "El IPCC señala que el cambio climático intensifica el ciclo hidrológico. El calentamiento de las aguas del océano alimenta huracanes más intensos y el aire más cálido retiene más agua, provocando precipitaciones extremas concentradas.",
+        fact: "La probabilidad y gravedad de las olas de calor extremas se ha multiplicado de manera alarmante en casi todas las regiones habitadas."
+      },
+      {
+        id: 52,
+        category: "evidencias",
+        categoryName: "Evidencias del calentamiento global",
+        type: "true-false",
+        text: "El suelo estacionalmente congelado (permafrost) ha mostrado un aumento en su extensión territorial en el hemisferio norte.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. El suelo congelado se ha reducido en aproximadamente un 7% en promedio en el hemisferio norte y hasta un 15% en primavera, debido al aumento de temperaturas en latitudes altas.",
+        fact: "El derretimiento del permafrost puede liberar enormes cantidades atrapadas de CO₂ y metano (CH₄), lo que crearía un bucle de retroalimentación climática incontrolable."
+      },
+      {
+        id: 53,
+        category: "evidencias",
+        categoryName: "Evidencias del calentamiento global",
+        type: "multiple",
+        text: "¿Qué muestra el análisis de la temperatura media del Hemisferio Norte durante los últimos 1000 años expuesto en el Documento 1 (curva del palo de hockey)?",
+        options: [
+          "Que el clima siempre ha estado subiendo de forma lineal.",
+          "Que tras siglos de variaciones suaves y un enfriamiento lento, la temperatura se dispara abruptamente hacia arriba en el siglo XX.",
+          "Que la Edad Media fue mucho más calurosa que la actualidad.",
+          "Que la temperatura es totalmente impredecible y caótica."
+        ],
+        correct: 1,
+        feedback: "La reconstrucción de temperaturas muestra que las variaciones naturales de los últimos 1000 años fueron pequeñas y graduales hasta la irrupción de las emisiones industriales en el siglo XX, donde la temperatura asciende verticalmente.",
+        fact: "El creador original de este gráfico fue el climatólogo Michael Mann en 1998, convirtiéndose en un ícono de la ciencia climática."
+      },
+      {
+        id: 54,
+        category: "evidencias",
+        categoryName: "Evidencias del calentamiento global",
+        type: "true-false",
+        text: "Las indemnizaciones por pérdidas económicas derivadas de catástrofes naturales de origen meteorológico se decruplicaron (multiplicaron por diez) en las últimas dos décadas del siglo XX.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. El Documento 1 hace referencia al alarmante aumento de los costos económicos por catástrofes naturales (inundaciones, huracanes, sequías) reportado por reaseguradoras como Munich Re.",
+        fact: "Hoy en día, las pérdidas anuales globales por eventos climáticos extremos ascienden a cientos de miles de millones de dólares."
+      },
+      {
+        id: 55,
+        category: "evidencias",
+        categoryName: "Evidencias del calentamiento global",
+        type: "text",
+        text: "¿Cuál es el nombre del observatorio astronómico y atmosférico situado en Hawái donde se inició el registro sistemático del CO₂ (Mauna ...)?",
+        correct: "Loa",
+        feedback: "El observatorio es Mauna Loa. Situado a más de 3000 metros de altitud en Hawái, lejos de la contaminación local, ofrece la serie temporal más larga y fiable de mediciones de gases de efecto invernadero del planeta.",
+        fact: "Charles David Keeling inició las mediciones allí en 1958, descubriendo que el CO₂ tiene una oscilación estacional debida a la respiración vegetal del Hemisferio Norte."
+      },
+
+      // CATEGORÍA 6: CICLOS DE MILANKOVITCH Y CAUSAS NATURALES (56-65)
+      {
+        id: 56,
+        category: "naturales",
+        categoryName: "Ciclos de Milankovitch y causas naturales",
+        type: "multiple",
+        text: "¿Qué explica la teoría de los Ciclos de Milankovitch en la paleoclimatología?",
+        options: [
+          "El impacto de asteroides en la Tierra.",
+          "Las variaciones en los parámetros orbitales de la Tierra que modifican la distribución de radiación solar recibida y gatillan las glaciaciones.",
+          "El movimiento continuo de los continentes por deriva continental.",
+          "Los ciclos de erupciones volcánicas submarinas."
+        ],
+        correct: 1,
+        feedback: "Los ciclos de Milankovitch detallan cómo ligeras variaciones en la órbita terrestre cambian la cantidad de insolación estival en latitudes altas del norte, determinando si la nieve invernal persiste y acumula hielo de glaciar.",
+        fact: "Milutin Milankovitch desarrolló esta teoría matemática a mano durante su encarcelamiento en la Primera Guerra Mundial."
+      },
+      {
+        id: 57,
+        category: "naturales",
+        categoryName: "Ciclos de Milankovitch y causas naturales",
+        type: "multiple",
+        text: "¿Cuáles son las tres variaciones orbitales propuestas por Milankovitch y sus periodicidades aproximadas?",
+        options: [
+          "Excentricidad (~100,000 años), Inclinación/Oblicuidad del eje (~41,000 años) y Precesión de equinoccios (~22,000 - 26,000 años)",
+          "Rotación (~24h), Traslación (~365 días) y Nutación (~18 años)",
+          "Gravedad lunar (~28 días), Mareas oceánicas y Tormentas solares",
+          "Deriva magnética (~100 años), Inversión de polos y Actividad solar"
+        ],
+        correct: 0,
+        feedback: "Los tres factores orbitales principales son: la excentricidad de la órbita (de más elíptica a más circular), la inclinación u oblicuidad del eje terrestre y la precesión (balanceo del eje de rotación como un trompo).",
+        fact: "La combinación de estos ciclos genera una firma de enfriamiento y calentamiento que encaja con los registros geológicos de las glaciaciones."
+      },
+      {
+        id: 58,
+        category: "naturales",
+        categoryName: "Ciclos de Milankovitch y causas naturales",
+        type: "true-false",
+        text: "Los datos geológicos muestran que los últimos ciclos glaciales del Cuaternario ocurren aproximadamente cada 100,000 años, durando las glaciaciones unos 90,000 años y los interglaciales cálidos unos 10,000 años.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. El registro paleoclimático revela que la Tierra pasa la mayor parte del tiempo geológico reciente en periodos fríos (glaciaciones) salpicados por breves periodos cálidos de estabilidad llamados interglaciales.",
+        fact: "Nuestro periodo interglacial actual (el Holoceno) comenzó hace unos 11,700 años, permitiendo el surgimiento de la agricultura y la civilización."
+      },
+      {
+        id: 59,
+        category: "naturales",
+        categoryName: "Ciclos de Milankovitch y causas naturales",
+        type: "multiple",
+        text: "¿Qué ocurrió con la temperatura y la concentración de CO₂ y metano en los últimos 160,000 años según el registro de Lorius et al. (Nature 1990) citado en el Documento 1?",
+        options: [
+          "No mostraron ninguna relación estadística entre sí.",
+          "Mostraron una estrecha correlación paralela, subiendo y bajando de forma sincronizada.",
+          "El CO₂ subía cuando la temperatura bajaba.",
+          "El metano se mantuvo en cero constantemente."
+        ],
+        correct: 1,
+        feedback: "Lorius y sus colegas demostraron una correlación entre los niveles térmicos globales y los gases de efecto invernadero. En periodos fríos las concentraciones de CO₂ y CH₄ eran bajas; en periodos cálidos aumentaban sustancialmente.",
+        fact: "Esto se debe a que la temperatura modula la solubilidad del CO₂ en el océano y la liberación de metano por los humedales, actuando como retroalimentación."
+      },
+      {
+        id: 60,
+        category: "naturales",
+        categoryName: "Ciclos de Milankovitch y causas naturales",
+        type: "true-false",
+        text: "La Pequeña Edad de Hielo (siglos XV al XIX) fue un periodo frío global causado por emisiones de gases industriales prehistóricos.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. La Pequeña Edad de Hielo fue una fluctuación climática natural de 1 a 2°C más fría, ligada al Mínimo de Maunder (baja actividad de manchas solares) y a una intensa actividad volcánica que liberó aerosoles reflectores.",
+        fact: "Durante esta época el río Támesis en Londres y los canales de Holanda se congelaban habitualmente en invierno."
+      },
+      {
+        id: 61,
+        category: "naturales",
+        categoryName: "Ciclos de Milankovitch y causas naturales",
+        type: "multiple",
+        text: "¿Cómo estudian los paleoclimatólogos el clima del pasado remoto terrestre?",
+        options: [
+          "Mediante registros históricos de satélites antiguos.",
+          "Analizando burbujas de aire atrapadas en núcleos de hielo profundo, conchas de foraminíferos en sedimentos oceánicos y polen fósil en lagos.",
+          "Por deducción matemática pura sin datos empíricos.",
+          "Midiendo la temperatura del manto terrestre profundo."
+        ],
+        correct: 1,
+        feedback: "La paleoclimatología utiliza 'archivos indirectos' o proxies. El hielo polar conserva aire real de hace cientos de miles de años, y las conchas calcáreas conservan la huella isotópica de la temperatura del agua.",
+        fact: "Los núcleos de hielo recuperados en el Domo C de la Antártida nos permiten retroceder hasta 800,000 años en el registro de composición atmosférica."
+      },
+      {
+        id: 62,
+        category: "naturales",
+        categoryName: "Ciclos de Milankovitch y causas naturales",
+        type: "true-false",
+        text: "Hace unos 250 millones de años, en la transición Permo-Triásica, ocurrió una extinción masiva coincidiendo con un brusco incremento natural de CO₂ hasta niveles del 0.1% o 0.2%.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. El Documento 3 relata que el calentamiento brusco provocado por colosales erupciones volcánicas (Siberian Traps) elevó el CO₂ drásticamente y causó la extinción de más del 90% de las especies marinas, la mayor en la historia del planeta.",
+        fact: "Este evento demuestra el peligro que representa la desestabilización química y térmica acelerada de la atmósfera para la supervivencia biológica."
+      },
+      {
+        id: 63,
+        category: "naturales",
+        categoryName: "Ciclos de Milankovitch y causas naturales",
+        type: "multiple",
+        text: "A nivel geológico, ¿cómo se redistribuye a largo plazo el carbono excedente que se disuelve en el océano?",
+        options: [
+          "Se evapora formando nubes de metano.",
+          "Queda atrapado como roca sedimentaria de carbonatos en el fondo marino, la cual eventualmente subduce y se libera de nuevo mediante erupciones volcánicas.",
+          "Desaparece en el manto de la corteza sin retorno.",
+          "Se solidifica formando depósitos de petróleo puro en pocos años."
+        ],
+        correct: 1,
+        feedback: "Es el ciclo geoquímico del carbono a largo plazo. El CO₂ disuelto en el agua forma carbonato de calcio que se deposita en conchas y sedimentos, transformándose en caliza. Las placas tectónicas transportan este material al manto, donde se funde y es reemitido por los volcanes.",
+        fact: "Este ciclo geológico tarda millones de años en regular el carbono de la Tierra, por lo que no puede mitigar nuestras emisiones en el corto plazo."
+      },
+      {
+        id: 64,
+        category: "naturales",
+        categoryName: "Ciclos de Milankovitch y causas naturales",
+        type: "true-false",
+        text: "Brian Fagan, arqueólogo de la UC Berkeley, describe los últimos 15,000 años de estabilidad climática cálida de la Tierra como un 'largo verano' que favoreció el nacimiento de las civilizaciones.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. Fagan acuña la frase para describir el Holoceno. Este clima benévolo permitió cosechas predecibles y sedentarismo. Sin embargo, advierte que el calentamiento antropogénico interrumpe este ciclo estable.",
+        fact: "El libro de Fagan explora cómo cambios climáticos locales del pasado (como sequías) colapsaron imperios enteros."
+      },
+      {
+        id: 65,
+        category: "naturales",
+        categoryName: "Ciclos de Milankovitch y causas naturales",
+        type: "text",
+        text: "¿Cuál es el nombre de la base de investigación rusa en la Antártida Oriental donde se extrajo el famoso núcleo de hielo que reveló el clima de los últimos 400,000 años?",
+        correct: "Vostok",
+        feedback: "La base es Vostok. En 1999, los datos extraídos de este núcleo de hielo mostraron el acoplamiento entre CO₂, CH₄ y temperatura a lo largo de cuatro ciclos glaciales completos.",
+        fact: "Bajo la capa de hielo de la base se encuentra el lago Vostok, un enorme lago subglacial aislado del exterior desde hace millones de años."
+      },
+
+      // CATEGORÍA 7: DIFERENCIAS ENTRE CLIMA Y TIEMPO METEOROLÓGICO (66-75)
+      {
+        id: 66,
+        category: "clima_tiempo",
+        categoryName: "Diferencias entre clima y tiempo meteorológico",
+        type: "multiple",
+        text: "¿Cuál es la diferencia fundamental entre el tiempo meteorológico y el clima?",
+        options: [
+          "El tiempo meteorológico se mide con termómetros y el clima con satélites.",
+          "El tiempo meteorológico describe el estado atmosférico puntual en un momento y lugar específicos, mientras que el clima es el comportamiento estadístico a largo plazo (décadas) de dichas variables.",
+          "No hay diferencia alguna, son sinónimos científicos exactos.",
+          "El clima solo ocurre en los polos y el tiempo meteorológico en los trópicos."
+        ],
+        correct: 1,
+        feedback: "El tiempo es el estado de la atmósfera hoy o mañana (ej: soleado, lluvioso, 20°C). El clima es el promedio y variabilidad de esas condiciones medidas durante al menos 30 años en una región determinada.",
+        fact: "Una famosa frase didáctica dice: 'El clima es lo que esperas (un abrigo en invierno), el tiempo es lo que obtienes (un día invernal cálido y lluvioso)'."
+      },
+      {
+        id: 67,
+        category: "clima_tiempo",
+        categoryName: "Diferencias entre clima y tiempo meteorológico",
+        type: "true-false",
+        text: "Un solo día extremadamente frío de invierno en una ciudad desmiente por completo la existencia del calentamiento global de la Tierra.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. Los eventos individuales de frío o calor corresponden al tiempo meteorológico y su variabilidad natural. El calentamiento global se define por la tendencia estadística del promedio de temperaturas globales a largo plazo.",
+        fact: "Incluso con calentamiento global, los inviernos seguirán existiendo, aunque estadísticamente tendrán menos días fríos extremos y más récords de calor."
+      },
+      {
+        id: 68,
+        category: "clima_tiempo",
+        categoryName: "Diferencias entre clima y tiempo meteorológico",
+        type: "multiple",
+        text: "¿Cuáles son las 5 esferas o componentes físicos que interactúan activamente para definir el sistema climático de la Tierra?",
+        options: [
+          "Atmósfera, biosfera, hidrosfera, criosfera y pedosfera/litosfera",
+          "Sol, luna, nubes, mares y arena",
+          "Troposfera, estratosfera, mesosfera, termosfera y exosfera",
+          "Oxígeno, nitrógeno, hidrógeno, carbono y fósforo"
+        ],
+        correct: 0,
+        feedback: "El clima depende del equilibrio dinámico entre: la atmósfera (aire), la hidrosfera (agua líquida/océanos), la criosfera (hielo/glaciares), la biosfera (vida orgánica, incluyendo humanos) y la pedosfera/litosfera (suelos/corteza).",
+        fact: "El cambio climático ocurre cuando se altera el balance energético en uno de estos componentes, repercutiendo en todos los demás."
+      },
+      {
+        id: 69,
+        category: "clima_tiempo",
+        categoryName: "Diferencias entre clima y tiempo meteorológico",
+        type: "true-false",
+        text: "La Organización Meteorológica Mundial (OMM) establece un periodo mínimo estándar de 30 años de datos de observación para definir las normales climatológicas de una región.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. La OMM fija lapsos de 30 años (ej: 1961-1990 o 1991-2020) para calcular valores promedio de lluvia y temperatura, minimizando la influencia de anomalías temporales o eventos puntuales.",
+        fact: "Debido a la velocidad del cambio climático actual, los promedios normales climatológicos de referencia se tienen que actualizar con mayor frecuencia."
+      },
+      {
+        id: 70,
+        category: "clima_tiempo",
+        categoryName: "Diferencias entre clima y tiempo meteorológico",
+        type: "multiple",
+        text: "¿Qué variables físicas se monitorean para describir el clima y el tiempo meteorológico?",
+        options: [
+          "Solo el color del cielo y el brillo del sol.",
+          "Temperatura, irradiación solar, humedad, nubosidad, vientos, presión atmosférica y precipitación.",
+          "La densidad de la corteza y el magnetismo.",
+          "La cantidad de peces en el océano."
+        ],
+        correct: 1,
+        feedback: "Estas variables físicas caracterizan las condiciones físicas de la atmósfera baja. Su medición sistemática permite generar modelos de pronóstico meteorológico y proyecciones de cambio climático.",
+        fact: "El termómetro, el barómetro y el anemómetro son herramientas clásicas que han dado paso a complejos sensores satelitales automáticos."
+      },
+      {
+        id: 71,
+        category: "clima_tiempo",
+        categoryName: "Diferencias entre clima y tiempo meteorológico",
+        type: "true-false",
+        text: "El clima terrestre es estático e inalterable, manteniéndose sin variaciones a través de los millones de años de historia geológica.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. La historia de las Ciencias de la Tierra demuestra que el clima de nuestro planeta ha experimentado variaciones drásticas debido a factores geológicos, orbitales y biológicos naturales (Eras Glaciales, Máximos Térmicos). Lo preocupante de la situación actual es la velocidad de los cambios antropogénicos.",
+        fact: "Durante el periodo Cretácico (hace 100 millones de años), la Tierra era tan cálida que no existían casquetes polares permanentes."
+      },
+      {
+        id: 72,
+        category: "clima_tiempo",
+        categoryName: "Diferencias entre clima y tiempo meteorológico",
+        type: "multiple",
+        text: "¿Cómo altera la biosfera (especialmente la cobertura vegetal) el clima local y global?",
+        options: [
+          "Fijando CO₂ por fotosíntesis y modificando el albedo (los bosques absorben más luz que los desiertos) y la evapotranspiración.",
+          "Causando tormentas de arena por la caída de hojas.",
+          "No tiene ningún impacto sobre el clima.",
+          "Emitiendo radiación UV."
+        ],
+        correct: 0,
+        feedback: "Las plantas absorben carbono reduciendo los niveles de GEI, pero también liberan humedad a la atmósfera mediante transpiración, lo que estimula la formación de lluvia. Además, el follaje de los bosques oscurece la superficie variando el albedo.",
+        fact: "La selva amazónica genera gran parte de su propia lluvia mediante este bombeo de humedad conocido como 'ríos voladores'."
+      },
+      {
+        id: 73,
+        category: "clima_tiempo",
+        categoryName: "Diferencias entre clima y tiempo meteorológico",
+        type: "true-false",
+        text: "Las olas de calor intensas prolongadas durante semanas son un ejemplo directo de cambio climático y no de tiempo meteorológico.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. Una ola de calor en sí misma sigue siendo un evento del tiempo meteorológico (meteorología extrema). Sin embargo, el aumento estadístico de la frecuencia, duración e intensidad de dichas olas de calor a lo largo de décadas es una manifestación clara del cambio climático.",
+        fact: "Los estudios de atribución climática calculan cuánto más probable se vuelve un evento extremo concreto debido al calentamiento global de origen humano."
+      },
+      {
+        id: 74,
+        category: "clima_tiempo",
+        categoryName: "Diferencias entre clima y tiempo meteorológico",
+        type: "multiple",
+        text: "¿Por qué el agua de la hidrosfera actúa como un regulador clave del clima en la Tierra?",
+        options: [
+          "Debido a su alta capacidad térmica (calor específico), que permite amortiguar las fluctuaciones extremas de temperatura de la atmósfera.",
+          "Porque el agua pura disuelve la radiación solar y la destruye.",
+          "Porque refleja toda la radiación solar incidente, impidiendo el calentamiento.",
+          "Porque la sal del mar neutraliza el efecto invernadero."
+        ],
+        correct: 0,
+        feedback: "El agua absorbe y libera grandes cantidades de calor sin cambiar drásticamente su propia temperatura. Los océanos actúan como un acumulador de energía térmica global, transportándola por corrientes de latitudes bajas a altas.",
+        fact: "El océano ha absorbido más del 90% del calor atrapado por las emisiones acumuladas de gases de efecto invernadero de origen humano."
+      },
+      {
+        id: 75,
+        category: "clima_tiempo",
+        categoryName: "Diferencias entre clima y tiempo meteorológico",
+        type: "text",
+        text: "¿Qué término engloba a la porción de agua congelada del sistema climático terrestre (incluyendo glaciares, casquetes y suelo helado)?",
+        correct: "criosfera",
+        feedback: "La criosfera es el componente del sistema terrestre que incluye la nieve, los glaciares de montaña, las capas de hielo polar y el permafrost. Es un indicador clave de las alteraciones del clima.",
+        fact: "El término procede de la palabra griega 'kryos', que significa frío o escarcha."
+      },
+
+      // CATEGORÍA 8: PROTOCOLOS, INFORMES IPCC Y CONFERENCIAS (76-85)
+      {
+        id: 76,
+        category: "internacional",
+        categoryName: "Protocolos, informes IPCC y conferencias",
+        type: "multiple",
+        text: "¿Qué significan las siglas IPCC y cuál es su función principal en la comunidad global?",
+        options: [
+          "Instituto de Patologías del Carbono y Contaminación.",
+          "Grupo Intergubernamental de Expertos sobre el Cambio Climático (Intergovernmental Panel on Climate Change), encargado de evaluar de forma periódica el estado del conocimiento científico del cambio climático.",
+          "Internacional de Protocolos y Conferencias Climáticas.",
+          "Industria del Petróleo y Combustión Controlada."
+        ],
+        correct: 1,
+        feedback: "El IPCC fue creado en 1988 por la OMM y el PNUMA. No realiza investigación original, sino que miles de científicos de todo el mundo revisan voluntariamente las publicaciones científicas para sintetizar el consenso sobre el cambio climático.",
+        fact: "El IPCC fue galardonado con el Premio Nobel de la Paz en 2007 por sus esfuerzos de divulgación científica climática."
+      },
+      {
+        id: 77,
+        category: "internacional",
+        categoryName: "Protocolos, informes IPCC y conferencias",
+        type: "true-false",
+        text: "El Protocolo de Kioto de 1997 fue el primer acuerdo internacional legalmente vinculante para reducir las emisiones de gases de efecto invernadero en países industrializados.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. Adoptado en 1997 con vigor en 2005, el Protocolo de Kioto obligó a las naciones desarrolladas firmantes a reducir sus emisiones promedio de GEI en un 5.2% respecto a los niveles de 1990 para el periodo 2008-2012.",
+        fact: "El acuerdo fue criticado porque EE. UU. no lo ratificó y no imponía reducciones de emisiones iniciales a potencias en desarrollo como China e India."
+      },
+      {
+        id: 78,
+        category: "internacional",
+        categoryName: "Protocolos, informes IPCC y conferencias",
+        type: "multiple",
+        text: "¿Qué tratado internacional adoptado en la COP21 de 2015 sustituyó al Protocolo de Kioto y busca mantener el calentamiento global muy por debajo de los 2°C, preferiblemente a 1.5°C?",
+        options: [
+          "El Acuerdo de París",
+          "La Declaración de Río",
+          "La Convención de Viena",
+          "El Protocolo de Montreal"
+        ],
+        correct: 0,
+        feedback: "El Acuerdo de París entró en vigor en 2016. A diferencia de Kioto, exige compromisos nacionales de reducción (NDC) a todos los países firmantes, reconociendo la meta de limitar el calentamiento a 1.5°C para evitar daños severos.",
+        fact: "Los países actualizan sus NDCs cada 5 años con el fin de aumentar la ambición de sus políticas."
+      },
+      {
+        id: 79,
+        category: "internacional",
+        categoryName: "Protocolos, informes IPCC y conferencias",
+        type: "true-false",
+        text: "El Cuarto Informe de Evaluación del IPCC (AR4, publicado en 2007) dictaminó con certeza científica abrumadora que el calentamiento global es real y muy probablemente causado por actividades humanas.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. El informe de 2007 reunió el consenso de cientos de científicos, concluyendo que el calentamiento del sistema climático es 'inequívoco' y asignando más del 90% de probabilidad a la atribución humana.",
+        fact: "El Sexto Informe (AR6, 2021-2023) eliminó toda duda afirmando que es un hecho inequívoco que la influencia humana ha calentado la atmósfera, el océano y la tierra."
+      },
+      {
+        id: 80,
+        category: "internacional",
+        categoryName: "Protocolos, informes IPCC y conferencias",
+        type: "multiple",
+        text: "¿Qué concluyó el influyente 'Informe Stern sobre la Economía del Cambio Climático' en 2006?",
+        options: [
+          "Que solucionar el cambio climático es imposible económicamente y debemos resignarnos.",
+          "Que los costos económicos de no actuar contra el cambio climático superan por mucho a los costos de invertir en mitigación y adaptación inmediata (~1% del PIB mundial).",
+          "Que la economía de libre mercado no sufre por el cambio climático.",
+          "Que el carbón es el combustible más rentable a largo plazo."
+        ],
+        correct: 1,
+        feedback: "El Informe Stern, encargado por el gobierno británico al economista Nicholas Stern, concluyó que la inacción climática podría costar anualmente entre el 5% y el 20% del PIB global, mientras que actuar a tiempo requería solo una inversión del 1% del PIB.",
+        fact: "Este informe cambió las perspectivas de muchos gobiernos al encuadrar el cambio climático como una grave amenaza para la estabilidad del mercado mundial."
+      },
+      {
+        id: 81,
+        category: "internacional",
+        categoryName: "Protocolos, informes IPCC y conferencias",
+        type: "true-false",
+        text: "Las organizaciones ecologistas presentes en la Cumbre de Poznan (2008) apoyaron con entusiasmo que el Banco Mundial gestionara los fondos para la mitigación del cambio climático.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. Amigos de la Tierra, Jubileo Sur y otras ONGs se opusieron a que el Banco Mundial gestionara dichos fondos, argumentando que la institución seguía subsidiando proyectos de carbón, gas y tala industrial nociva en países del Sur global.",
+        fact: "Los fondos climáticos internacionales se gestionan en gran parte a través de mecanismos multilaterales propios de la CMNUCC como el Fondo Verde para el Clima."
+      },
+      {
+        id: 82,
+        category: "internacional",
+        categoryName: "Protocolos, informes IPCC y conferencias",
+        type: "multiple",
+        text: "¿Por qué los activistas y líderes de pueblos indígenas reclaman un papel central en las cumbres climáticas internacionales?",
+        options: [
+          "Porque desean promocionar productos agrícolas locales.",
+          "Porque señalan que las estrategias comerciales actuales de mitigación suelen marginar sus derechos sobre sus tierras y excluir sus conocimientos ancestrales de gestión sostenible del bosque.",
+          "Porque prefieren el calentamiento global.",
+          "Porque buscan financiamiento para infraestructura de combustibles fósiles."
+        ],
+        correct: 1,
+        feedback: "Los pueblos indígenas sostienen que muchas soluciones comerciales para el carbono, como proyectos de plantación de árboles exóticos rápidos en tierras nativas, dañan su subsistencia tradicional y carecen de consulta previa.",
+        fact: "Aproximadamente el 80% de la biodiversidad que queda en el planeta está custodiada por territorios habitados por pueblos indígenas."
+      },
+      {
+        id: 83,
+        category: "internacional",
+        categoryName: "Protocolos, informes IPCC y conferencias",
+        type: "true-false",
+        text: "La Convención Marco de las Naciones Unidas sobre el Cambio Climático (CMCC), firmada en Río de Janeiro en 1992, es el tratado original que estableció la cooperación internacional para combatir el calentamiento global.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. La CMCC fue el tratado internacional fundacional diseñado para estabilizar las concentraciones de GEI a un nivel que impida interferencias antropogénicas peligrosas en el sistema climático.",
+        fact: "El órgano de decisión anual supremo de esta convención se reúne en las famosas cumbres mundiales de las 'COP' (Conferencias de las Partes)."
+      },
+      {
+        id: 84,
+        category: "internacional",
+        categoryName: "Protocolos, informes IPCC y conferencias",
+        type: "multiple",
+        text: "¿Cuál es la meta de estabilización de emisiones recomendada por el Informe de Desarrollo Humano (2007-2008) para limitar el calentamiento global y qué coste estimado representaría para el PIB mundial hacia 2030?",
+        options: [
+          "Estabilizar en 450 ppm de CO₂ con un costo estimado de 1.6% del PIB mundial para 2030",
+          "Estabilizar en 750 ppm con costo cero",
+          "Reducir las emisiones a cero para el año 2000 con coste del 50% del PIB",
+          "Estabilizar en 350 ppm con subsidios del 10% del PIB"
+        ],
+        correct: 0,
+        feedback: "El Informe del PNUD sugirió fijar el límite en 450 ppm de CO₂e para tener un 50% de probabilidad de evitar superar un aumento de 2°C (considerado el umbral del cambio catastrófico), estimando el costo global en un manejable 1.6% del PIB.",
+        fact: "Si superamos las 450 ppm de CO₂e, la probabilidad de desencadenar bucles de retroalimentación climática incontrolables aumenta exponencialmente."
+      },
+      {
+        id: 85,
+        category: "internacional",
+        categoryName: "Protocolos, informes IPCC y conferencias",
+        type: "text",
+        text: "¿Qué sigla en español se utiliza para designar a los gases que absorben y emiten radiación infrarroja, contribuyendo al efecto invernadero (G...)?",
+        correct: "GEI",
+        feedback: "GEI significa Gases de Efecto Invernadero. Incluye los principales gases como CO₂, H₂O, CH₄, N₂O, O₃ y los halocarbonados artificiales.",
+        fact: "En inglés se utiliza la sigla equivalente GHG (Greenhouse Gases)."
+      },
+
+      // CATEGORÍA 9: CONSECUENCIAS PREVISTAS (86-95)
+      {
+        id: 86,
+        category: "consecuencias",
+        categoryName: "Consecuencias previstas",
+        type: "multiple",
+        text: "¿Qué rango de aumento en el nivel medio del mar se proyectaba para finales del siglo XXI si continuaban derritiéndose las capas de hielo continental?",
+        options: [
+          "Entre 1 y 5 metros",
+          "De 15 a 90 centímetros (afectando seriamente a ciudades costeras bajas como Nueva York, Bombay, Buenos Aires y Barcelona)",
+          "Menos de 5 centímetros",
+          "No habría variación alguna"
+        ],
+        correct: 1,
+        feedback: "Los informes de principios del siglo XXI ya estimaban un aumento de 15 a 90 cm en un horizonte de 100 años. Estas proyecciones se han ido ajustando al alza debido a la alarmante inestabilidad de los glaciares en Groenlandia y la Antártida Occidental.",
+        fact: "Ciudades costeras populosas e islas bajas como Maldivas o Tuvalu se enfrentan a un riesgo inminente de inundación permanente."
+      },
+      {
+        id: 87,
+        category: "consecuencias",
+        categoryName: "Consecuencias previstas",
+        type: "true-false",
+        text: "Norman Myers estimó que para mediados del siglo XXI el cambio climático y la degradación del suelo podrían generar entre 150 y 250 millones de refugiados ambientales.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. El ecólogo británico Norman Myers advirtió que la desertificación, la escasez de agua dulce y la subida del nivel del mar provocarán desplazamientos humanos masivos sin precedentes.",
+        fact: "El término 'refugiado ambiental' o 'migrante climático' no está reconocido en el derecho internacional, lo que deja a estas personas sin la misma protección jurídica que los refugiados políticos."
+      },
+      {
+        id: 88,
+        category: "consecuencias",
+        categoryName: "Consecuencias previstas",
+        type: "multiple",
+        text: "¿Cuál es el riesgo para la agricultura global si la temperatura media de la Tierra aumenta más de 3°C?",
+        options: [
+          "Aumento exponencial de cosechas en todo el mundo sin límites.",
+          "Una caída severa del rendimiento agrícola en zonas tropicales y templadas debido a sequías persistentes, olas de calor y estrés hídrico.",
+          "Las plantas dejarían de necesitar agua.",
+          "Ninguno, las plantas se adaptan instantáneamente a cualquier temperatura."
+        ],
+        correct: 1,
+        feedback: "Aunque un aumento moderado de CO₂ puede estimular la fotosíntesis, el incremento de la temperatura global por encima de ciertos umbrales y la alteración de las lluvias destruyen cosechas enteras y expanden plagas.",
+        fact: "Cereales básicos como el maíz y el trigo experimentan caídas de rendimiento por cada grado de calentamiento global."
+      },
+      {
+        id: 89,
+        category: "consecuencias",
+        categoryName: "Consecuencias previstas",
+        type: "true-false",
+        text: "El derretimiento total de los casquetes polares continentales (como el de la Antártida y Groenlandia) no tiene suficiente volumen de agua para inundar puertos continentales.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. La capa de hielo de Groenlandia contiene suficiente agua para elevar el nivel del mar en unos 7 metros, y la de la Antártida (que tiene un espesor de hasta 4 km) podría elevarlo en cerca de 60 metros si se derritiesen por completo.",
+        fact: "Aunque un deshielo total requeriría miles de años bajo altas temperaturas, una pérdida fraccionaria de estas capas inundaría megaciudades costeras en este siglo."
+      },
+      {
+        id: 90,
+        category: "consecuencias",
+        categoryName: "Consecuencias previstas",
+        type: "multiple",
+        text: "¿Cómo puede el calentamiento global propagar enfermedades transmitidas por vectores (como mosquitos)?",
+        options: [
+          "Porque los virus se vuelven visibles a la luz solar.",
+          "Al expandirse las zonas templadas y cálidas húmedas, los mosquitos que transmiten el dengue, la malaria o el zika pueden colonizar nuevas latitudes que antes eran muy frías para su supervivencia.",
+          "Porque el calor debilita a todos los medicamentos.",
+          "Las enfermedades no guardan relación con el clima."
+        ],
+        correct: 1,
+        feedback: "Las temperaturas invernales más cálidas y la extensión de las temporadas de calor permiten que insectos vectores de enfermedades tropicales sobrevivan y se multipliquen en latitudes medias (como Europa y Norteamérica).",
+        fact: "En los últimos años se han registrado brotes locales de dengue en varios países del sur de Europa debido a la colonización del mosquito tigre."
+      },
+      {
+        id: 91,
+        category: "consecuencias",
+        categoryName: "Consecuencias previstas",
+        type: "true-false",
+        text: "El calentamiento global debilita la capacidad de los océanos para disolver CO₂, lo que podría transformar las aguas marinas de un sumidero que absorbe carbono en una fuente emisora.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. La solubilidad física del dióxido de carbono disminuye a medida que la temperatura del agua aumenta (ley de Henry). Los océanos cálidos retienen menos gas disuelto, liberando CO₂ de vuelta al aire.",
+        fact: "Esta retroalimentación biogeoquímica reduce la eficacia de los sumideros naturales a medida que aumenta la temperatura global."
+      },
+      {
+        id: 92,
+        category: "consecuencias",
+        categoryName: "Consecuencias previstas",
+        type: "multiple",
+        text: "¿Qué impacto ecológico severo sufren los arrecifes de coral debido al calentamiento del agua oceánica?",
+        options: [
+          "Crecen más rápido formando islas artificiales.",
+          "El blanqueamiento de los corales, provocado por la expulsión de las algas simbióticas (zooxantelas) de las que dependen para nutrirse.",
+          "Se vuelven venenosos para las algas.",
+          "No sufren impactos, los corales toleran temperaturas extremas."
+        ],
+        correct: 1,
+        feedback: "El estrés térmico hace que las microalgas fotosintéticas abandonen los tejidos del coral. Si las altas temperaturas persisten, el coral muere de inanición, colapsando ecosistemas marinos enteros.",
+        fact: "Los arrecifes de coral albergan más del 25% de todas las especies marinas a pesar de cubrir menos del 0.1% de la superficie oceánica."
+      },
+      {
+        id: 93,
+        category: "consecuencias",
+        categoryName: "Consecuencias previstas",
+        type: "true-false",
+        text: "Las precipitaciones extremas concentradas e inundaciones repentinas disminuyen la escasez de agua dulce útil para el consumo humano.",
+        options: ["Verdadero", "Falso"],
+        correct: 1, // Falso
+        feedback: "Falso. La lluvia torrencial extrema tiende a escurrir rápidamente sobre el terreno sin infiltrar los acuíferos subterráneos, arrastrando contaminantes y lodo hacia las reservas superficiales, lo que deteriora la calidad del agua potable.",
+        fact: "La gestión del agua dulce requiere lluvias constantes y suaves y capas de nieve que actúen como depósitos naturales de liberación lenta."
+      },
+      {
+        id: 94,
+        category: "consecuencias",
+        categoryName: "Consecuencias previstas",
+        type: "multiple",
+        text: "¿Qué consecuencia social se destaca en el Informe sobre Desarrollo Humano si el cambio climático mina la lucha internacional contra la pobreza?",
+        options: [
+          "El fin de los empleos industriales.",
+          "Un retroceso en el desarrollo humano en los países más pobres, ampliando la desigualdad y exponiendo a millones de personas a hambrunas, escasez de agua y pérdidas agrícolas.",
+          "Una migración general hacia los polos terrestres.",
+          "La desaparición del comercio internacional."
+        ],
+        correct: 1,
+        feedback: "El PNUD enfatiza que el cambio climático es una grave amenaza contra la equidad global. Las poblaciones más vulnerables del Sur global, que menos han contribuido a las emisiones históricas, sufren los impactos más duros y carecen de recursos para adaptarse.",
+        fact: "A esto se le conoce como la 'injusticia climática': quienes sufren primero y peor son quienes menos contaminan."
+      },
+      {
+        id: 95,
+        category: "consecuencias",
+        categoryName: "Consecuencias previstas",
+        type: "multiple",
+        text: "¿Cuál es el riesgo de que el cambio climático rápido supere la velocidad de adaptación natural de las especies vegetales y animales?",
+        options: [
+          "Un aumento masivo en la diversidad de plantas silvestres.",
+          "Extinciones biológicas masivas, pérdida de biodiversidad y migraciones forzadas de especies terrestres hacia latitudes más altas o zonas montañosas elevadas.",
+          "Las especies mutarían inmediatamente volviéndose inmunes al calor.",
+          "Las plantas comenzarían a desplazarse de forma autónoma."
+        ],
+        correct: 1,
+        feedback: "Muchas especies no pueden migrar o evolucionar al vertiginoso ritmo impuesto por el calentamiento humano, lo que provoca la fragmentación de ecosistemas y la extinción local de flora y fauna.",
+        fact: "El Sexto Informe del IPCC estima que hasta un 14% de las especies terrestres se enfrentan a un alto riesgo de extinción si alcanzamos los 1.5°C de calentamiento."
+      },
+
+      // CATEGORÍA 10: MEDIDAS DE MITIGACIÓN Y ADAPTACIÓN (96-101)
+      {
+        id: 96,
+        category: "mitigacion",
+        categoryName: "Medidas de mitigación y adaptación",
+        type: "multiple",
+        text: "¿Cuál es la diferencia básica entre las estrategias de 'mitigación' y de 'adaptación' frente al cambio climático?",
+        options: [
+          "Mitigar significa ignorar el problema y adaptar significa combatirlo en el espacio.",
+          "La mitigación busca reducir las emisiones de GEI y potenciar los sumideros de carbono, mientras que la adaptación busca ajustar los sistemas humanos o naturales para minimizar los impactos y daños inevitables del cambio.",
+          "Mitigación es un término puramente económico y adaptación es puramente biológico.",
+          "Son términos intercambiables sin diferencia metodológica."
+        ],
+        correct: 1,
+        feedback: "La mitigación actúa sobre la causa (la acumulación de GEI) para limitar el cambio futuro (ej: paneles solares, reforestación). La adaptación actúa sobre los efectos para sobrevivir a las alteraciones en marcha (ej: construir diques, sembrar cultivos resistentes a sequías).",
+        fact: "Ambas estrategias son complementarias: cuanta menos mitigación logremos, mayor y más costosa será la adaptación requerida."
+      },
+      {
+        id: 97,
+        category: "mitigacion",
+        categoryName: "Medidas de mitigación y adaptación",
+        type: "true-false",
+        text: "El secuestro geológico de carbono consiste en capturar el CO₂ emitido por centrales térmicas o industrias pesadas y enterrarlo en depósitos profundos estables (como antiguos pozos de gas vacíos o minas de carbón agotadas).",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. Esta tecnología se conoce como Captura y Almacenamiento de Carbono (CCS). Noruega ha sido pionera en inyectar CO₂ en el fondo marino del yacimiento de Sleipner desde la década de 1990 para eludir impuestos sobre el carbono.",
+        fact: "Aunque es una solución prometedora para industrias difíciles de descarbonizar (como la del acero o cemento), su elevado costo energético e infraestructural limita su despliegue a gran escala."
+      },
+      {
+        id: 98,
+        category: "mitigacion",
+        categoryName: "Medidas de mitigación y adaptación",
+        type: "multiple",
+        text: "¿Qué medidas sencillas de eficiencia energética en el sector residencial pueden contribuir a la mitigación climática según el Documento 1?",
+        options: [
+          "Sustituir bombillas incandescentes por lámparas de alta eficiencia (como fluorescentes compactas o tecnología LED actual) y mejorar el aislamiento térmico de los hogares.",
+          "Apagar el refrigerador durante las noches.",
+          "Consumir únicamente alimentos enlatados.",
+          "Aumentar el uso de calefactores eléctricos de resistencia sin termostato."
+        ],
+        correct: 0,
+        feedback: "El ahorro en iluminación y climatización es una forma costo-efectiva de mitigar emisiones, al reducir la demanda eléctrica global que a menudo es satisfecha quemando carbón o gas.",
+        fact: "La transición masiva a iluminación LED ha ahorrado miles de millones de toneladas de CO₂ en todo el mundo en la última década."
+      },
+      {
+        id: 99,
+        category: "mitigacion",
+        categoryName: "Medidas de mitigación y adaptación",
+        type: "true-false",
+        text: "La agricultura de conservación y sostenible (como la siembra directa sin laboreo) ayuda a mitigar el cambio climático porque mantiene el carbono orgánico almacenado en el suelo en lugar de liberarlo por arado intensivo.",
+        options: ["Verdadero", "Falso"],
+        correct: 0, // Verdadero
+        feedback: "Verdadero. El suelo es un gigantesco sumidero de carbono. El laboreo tradicional (arar la tierra) expone la materia orgánica profunda al oxígeno del aire, acelerando su descomposición y liberación como CO₂.",
+        fact: "La agricultura regenerativa también mejora la retención de agua de los suelos, haciéndola más resiliente frente a sequías extremas."
+      },
+      {
+        id: 100,
+        category: "mitigacion",
+        categoryName: "Medidas de mitigación y adaptación",
+        type: "multiple",
+        text: "¿Cuál es el principal reto de la transición energética masiva hacia energías 100% renovables (como solar y eólica)?",
+        options: [
+          "Que estas fuentes agotan el calor interno de la Tierra.",
+          "La intermitencia de la generación (no siempre hay sol o viento), lo que requiere sistemas avanzados de almacenamiento en baterías y redes eléctricas inteligentes integradas.",
+          "Que los paneles solares y molinos consumen el oxígeno de la troposfera.",
+          "No plantean ningún reto tecnológico en absoluto."
+        ],
+        correct: 1,
+        feedback: "La energía solar y la eólica son variables. La transición requiere integrar tecnologías de almacenamiento (baterías, bombeo hidráulico, hidrógeno verde) y diversificar la matriz de generación limpia.",
+        fact: "Los costos de los paneles solares y las baterías de litio han caído más de un 85% en los últimos diez años, acelerando la transición comercial."
+      },
+      {
+        id: 101,
+        category: "mitigacion",
+        categoryName: "Medidas de mitigación y adaptación",
+        type: "multiple",
+        text: "¿Qué recomendación educativa y social hace Gerarda Díaz en el Documento 2 para afrontar la degradación ambiental global?",
+        options: [
+          "Cerrar las universidades para ahorrar papel y electricidad.",
+          "Promover la educación ambiental permanente en todos los niveles curriculares y desarrollar la voluntad política para aplicar las realidades de la interdependencia ecológica global.",
+          "Esperar a la certeza científica absoluta antes de enseñar sobre el clima.",
+          "Desincentivar la investigación científica para evitar alarmar a la población."
+        ],
+        correct: 1,
+        feedback: "La autora resalta que la educación formal y no formal es imprescindible para dotar de coraje ético a las sociedades, permitiéndoles comprender los riesgos sistémicos y cambiar hábitos destructivos de consumo.",
+        fact: "La Agenda 2030 y los Objetivos de Desarrollo Sostenible (ODS) colocan la educación sobre el clima en el centro del desarrollo humano."
+      }
+    ];
+
+    // ESTADO DE LA APLICACIÓN
+    let currentFilteredQuestions = [...questions];
+    let userAnswers = {}; // Almacena las respuestas del usuario {questionId: selectedIndex o textString}
+    let reviewFlags = {}; // Almacena {questionId: true/false}
+    let currentIndex = 0;
+    let examMode = "practice"; // "practice" (inmediato) o "exam" (al final)
+    let isExamFinished = false;
+
+    // REFERENCIAS DE DOM
+    const questionCard = document.getElementById("question-card");
+    const questionCategory = document.getElementById("question-category");
+    const questionIndexDisplay = document.getElementById("question-index-display");
+    const questionText = document.getElementById("question-text");
+    const answersContainer = document.getElementById("answers-container");
+    const feedbackBox = document.getElementById("feedback-box");
+    const feedbackTitle = document.getElementById("feedback-title");
+    const feedbackExplanation = document.getElementById("feedback-explanation");
+    const factBox = document.getElementById("fact-box");
+    const factText = document.getElementById("fact-text");
+    
+    const btnPrev = document.getElementById("btn-prev");
+    const btnNext = document.getElementById("btn-next");
+    const btnMarkReview = document.getElementById("btn-mark-review");
+    const markText = document.getElementById("mark-text");
+    const btnSubmitExam = document.getElementById("btn-submit-exam");
+    const btnResetExam = document.getElementById("btn-reset-exam");
+    
+    const progressText = document.getElementById("progress-text");
+    const progressBar = document.getElementById("progress-bar");
+    const categoryFilter = document.getElementById("category-filter");
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeText = document.getElementById("theme-text");
+    const modeToggle = document.getElementById("mode-toggle");
+    const modeText = document.getElementById("mode-text");
+    
+    const statAnswered = document.getElementById("stat-answered");
+    const statPending = document.getElementById("stat-pending");
+    const statScoreContainer = document.getElementById("stat-score-container");
+    const statIncorrectContainer = document.getElementById("stat-incorrect-container");
+    const statCorrect = document.getElementById("stat-correct");
+    const statIncorrect = document.getElementById("stat-incorrect");
+    
+    const questionGrid = document.getElementById("question-grid");
+    const examView = document.getElementById("exam-view");
+    const resultsView = document.getElementById("results-view");
+    
+    const finalPercent = document.getElementById("final-percent");
+    const finalRatio = document.getElementById("final-ratio");
+    const scoreCircleProgress = document.getElementById("score-circle-progress");
+    const finalFeedback = document.getElementById("final-feedback");
+    const categoryResultsGrid = document.getElementById("category-results-grid");
+    const reviewList = document.getElementById("review-list");
+    const btnRestartFromResults = document.getElementById("btn-restart-from-results");
+
+    // INICIALIZACIÓN
+    function init() {
+      // Intentar cargar progreso de LocalStorage
+      loadProgress();
+      
+      // Aplicar tema guardado
+      const savedTheme = localStorage.getItem("climate-exam-theme") || "light";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+      updateThemeUI(savedTheme);
+
+      // Event Listeners
+      btnPrev.addEventListener("click", goPrev);
+      btnNext.addEventListener("click", goNext);
+      btnMarkReview.addEventListener("click", toggleMarkReview);
+      btnSubmitExam.addEventListener("click", submitExam);
+      btnResetExam.addEventListener("click", resetExamData);
+      btnRestartFromResults.addEventListener("click", resetExamData);
+      
+      categoryFilter.addEventListener("change", handleFilterChange);
+      themeToggle.addEventListener("click", toggleTheme);
+      modeToggle.addEventListener("click", toggleExamMode);
+      
+      // Construir la interfaz inicial
+      renderQuestionGrid();
+      renderQuestion();
+      updateProgress();
+    }
+
+    // CARGAR PREGUNTA ACTUAL
+    function renderQuestion() {
+      if (currentFilteredQuestions.length === 0) {
+        questionText.textContent = "No hay preguntas en esta categoría.";
+        answersContainer.innerHTML = "";
+        feedbackBox.style.display = "none";
+        factBox.style.display = "none";
+        return;
+      }
+
+      const q = currentFilteredQuestions[currentIndex];
+      
+      // Actualizar tarjeta clase de revisión
+      if (reviewFlags[q.id]) {
+        questionCard.classList.add("marked");
+        markText.textContent = "Quitar marca de revisión";
+      } else {
+        questionCard.classList.remove("marked");
+        markText.textContent = "Marcar para revisión";
+      }
+
+      // Datos de cabecera
+      questionCategory.textContent = q.categoryName;
+      questionIndexDisplay.textContent = `Pregunta ${currentIndex + 1} de ${currentFilteredQuestions.length}`;
+      questionText.textContent = q.text;
+
+      // Limpiar contenedores
+      answersContainer.innerHTML = "";
+      feedbackBox.style.display = "none";
+      factBox.style.display = "none";
+
+      const answered = userAnswers[q.id] !== undefined;
+
+      // Renderizar controles según tipo
+      if (q.type === "multiple") {
+        const container = document.createElement("div");
+        container.className = "options-container";
+        
+        q.options.forEach((opt, idx) => {
+          const btn = document.createElement("button");
+          btn.className = "option-btn";
+          if (userAnswers[q.id] === idx) {
+            btn.classList.add("selected");
+          }
+          if (answered && examMode === "practice") {
+            btn.disabled = true;
+          }
+          
+          const letter = document.createElement("span");
+          letter.className = "option-letter";
+          letter.textContent = String.fromCharCode(65 + idx); // A, B, C, D
+          
+          const text = document.createElement("span");
+          text.textContent = opt;
+          
+          btn.appendChild(letter);
+          btn.appendChild(text);
+          
+          btn.addEventListener("click", () => handleSelectOption(q.id, idx));
+          container.appendChild(btn);
+        });
+        answersContainer.appendChild(container);
+
+      } else if (q.type === "true-false") {
+        const container = document.createElement("div");
+        container.className = "tf-container";
+        
+        q.options.forEach((opt, idx) => {
+          const btn = document.createElement("button");
+          btn.className = "tf-btn";
+          if (userAnswers[q.id] === idx) {
+            btn.classList.add(idx === 0 ? "selected-true" : "selected-false");
+          }
+          if (answered && examMode === "practice") {
+            btn.disabled = true;
+          }
+          
+          const icon = document.createElement("i");
+          icon.className = idx === 0 ? "fa-solid fa-check" : "fa-solid fa-xmark";
+          
+          const label = document.createElement("span");
+          label.textContent = opt;
+          
+          btn.appendChild(icon);
+          btn.appendChild(label);
+          
+          btn.addEventListener("click", () => handleSelectOption(q.id, idx));
+          container.appendChild(btn);
+        });
+        answersContainer.appendChild(container);
+
+      } else if (q.type === "text") {
+        const container = document.createElement("div");
+        container.className = "text-input-container";
+        
+        const input = document.createElement("input");
+        input.type = "text";
+        input.className = "text-answer-input";
+        input.placeholder = "Escribe tu respuesta aquí (evaluación aproximada)...";
+        input.value = userAnswers[q.id] || "";
+        
+        if (answered && examMode === "practice") {
+          input.disabled = true;
+        }
+        
+        const submitBtn = document.createElement("button");
+        submitBtn.className = "btn btn-primary";
+        submitBtn.textContent = "Validar Respuesta";
+        submitBtn.style.alignSelf = "flex-start";
+        if (answered && examMode === "practice") {
+          submitBtn.disabled = true;
+        }
+        
+        submitBtn.addEventListener("click", () => {
+          if (input.value.trim() !== "") {
+            handleTextAnswerSubmit(q.id, input.value);
+          }
+        });
+        
+        container.appendChild(input);
+        container.appendChild(submitBtn);
+        answersContainer.appendChild(container);
+      }
+
+      // Si está contestada en modo práctica, mostrar retroalimentación inmediata
+      if (answered && (examMode === "practice" || isExamFinished)) {
+        showFeedback(q);
+      }
+
+      // Actualizar estado del grid activo
+      document.querySelectorAll(".grid-cell").forEach(cell => {
+        cell.classList.remove("active");
+        if (parseInt(cell.dataset.id) === q.id) {
+          cell.classList.add("active");
+        }
+      });
+
+      // Desactivar/Activar botones de navegación
+      btnPrev.disabled = currentIndex === 0;
+      btnNext.disabled = currentIndex === currentFilteredQuestions.length - 1;
+    }
+
+    // ACCIONES DE SELECCIÓN DE RESPUESTA
+    function handleSelectOption(questionId, selectedIdx) {
+      if (isExamFinished) return;
+      
+      userAnswers[questionId] = selectedIdx;
+      saveProgress();
+      updateProgress();
+      updateGridCellStatus(questionId);
+
+      const q = currentFilteredQuestions.find(x => x.id === questionId);
+      if (examMode === "practice") {
+        // En modo práctica, inhabilitar controles y mostrar feedback
+        renderQuestion();
+      } else {
+        // En modo examen, solo pasar visualmente a la seleccionada
+        renderQuestion();
+      }
+    }
+
+    function handleTextAnswerSubmit(questionId, answerText) {
+      if (isExamFinished) return;
+      
+      userAnswers[questionId] = answerText;
+      saveProgress();
+      updateProgress();
+      updateGridCellStatus(questionId);
+      renderQuestion();
+    }
+
+    // MOSTRAR RETROALIMENTACIÓN
+    function showFeedback(q) {
+      const isCorrect = checkAnswer(q);
+      feedbackBox.className = `feedback-box ${isCorrect ? 'correct' : 'incorrect'}`;
+      feedbackBox.style.display = "block";
+      
+      if (isCorrect) {
+        feedbackTitle.innerHTML = `<i class="fa-solid fa-circle-check"></i> ¡Correcto! Excelente deducción científica.`;
+      } else {
+        let correctText = "";
+        if (q.type === "multiple" || q.type === "true-false") {
+          correctText = q.options[q.correct];
+        } else {
+          correctText = q.correct;
+        }
+        feedbackTitle.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Incorrecto. La respuesta correcta es: <strong>${correctText}</strong>`;
+      }
+      
+      feedbackExplanation.textContent = q.feedback;
+
+      // Mostrar dato curioso si existe
+      if (q.fact) {
+        factText.textContent = q.fact;
+        factBox.style.display = "flex";
+      }
+    }
+
+    // DETECTAR SI LA RESPUESTA ES CORRECTA
+    function checkAnswer(q) {
+      const ans = userAnswers[q.id];
+      if (ans === undefined) return false;
+
+      if (q.type === "multiple" || q.type === "true-false") {
+        return ans === q.correct;
+      } else if (q.type === "text") {
+        // Comparación insensible a mayúsculas, minúsculas, acentos y espacios
+        const cleanStr = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+        return cleanStr(ans) === cleanStr(q.correct);
+      }
+      return false;
+    }
+
+    // NAVEGACIÓN
+    function goPrev() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    }
+
+    function goNext() {
+      if (currentIndex < currentFilteredQuestions.length - 1) {
+        currentIndex++;
+        renderQuestion();
+      }
+    }
+
+    function jumpToQuestion(qId) {
+      const targetIdx = currentFilteredQuestions.findIndex(x => x.id === qId);
+      if (targetIdx !== -1) {
+        currentIndex = targetIdx;
+        renderQuestion();
+      }
+    }
+
+    // MARCAR PARA REVISIÓN
+    function toggleMarkReview() {
+      if (currentFilteredQuestions.length === 0) return;
+      const q = currentFilteredQuestions[currentIndex];
+      
+      reviewFlags[q.id] = !reviewFlags[q.id];
+      saveProgress();
+      updateGridCellStatus(q.id);
+      
+      if (reviewFlags[q.id]) {
+        questionCard.classList.add("marked");
+        markText.textContent = "Quitar marca de revisión";
+      } else {
+        questionCard.classList.remove("marked");
+        markText.textContent = "Marcar para revisión";
+      }
+    }
+
+    // FILTRADO POR CATEGORÍA
+    function handleFilterChange(e) {
+      const cat = e.target.value;
+      if (cat === "all") {
+        currentFilteredQuestions = [...questions];
+      } else {
+        currentFilteredQuestions = questions.filter(q => q.category === cat);
+      }
+      currentIndex = 0;
+      renderQuestionGrid();
+      renderQuestion();
+      updateProgress();
+    }
+
+    // ACTUALIZAR PROGRESO Y CONTADORES
+    function updateProgress() {
+      const total = currentFilteredQuestions.length;
+      if (total === 0) {
+        progressBar.style.width = "0%";
+        progressText.textContent = "0% (0 de 0)";
+        statAnswered.textContent = "0";
+        statPending.textContent = "0";
+        return;
+      }
+
+      let answeredCount = 0;
+      currentFilteredQuestions.forEach(q => {
+        if (userAnswers[q.id] !== undefined) {
+          answeredCount++;
+        }
+      });
+
+      const percent = Math.round((answeredCount / total) * 100);
+      progressBar.style.width = `${percent}%`;
+      progressText.textContent = `${percent}% (${answeredCount} de ${total} respondidas)`;
+
+      statAnswered.textContent = answeredCount;
+      statPending.textContent = total - answeredCount;
+
+      // Si el examen ha sido finalizado, mostrar también correctas/incorrectas en el sidebar
+      if (isExamFinished || examMode === "practice") {
+        statScoreContainer.style.display = "flex";
+        statIncorrectContainer.style.display = "flex";
+        
+        let correct = 0;
+        let incorrect = 0;
+        currentFilteredQuestions.forEach(q => {
+          if (userAnswers[q.id] !== undefined) {
+            if (checkAnswer(q)) correct++;
+            else incorrect++;
+          }
+        });
+        statCorrect.textContent = correct;
+        statIncorrect.textContent = incorrect;
+      } else {
+        statScoreContainer.style.display = "none";
+        statIncorrectContainer.style.display = "none";
+      }
+    }
+
+    // RENDERIZAR REJILLA / MAPA
+    function renderQuestionGrid() {
+      questionGrid.innerHTML = "";
+      currentFilteredQuestions.forEach((q, index) => {
+        const cell = document.createElement("div");
+        cell.className = "grid-cell";
+        cell.dataset.id = q.id;
+        cell.textContent = index + 1;
+        
+        cell.addEventListener("click", () => jumpToQuestion(q.id));
+        questionGrid.appendChild(cell);
+        updateGridCellStatus(q.id);
+      });
+    }
+
+    // ACTUALIZAR ESTADO VISUAL DE CELDA DE LA REJILLA
+    function updateGridCellStatus(qId) {
+      const cell = questionGrid.querySelector(`[data-id="${qId}"]`);
+      if (!cell) return;
+
+      cell.className = "grid-cell"; // Reiniciar
+      
+      const q = questions.find(x => x.id === qId);
+      if (currentFilteredQuestions[currentIndex] && qId === currentFilteredQuestions[currentIndex].id) {
+        cell.classList.add("active");
+      }
+
+      const answered = userAnswers[qId] !== undefined;
+      const marked = reviewFlags[qId] === true;
+
+      if (isExamFinished || examMode === "practice") {
+        if (answered) {
+          const isCorrect = checkAnswer(q);
+          cell.classList.add(isCorrect ? "correct" : "incorrect");
+        } else if (marked) {
+          cell.classList.add("review");
+        }
+      } else {
+        // Modo Examen sin finalizar
+        if (marked) {
+          cell.classList.add("review");
+        } else if (answered) {
+          cell.classList.add("unanswered");
+        }
+      }
+    }
+
+    // CAMBIAR TEMA (CLARO / OSCURO)
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("climate-exam-theme", newTheme);
+      updateThemeUI(newTheme);
+    }
+
+    function updateThemeUI(theme) {
+      if (theme === "dark") {
+        themeText.textContent = "Modo Claro";
+        themeToggle.querySelector("i").className = "fa-solid fa-sun";
+      } else {
+        themeText.textContent = "Modo Oscuro";
+        themeToggle.querySelector("i").className = "fa-solid fa-moon";
+      }
+    }
+
+    // CAMBIAR MODO (PRÁCTICA / EXAMEN)
+    function toggleExamMode() {
+      if (isExamFinished) return; // No cambiar modo si ya se terminó
+
+      examMode = examMode === "practice" ? "exam" : "practice";
+      saveProgress();
+      
+      if (examMode === "practice") {
+        modeText.textContent = "Modo Examen";
+        modeToggle.querySelector("i").className = "fa-solid fa-file-invoice";
+        document.getElementById("legend-correct-item").style.display = "flex";
+        document.getElementById("legend-incorrect-item").style.display = "flex";
+      } else {
+        modeText.textContent = "Modo Práctica";
+        modeToggle.querySelector("i").className = "fa-solid fa-graduation-cap";
+        document.getElementById("legend-correct-item").style.display = "none";
+        document.getElementById("legend-incorrect-item").style.display = "none";
+      }
+
+      // Forzar renderizado
+      currentFilteredQuestions.forEach(q => updateGridCellStatus(q.id));
+      renderQuestion();
+      updateProgress();
+    }
+
+    // PRESENTAR / FINALIZAR EL EXAMEN (AL FINALIZAR)
+    function submitExam() {
+      const answeredTotal = Object.keys(userAnswers).length;
+      const totalQuestions = questions.length;
+      
+      if (answeredTotal < totalQuestions && !isExamFinished) {
+        if (!confirm(`Has respondido solo ${answeredTotal} de ${totalQuestions} preguntas. ¿Seguro que deseas finalizar el examen y ver tu calificación?`)) {
+          return;
+        }
+      }
+
+      isExamFinished = true;
+      examMode = "exam";
+      saveProgress();
+
+      // Ocultar vista del examen
+      examView.style.display = "none";
+      
+      // Calcular puntuación general
+      let correct = 0;
+      questions.forEach(q => {
+        if (userAnswers[q.id] !== undefined && checkAnswer(q)) {
+          correct++;
+        }
+      });
+
+      const percent = Math.round((correct / totalQuestions) * 100);
+      finalPercent.textContent = `${percent}%`;
+      finalRatio.textContent = `${correct} de ${totalQuestions}`;
+
+      // Animación de la barra radial
+      const circleOffset = 502 - (502 * percent) / 100;
+      scoreCircleProgress.style.strokeDashoffset = circleOffset;
+
+      // Mensaje de feedback según puntuación
+      let msg = "";
+      if (percent >= 90) {
+        msg = "¡Excelente nivel! Demuestras un dominio excepcional de las ciencias climáticas y sus causas. Eres un experto concienciado.";
+      } else if (percent >= 70) {
+        msg = "¡Buen trabajo! Tienes un conocimiento sólido sobre el efecto invernadero y las causas del cambio climático. Sigue repasando para perfeccionarlo.";
+      } else if (percent >= 50) {
+        msg = "Aprobado básico. Tienes claros varios conceptos clave, pero te vendría bien repasar las causas antropogénicas y las consecuencias globales del cambio climático.";
+      } else {
+        msg = "Requiere estudio. Te recomendamos volver a leer con detenimiento los documentos originales y utilizar el examen en Modo Práctica para aprender con las explicaciones.";
+      }
+      finalFeedback.textContent = msg;
+
+      // Calcular rendimiento por categorías
+      renderCategoryBreakdown();
+
+      // Renderizar lista de respuestas falladas
+      renderReviewList();
+
+      resultsView.style.display = "flex";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // CALCULAR RENDIMIENTO POR CATEGORÍAS
+    function renderCategoryBreakdown() {
+      categoryResultsGrid.innerHTML = "";
+      
+      // Agrupar preguntas por categoría
+      const catGroups = {};
+      questions.forEach(q => {
+        if (!catGroups[q.category]) {
+          catGroups[q.category] = { name: q.categoryName, total: 0, correct: 0 };
+        }
+        catGroups[q.category].total++;
+        if (userAnswers[q.id] !== undefined && checkAnswer(q)) {
+          catGroups[q.category].correct++;
+        }
+      });
+
+      // Crear tarjeta para cada grupo
+      Object.keys(catGroups).forEach(key => {
+        const group = catGroups[key];
+        const percent = Math.round((group.correct / group.total) * 100);
+        
+        const card = document.createElement("div");
+        card.className = "category-score-card";
+        
+        const header = document.createElement("div");
+        header.className = "category-score-header";
+        header.innerHTML = `<span>${group.name}</span> <span>${group.correct}/${group.total} (${percent}%)</span>`;
+        
+        const track = document.createElement("div");
+        track.className = "category-progress-track";
+        
+        const fill = document.createElement("div");
+        fill.className = "category-progress-fill";
+        fill.style.width = `${percent}%`;
+        if (percent >= 80) fill.style.backgroundColor = "var(--success)";
+        else if (percent >= 50) fill.style.backgroundColor = "var(--warning)";
+        else fill.style.backgroundColor = "var(--danger)";
+
+        track.appendChild(fill);
+        card.appendChild(header);
+        card.appendChild(track);
+        categoryResultsGrid.appendChild(card);
+      });
+    }
+
+    // LISTAR PREGUNTAS FALLADAS CON SU EXPLICACIÓN
+    function renderReviewList() {
+      reviewList.innerHTML = "";
+      
+      let incorrectCount = 0;
+      questions.forEach((q) => {
+        const answered = userAnswers[q.id] !== undefined;
+        const isCorrect = checkAnswer(q);
+
+        if (!answered || !isCorrect) {
+          incorrectCount++;
+          
+          const item = document.createElement("div");
+          item.className = "review-item";
+          
+          const header = document.createElement("div");
+          header.className = "review-item-header";
+          header.innerHTML = `<span>${q.categoryName.toUpperCase()}</span> <span><i class="fa-solid fa-triangle-exclamation"></i> ${!answered ? 'Sin contestar' : 'Respuesta errónea'}</span>`;
+          
+          const text = document.createElement("div");
+          text.className = "review-item-text";
+          text.textContent = q.text;
+          
+          const ansBox = document.createElement("div");
+          ansBox.className = "review-item-answers";
+          
+          let userAnsText = !answered ? "Ninguna" : userAnswers[q.id];
+          let correctAnsText = "";
+          
+          if (q.type === "multiple" || q.type === "true-false") {
+            if (answered) userAnsText = q.options[userAnswers[q.id]];
+            correctAnsText = q.options[q.correct];
+          } else {
+            correctAnsText = q.correct;
+          }
+
+          ansBox.innerHTML = `
+            <div>Tu respuesta: <span style="color: var(--danger); font-weight: 700;">${userAnsText}</span></div>
+            <div>Respuesta correcta: <span style="color: var(--success); font-weight: 700;">${correctAnsText}</span></div>
+          `;
+          
+          const expl = document.createElement("div");
+          expl.className = "review-explanation";
+          expl.innerHTML = `<strong>Dato Científico:</strong> ${q.feedback}`;
+          
+          item.appendChild(header);
+          item.appendChild(text);
+          item.appendChild(ansBox);
+          item.appendChild(expl);
+          
+          reviewList.appendChild(item);
+        }
+      });
+
+      if (incorrectCount === 0) {
+        reviewList.innerHTML = `<div class="feedback-box correct" style="display:block;">¡Impresionante! Respondiste correctamente todas las preguntas del examen. No tienes errores que revisar.</div>`;
+      }
+    }
+
+    // PERSISTENCIA DE PROGRESO EN LOCALSTORAGE
+    function saveProgress() {
+      const data = {
+        userAnswers,
+        reviewFlags,
+        currentIndex,
+        examMode,
+        isExamFinished
+      };
+      localStorage.setItem("climate-exam-progress", JSON.stringify(data));
+    }
+
+    function loadProgress() {
+      const raw = localStorage.getItem("climate-exam-progress");
+      if (raw) {
+        try {
+          const data = JSON.parse(raw);
+          userAnswers = data.userAnswers || {};
+          reviewFlags = data.reviewFlags || {};
+          currentIndex = data.currentIndex || 0;
+          examMode = data.examMode || "practice";
+          isExamFinished = data.isExamFinished || false;
+          
+          // Sincronizar UI de Modo
+          if (examMode === "exam" && !isExamFinished) {
+            modeText.textContent = "Modo Práctica";
+            modeToggle.querySelector("i").className = "fa-solid fa-graduation-cap";
+          } else if (isExamFinished) {
+            submitExam();
+          }
+        } catch (e) {
+          console.error("Error al cargar progreso", e);
+        }
+      }
+    }
+
+    // REINICIAR EXAMEN
+    function resetExamData() {
+      if (confirm("¿Estás seguro de que deseas borrar todo tu progreso y reiniciar el examen?")) {
+        userAnswers = {};
+        reviewFlags = {};
+        currentIndex = 0;
+        isExamFinished = false;
+        examMode = "practice";
+        
+        localStorage.removeItem("climate-exam-progress");
+        
+        categoryFilter.value = "all";
+        currentFilteredQuestions = [...questions];
+        
+        // Sincronizar UI Modo
+        modeText.textContent = "Modo Examen";
+        modeToggle.querySelector("i").className = "fa-solid fa-file-invoice";
+        
+        resultsView.style.display = "none";
+        examView.style.display = "grid";
+        
+        renderQuestionGrid();
+        renderQuestion();
+        updateProgress();
+      }
+    }
+
+    // Lanzar al cargar
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
 </body>
 </html>
